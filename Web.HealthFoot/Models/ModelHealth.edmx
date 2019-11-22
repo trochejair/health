@@ -1,0 +1,1281 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HealthModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CATEGORIA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="50" />
+          <Property Name="ACTIVO" Type="int" />
+          <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="50" />
+          <Property Name="APELLIDOS" Type="nvarchar" MaxLength="50" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="255" />
+          <Property Name="FK_DIRECCION" Type="int" Nullable="false" />
+          <Property Name="ACTIVO" Type="int" />
+          <Property Name="ROL" Type="int" />
+          <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DETALLE_ORDEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_ORDEN" Type="int" Nullable="false" />
+          <Property Name="FK_PRODUCTO" Type="int" Nullable="false" />
+          <Property Name="CANTIDAD" Type="int" />
+          <Property Name="SUBTOTAL" Type="float" />
+        </EntityType>
+        <EntityType Name="DIRECCION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ESTADO" Type="nvarchar" MaxLength="50" />
+          <Property Name="CIUDAD" Type="nvarchar" MaxLength="50" />
+          <Property Name="MUNICIPIO" Type="nvarchar" MaxLength="50" />
+          <Property Name="COLONIA" Type="nvarchar" MaxLength="100" />
+          <Property Name="CALLE" Type="nvarchar" MaxLength="100" />
+          <Property Name="CP" Type="nvarchar" MaxLength="8" />
+          <Property Name="NUMERO" Type="nvarchar" MaxLength="10" />
+          <Property Name="ACTIVO" Type="int" />
+          <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMBARQUE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_RUTA" Type="int" Nullable="false" />
+          <Property Name="ID_VEHICULO" Type="int" Nullable="false" />
+          <Property Name="FECHA" Type="date" />
+          <Property Name="ACTIVO" Type="int" />
+          <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMPLEADO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="100" />
+          <Property Name="APELIDO_PATERNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="APELLIDO_MATERNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="ROL" Type="int" />
+          <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
+          <Property Name="ACTIVO" Type="int" />
+        </EntityType>
+        <EntityType Name="ENTREGA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_VENTA" Type="int" Nullable="false" />
+          <Property Name="ID_EMBARQUE" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FORMULA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_PRODUCTO" Type="int" Nullable="false" />
+          <Property Name="FK_INSUMO_ORDEN" Type="int" Nullable="false" />
+          <Property Name="UNIDAD_MEDIDA" Type="nvarchar" MaxLength="50" />
+          <Property Name="CANTIDAD" Type="int" />
+          <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IMAGEN_PRODUCTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IMAGEN" Type="nvarchar" MaxLength="255" />
+          <Property Name="FK_PRODUCTO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="INSUMO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="100" />
+          <Property Name="CANTIDAD" Type="int" />
+          <Property Name="ACTIVO" Type="int" />
+          <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="INSUMO_ORDEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CANTIDAD" Type="int" />
+          <Property Name="PRECIO" Type="float" />
+          <Property Name="UNIDAD_MEDIDA" Type="nvarchar" MaxLength="50" />
+          <Property Name="ACTIVO" Type="int" />
+          <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
+          <Property Name="FK_ORDEN_PROVEEDOR" Type="int" Nullable="false" />
+          <Property Name="FK_INSUMO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ORDEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FECHA" Type="date" />
+          <Property Name="FK_CLIENTE" Type="int" Nullable="false" />
+          <Property Name="ESTATUS" Type="nvarchar" MaxLength="50" />
+          <Property Name="ACTIVO" Type="int" />
+          <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ORDEN_PROVEEDOR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_PROVEEDOR" Type="int" Nullable="false" />
+          <Property Name="FECHA" Type="date" />
+          <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="100" />
+          <Property Name="CANTIDAD" Type="int" />
+          <Property Name="PRECIO" Type="float" />
+          <Property Name="DESCRIPCION" Type="text" />
+          <Property Name="FK_CATEGORIA" Type="int" Nullable="false" />
+          <Property Name="ACTIVO" Type="int" />
+          <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PROVEEDOR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="100" />
+          <Property Name="TELEFONO" Type="nvarchar" MaxLength="15" />
+          <Property Name="CORREO" Type="nvarchar" MaxLength="50" />
+          <Property Name="RFC" Type="nvarchar" MaxLength="20" />
+          <Property Name="FK_DIRECCION" Type="int" Nullable="false" />
+          <Property Name="ACTIVO" Type="int" />
+          <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RUTA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INICIO" Type="nvarchar" MaxLength="50" />
+          <Property Name="FIN" Type="nvarchar" MaxLength="50" />
+          <Property Name="DISTANCIA" Type="int" />
+          <Property Name="ACTIVO" Type="int" />
+          <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VEHICULO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="50" />
+          <Property Name="MARCA" Type="nvarchar" MaxLength="50" />
+          <Property Name="MODELO" Type="nvarchar" MaxLength="50" />
+          <Property Name="CAPACIDAD" Type="nvarchar" MaxLength="50" />
+          <Property Name="PESO" Type="nvarchar" MaxLength="50" />
+          <Property Name="CILINDROS" Type="int" />
+          <Property Name="ACTIVO" Type="int" />
+          <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VENTA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_ORDEN" Type="int" Nullable="false" />
+          <Property Name="FECHA" Type="date" />
+          <Property Name="FK_DIRECCION" Type="int" Nullable="false" />
+          <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__CLIENTE__FK_DIRE__44FF419A">
+          <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="1" />
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIRECCION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CLIENTE">
+              <PropertyRef Name="FK_DIRECCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLE_O__FK_OR__4CA06362">
+          <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="1" />
+          <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN">
+              <PropertyRef Name="FK_ORDEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLE_O__FK_PR__4BAC3F29">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN">
+              <PropertyRef Name="FK_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMBARQUE__ID_RUT__5AEE82B9">
+          <End Role="RUTA" Type="Self.RUTA" Multiplicity="1" />
+          <End Role="EMBARQUE" Type="Self.EMBARQUE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RUTA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EMBARQUE">
+              <PropertyRef Name="ID_RUTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMBARQUE__ID_VEH__5BE2A6F2">
+          <End Role="VEHICULO" Type="Self.VEHICULO" Multiplicity="1" />
+          <End Role="EMBARQUE" Type="Self.EMBARQUE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VEHICULO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EMBARQUE">
+              <PropertyRef Name="ID_VEHICULO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ENTREGA__ID_EMBA__5EBF139D">
+          <End Role="EMBARQUE" Type="Self.EMBARQUE" Multiplicity="1" />
+          <End Role="ENTREGA" Type="Self.ENTREGA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMBARQUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ENTREGA">
+              <PropertyRef Name="ID_EMBARQUE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FORMULA__FK_INSU__412EB0B6">
+          <End Role="INSUMO_ORDEN" Type="Self.INSUMO_ORDEN" Multiplicity="1" />
+          <End Role="FORMULA" Type="Self.FORMULA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INSUMO_ORDEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FORMULA">
+              <PropertyRef Name="FK_INSUMO_ORDEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FORMULA__FK_PROD__403A8C7D">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="FORMULA" Type="Self.FORMULA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FORMULA">
+              <PropertyRef Name="FK_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IMAGEN_PR__FK_PR__2A4B4B5E">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="IMAGEN_PRODUCTO" Type="Self.IMAGEN_PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="IMAGEN_PRODUCTO">
+              <PropertyRef Name="FK_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INSUMO_OR__FK_IN__3C69FB99">
+          <End Role="INSUMO" Type="Self.INSUMO" Multiplicity="1" />
+          <End Role="INSUMO_ORDEN" Type="Self.INSUMO_ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INSUMO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INSUMO_ORDEN">
+              <PropertyRef Name="FK_INSUMO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INSUMO_OR__FK_OR__3B75D760">
+          <End Role="ORDEN_PROVEEDOR" Type="Self.ORDEN_PROVEEDOR" Multiplicity="1" />
+          <End Role="INSUMO_ORDEN" Type="Self.INSUMO_ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_PROVEEDOR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INSUMO_ORDEN">
+              <PropertyRef Name="FK_ORDEN_PROVEEDOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDEN__FK_CLIENT__48CFD27E">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDEN">
+              <PropertyRef Name="FK_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDEN_PRO__FK_PR__34C8D9D1">
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+          <End Role="ORDEN_PROVEEDOR" Type="Self.ORDEN_PROVEEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDOR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDEN_PROVEEDOR">
+              <PropertyRef Name="FK_PROVEEDOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO__FK_CAT__276EDEB3">
+          <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="FK_CATEGORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PROVEEDOR__FK_DI__30F848ED">
+          <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="1" />
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIRECCION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PROVEEDOR">
+              <PropertyRef Name="FK_DIRECCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTA__FK_DIRECC__5165187F">
+          <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIRECCION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="FK_DIRECCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTA__FK_ORDEN__5070F446">
+          <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="FK_ORDEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HealthModelStoreContainer">
+          <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DETALLE_ORDEN" EntityType="Self.DETALLE_ORDEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DIRECCION" EntityType="Self.DIRECCION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMBARQUE" EntityType="Self.EMBARQUE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ENTREGA" EntityType="Self.ENTREGA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FORMULA" EntityType="Self.FORMULA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IMAGEN_PRODUCTO" EntityType="Self.IMAGEN_PRODUCTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INSUMO" EntityType="Self.INSUMO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INSUMO_ORDEN" EntityType="Self.INSUMO_ORDEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDEN" EntityType="Self.ORDEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDEN_PROVEEDOR" EntityType="Self.ORDEN_PROVEEDOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RUTA" EntityType="Self.RUTA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VEHICULO" EntityType="Self.VEHICULO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VENTA" EntityType="Self.VENTA" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CLIENTE__FK_DIRE__44FF419A" Association="Self.FK__CLIENTE__FK_DIRE__44FF419A">
+            <End Role="DIRECCION" EntitySet="DIRECCION" />
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLE_O__FK_OR__4CA06362" Association="Self.FK__DETALLE_O__FK_OR__4CA06362">
+            <End Role="ORDEN" EntitySet="ORDEN" />
+            <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLE_O__FK_PR__4BAC3F29" Association="Self.FK__DETALLE_O__FK_PR__4BAC3F29">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMBARQUE__ID_RUT__5AEE82B9" Association="Self.FK__EMBARQUE__ID_RUT__5AEE82B9">
+            <End Role="RUTA" EntitySet="RUTA" />
+            <End Role="EMBARQUE" EntitySet="EMBARQUE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMBARQUE__ID_VEH__5BE2A6F2" Association="Self.FK__EMBARQUE__ID_VEH__5BE2A6F2">
+            <End Role="VEHICULO" EntitySet="VEHICULO" />
+            <End Role="EMBARQUE" EntitySet="EMBARQUE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ENTREGA__ID_EMBA__5EBF139D" Association="Self.FK__ENTREGA__ID_EMBA__5EBF139D">
+            <End Role="EMBARQUE" EntitySet="EMBARQUE" />
+            <End Role="ENTREGA" EntitySet="ENTREGA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FORMULA__FK_INSU__412EB0B6" Association="Self.FK__FORMULA__FK_INSU__412EB0B6">
+            <End Role="INSUMO_ORDEN" EntitySet="INSUMO_ORDEN" />
+            <End Role="FORMULA" EntitySet="FORMULA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FORMULA__FK_PROD__403A8C7D" Association="Self.FK__FORMULA__FK_PROD__403A8C7D">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="FORMULA" EntitySet="FORMULA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IMAGEN_PR__FK_PR__2A4B4B5E" Association="Self.FK__IMAGEN_PR__FK_PR__2A4B4B5E">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="IMAGEN_PRODUCTO" EntitySet="IMAGEN_PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INSUMO_OR__FK_IN__3C69FB99" Association="Self.FK__INSUMO_OR__FK_IN__3C69FB99">
+            <End Role="INSUMO" EntitySet="INSUMO" />
+            <End Role="INSUMO_ORDEN" EntitySet="INSUMO_ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INSUMO_OR__FK_OR__3B75D760" Association="Self.FK__INSUMO_OR__FK_OR__3B75D760">
+            <End Role="ORDEN_PROVEEDOR" EntitySet="ORDEN_PROVEEDOR" />
+            <End Role="INSUMO_ORDEN" EntitySet="INSUMO_ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDEN__FK_CLIENT__48CFD27E" Association="Self.FK__ORDEN__FK_CLIENT__48CFD27E">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="ORDEN" EntitySet="ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDEN_PRO__FK_PR__34C8D9D1" Association="Self.FK__ORDEN_PRO__FK_PR__34C8D9D1">
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+            <End Role="ORDEN_PROVEEDOR" EntitySet="ORDEN_PROVEEDOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO__FK_CAT__276EDEB3" Association="Self.FK__PRODUCTO__FK_CAT__276EDEB3">
+            <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PROVEEDOR__FK_DI__30F848ED" Association="Self.FK__PROVEEDOR__FK_DI__30F848ED">
+            <End Role="DIRECCION" EntitySet="DIRECCION" />
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTA__FK_DIRECC__5165187F" Association="Self.FK__VENTA__FK_DIRECC__5165187F">
+            <End Role="DIRECCION" EntitySet="DIRECCION" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTA__FK_ORDEN__5070F446" Association="Self.FK__VENTA__FK_ORDEN__5070F446">
+            <End Role="ORDEN" EntitySet="ORDEN" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HealthModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CATEGORIA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ACTIVO" Type="Int32" />
+          <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__PRODUCTO__FK_CAT__276EDEB3" FromRole="CATEGORIA" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="APELLIDOS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EMAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FK_DIRECCION" Type="Int32" Nullable="false" />
+          <Property Name="ACTIVO" Type="Int32" />
+          <Property Name="ROL" Type="Int32" />
+          <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DIRECCION" Relationship="Self.FK__CLIENTE__FK_DIRE__44FF419A" FromRole="CLIENTE" ToRole="DIRECCION" />
+          <NavigationProperty Name="ORDEN" Relationship="Self.FK__ORDEN__FK_CLIENT__48CFD27E" FromRole="CLIENTE" ToRole="ORDEN" />
+        </EntityType>
+        <EntityType Name="DETALLE_ORDEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_ORDEN" Type="Int32" Nullable="false" />
+          <Property Name="FK_PRODUCTO" Type="Int32" Nullable="false" />
+          <Property Name="CANTIDAD" Type="Int32" />
+          <Property Name="SUBTOTAL" Type="Double" />
+          <NavigationProperty Name="ORDEN" Relationship="Self.FK__DETALLE_O__FK_OR__4CA06362" FromRole="DETALLE_ORDEN" ToRole="ORDEN" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__DETALLE_O__FK_PR__4BAC3F29" FromRole="DETALLE_ORDEN" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="DIRECCION">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ESTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CIUDAD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MUNICIPIO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="COLONIA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CALLE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CP" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="NUMERO" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ACTIVO" Type="Int32" />
+          <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__CLIENTE__FK_DIRE__44FF419A" FromRole="DIRECCION" ToRole="CLIENTE" />
+          <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK__PROVEEDOR__FK_DI__30F848ED" FromRole="DIRECCION" ToRole="PROVEEDOR" />
+          <NavigationProperty Name="VENTA" Relationship="Self.FK__VENTA__FK_DIRECC__5165187F" FromRole="DIRECCION" ToRole="VENTA" />
+        </EntityType>
+        <EntityType Name="EMBARQUE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_RUTA" Type="Int32" Nullable="false" />
+          <Property Name="ID_VEHICULO" Type="Int32" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Precision="0" />
+          <Property Name="ACTIVO" Type="Int32" />
+          <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="RUTA" Relationship="Self.FK__EMBARQUE__ID_RUT__5AEE82B9" FromRole="EMBARQUE" ToRole="RUTA" />
+          <NavigationProperty Name="VEHICULO" Relationship="Self.FK__EMBARQUE__ID_VEH__5BE2A6F2" FromRole="EMBARQUE" ToRole="VEHICULO" />
+          <NavigationProperty Name="ENTREGA" Relationship="Self.FK__ENTREGA__ID_EMBA__5EBF139D" FromRole="EMBARQUE" ToRole="ENTREGA" />
+        </EntityType>
+        <EntityType Name="EMPLEADO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="APELIDO_PATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="APELLIDO_MATERNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ROL" Type="Int32" />
+          <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ACTIVO" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ENTREGA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_VENTA" Type="Int32" Nullable="false" />
+          <Property Name="ID_EMBARQUE" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EMBARQUE" Relationship="Self.FK__ENTREGA__ID_EMBA__5EBF139D" FromRole="ENTREGA" ToRole="EMBARQUE" />
+        </EntityType>
+        <EntityType Name="FORMULA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_PRODUCTO" Type="Int32" Nullable="false" />
+          <Property Name="FK_INSUMO_ORDEN" Type="Int32" Nullable="false" />
+          <Property Name="UNIDAD_MEDIDA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CANTIDAD" Type="Int32" />
+          <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="INSUMO_ORDEN" Relationship="Self.FK__FORMULA__FK_INSU__412EB0B6" FromRole="FORMULA" ToRole="INSUMO_ORDEN" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__FORMULA__FK_PROD__403A8C7D" FromRole="FORMULA" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="IMAGEN_PRODUCTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IMAGEN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FK_PRODUCTO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__IMAGEN_PR__FK_PR__2A4B4B5E" FromRole="IMAGEN_PRODUCTO" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="INSUMO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CANTIDAD" Type="Int32" />
+          <Property Name="ACTIVO" Type="Int32" />
+          <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="INSUMO_ORDEN" Relationship="Self.FK__INSUMO_OR__FK_IN__3C69FB99" FromRole="INSUMO" ToRole="INSUMO_ORDEN" />
+        </EntityType>
+        <EntityType Name="INSUMO_ORDEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CANTIDAD" Type="Int32" />
+          <Property Name="PRECIO" Type="Double" />
+          <Property Name="UNIDAD_MEDIDA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ACTIVO" Type="Int32" />
+          <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FK_ORDEN_PROVEEDOR" Type="Int32" Nullable="false" />
+          <Property Name="FK_INSUMO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FORMULA" Relationship="Self.FK__FORMULA__FK_INSU__412EB0B6" FromRole="INSUMO_ORDEN" ToRole="FORMULA" />
+          <NavigationProperty Name="INSUMO" Relationship="Self.FK__INSUMO_OR__FK_IN__3C69FB99" FromRole="INSUMO_ORDEN" ToRole="INSUMO" />
+          <NavigationProperty Name="ORDEN_PROVEEDOR" Relationship="Self.FK__INSUMO_OR__FK_OR__3B75D760" FromRole="INSUMO_ORDEN" ToRole="ORDEN_PROVEEDOR" />
+        </EntityType>
+        <EntityType Name="ORDEN">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FECHA" Type="DateTime" Precision="0" />
+          <Property Name="FK_CLIENTE" Type="Int32" Nullable="false" />
+          <Property Name="ESTATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ACTIVO" Type="Int32" />
+          <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__ORDEN__FK_CLIENT__48CFD27E" FromRole="ORDEN" ToRole="CLIENTE" />
+          <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK__DETALLE_O__FK_OR__4CA06362" FromRole="ORDEN" ToRole="DETALLE_ORDEN" />
+          <NavigationProperty Name="VENTA" Relationship="Self.FK__VENTA__FK_ORDEN__5070F446" FromRole="ORDEN" ToRole="VENTA" />
+        </EntityType>
+        <EntityType Name="ORDEN_PROVEEDOR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_PROVEEDOR" Type="Int32" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Precision="0" />
+          <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="INSUMO_ORDEN" Relationship="Self.FK__INSUMO_OR__FK_OR__3B75D760" FromRole="ORDEN_PROVEEDOR" ToRole="INSUMO_ORDEN" />
+          <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK__ORDEN_PRO__FK_PR__34C8D9D1" FromRole="ORDEN_PROVEEDOR" ToRole="PROVEEDOR" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CANTIDAD" Type="Int32" />
+          <Property Name="PRECIO" Type="Double" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_CATEGORIA" Type="Int32" Nullable="false" />
+          <Property Name="ACTIVO" Type="Int32" />
+          <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CATEGORIA" Relationship="Self.FK__PRODUCTO__FK_CAT__276EDEB3" FromRole="PRODUCTO" ToRole="CATEGORIA" />
+          <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK__DETALLE_O__FK_PR__4BAC3F29" FromRole="PRODUCTO" ToRole="DETALLE_ORDEN" />
+          <NavigationProperty Name="FORMULA" Relationship="Self.FK__FORMULA__FK_PROD__403A8C7D" FromRole="PRODUCTO" ToRole="FORMULA" />
+          <NavigationProperty Name="IMAGEN_PRODUCTO" Relationship="Self.FK__IMAGEN_PR__FK_PR__2A4B4B5E" FromRole="PRODUCTO" ToRole="IMAGEN_PRODUCTO" />
+        </EntityType>
+        <EntityType Name="PROVEEDOR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TELEFONO" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="CORREO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RFC" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FK_DIRECCION" Type="Int32" Nullable="false" />
+          <Property Name="ACTIVO" Type="Int32" />
+          <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DIRECCION" Relationship="Self.FK__PROVEEDOR__FK_DI__30F848ED" FromRole="PROVEEDOR" ToRole="DIRECCION" />
+          <NavigationProperty Name="ORDEN_PROVEEDOR" Relationship="Self.FK__ORDEN_PRO__FK_PR__34C8D9D1" FromRole="PROVEEDOR" ToRole="ORDEN_PROVEEDOR" />
+        </EntityType>
+        <EntityType Name="RUTA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INICIO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FIN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DISTANCIA" Type="Int32" />
+          <Property Name="ACTIVO" Type="Int32" />
+          <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="EMBARQUE" Relationship="Self.FK__EMBARQUE__ID_RUT__5AEE82B9" FromRole="RUTA" ToRole="EMBARQUE" />
+        </EntityType>
+        <EntityType Name="VEHICULO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MARCA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MODELO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CAPACIDAD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PESO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CILINDROS" Type="Int32" />
+          <Property Name="ACTIVO" Type="Int32" />
+          <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="EMBARQUE" Relationship="Self.FK__EMBARQUE__ID_VEH__5BE2A6F2" FromRole="VEHICULO" ToRole="EMBARQUE" />
+        </EntityType>
+        <EntityType Name="VENTA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_ORDEN" Type="Int32" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Precision="0" />
+          <Property Name="FK_DIRECCION" Type="Int32" Nullable="false" />
+          <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DIRECCION" Relationship="Self.FK__VENTA__FK_DIRECC__5165187F" FromRole="VENTA" ToRole="DIRECCION" />
+          <NavigationProperty Name="ORDEN" Relationship="Self.FK__VENTA__FK_ORDEN__5070F446" FromRole="VENTA" ToRole="ORDEN" />
+        </EntityType>
+        <Association Name="FK__PRODUCTO__FK_CAT__276EDEB3">
+          <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="FK_CATEGORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CLIENTE__FK_DIRE__44FF419A">
+          <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="1" />
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIRECCION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CLIENTE">
+              <PropertyRef Name="FK_DIRECCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDEN__FK_CLIENT__48CFD27E">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDEN">
+              <PropertyRef Name="FK_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLE_O__FK_OR__4CA06362">
+          <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="1" />
+          <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN">
+              <PropertyRef Name="FK_ORDEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLE_O__FK_PR__4BAC3F29">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DETALLE_ORDEN">
+              <PropertyRef Name="FK_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PROVEEDOR__FK_DI__30F848ED">
+          <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="1" />
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIRECCION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PROVEEDOR">
+              <PropertyRef Name="FK_DIRECCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTA__FK_DIRECC__5165187F">
+          <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIRECCION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="FK_DIRECCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMBARQUE__ID_RUT__5AEE82B9">
+          <End Role="RUTA" Type="Self.RUTA" Multiplicity="1" />
+          <End Role="EMBARQUE" Type="Self.EMBARQUE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RUTA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EMBARQUE">
+              <PropertyRef Name="ID_RUTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMBARQUE__ID_VEH__5BE2A6F2">
+          <End Role="VEHICULO" Type="Self.VEHICULO" Multiplicity="1" />
+          <End Role="EMBARQUE" Type="Self.EMBARQUE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VEHICULO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EMBARQUE">
+              <PropertyRef Name="ID_VEHICULO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ENTREGA__ID_EMBA__5EBF139D">
+          <End Role="EMBARQUE" Type="Self.EMBARQUE" Multiplicity="1" />
+          <End Role="ENTREGA" Type="Self.ENTREGA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMBARQUE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ENTREGA">
+              <PropertyRef Name="ID_EMBARQUE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FORMULA__FK_INSU__412EB0B6">
+          <End Role="INSUMO_ORDEN" Type="Self.INSUMO_ORDEN" Multiplicity="1" />
+          <End Role="FORMULA" Type="Self.FORMULA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INSUMO_ORDEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FORMULA">
+              <PropertyRef Name="FK_INSUMO_ORDEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FORMULA__FK_PROD__403A8C7D">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="FORMULA" Type="Self.FORMULA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FORMULA">
+              <PropertyRef Name="FK_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__IMAGEN_PR__FK_PR__2A4B4B5E">
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+          <End Role="IMAGEN_PRODUCTO" Type="Self.IMAGEN_PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="IMAGEN_PRODUCTO">
+              <PropertyRef Name="FK_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INSUMO_OR__FK_IN__3C69FB99">
+          <End Role="INSUMO" Type="Self.INSUMO" Multiplicity="1" />
+          <End Role="INSUMO_ORDEN" Type="Self.INSUMO_ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INSUMO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INSUMO_ORDEN">
+              <PropertyRef Name="FK_INSUMO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INSUMO_OR__FK_OR__3B75D760">
+          <End Role="ORDEN_PROVEEDOR" Type="Self.ORDEN_PROVEEDOR" Multiplicity="1" />
+          <End Role="INSUMO_ORDEN" Type="Self.INSUMO_ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN_PROVEEDOR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INSUMO_ORDEN">
+              <PropertyRef Name="FK_ORDEN_PROVEEDOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTA__FK_ORDEN__5070F446">
+          <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="1" />
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDEN">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VENTA">
+              <PropertyRef Name="FK_ORDEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDEN_PRO__FK_PR__34C8D9D1">
+          <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+          <End Role="ORDEN_PROVEEDOR" Type="Self.ORDEN_PROVEEDOR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVEEDOR">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDEN_PROVEEDOR">
+              <PropertyRef Name="FK_PROVEEDOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HealthEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" />
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
+          <EntitySet Name="DETALLE_ORDEN" EntityType="Self.DETALLE_ORDEN" />
+          <EntitySet Name="DIRECCION" EntityType="Self.DIRECCION" />
+          <EntitySet Name="EMBARQUE" EntityType="Self.EMBARQUE" />
+          <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" />
+          <EntitySet Name="ENTREGA" EntityType="Self.ENTREGA" />
+          <EntitySet Name="FORMULA" EntityType="Self.FORMULA" />
+          <EntitySet Name="IMAGEN_PRODUCTO" EntityType="Self.IMAGEN_PRODUCTO" />
+          <EntitySet Name="INSUMO" EntityType="Self.INSUMO" />
+          <EntitySet Name="INSUMO_ORDEN" EntityType="Self.INSUMO_ORDEN" />
+          <EntitySet Name="ORDEN" EntityType="Self.ORDEN" />
+          <EntitySet Name="ORDEN_PROVEEDOR" EntityType="Self.ORDEN_PROVEEDOR" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" />
+          <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" />
+          <EntitySet Name="RUTA" EntityType="Self.RUTA" />
+          <EntitySet Name="VEHICULO" EntityType="Self.VEHICULO" />
+          <EntitySet Name="VENTA" EntityType="Self.VENTA" />
+          <AssociationSet Name="FK__PRODUCTO__FK_CAT__276EDEB3" Association="Self.FK__PRODUCTO__FK_CAT__276EDEB3">
+            <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CLIENTE__FK_DIRE__44FF419A" Association="Self.FK__CLIENTE__FK_DIRE__44FF419A">
+            <End Role="DIRECCION" EntitySet="DIRECCION" />
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDEN__FK_CLIENT__48CFD27E" Association="Self.FK__ORDEN__FK_CLIENT__48CFD27E">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="ORDEN" EntitySet="ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLE_O__FK_OR__4CA06362" Association="Self.FK__DETALLE_O__FK_OR__4CA06362">
+            <End Role="ORDEN" EntitySet="ORDEN" />
+            <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLE_O__FK_PR__4BAC3F29" Association="Self.FK__DETALLE_O__FK_PR__4BAC3F29">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PROVEEDOR__FK_DI__30F848ED" Association="Self.FK__PROVEEDOR__FK_DI__30F848ED">
+            <End Role="DIRECCION" EntitySet="DIRECCION" />
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTA__FK_DIRECC__5165187F" Association="Self.FK__VENTA__FK_DIRECC__5165187F">
+            <End Role="DIRECCION" EntitySet="DIRECCION" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMBARQUE__ID_RUT__5AEE82B9" Association="Self.FK__EMBARQUE__ID_RUT__5AEE82B9">
+            <End Role="RUTA" EntitySet="RUTA" />
+            <End Role="EMBARQUE" EntitySet="EMBARQUE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMBARQUE__ID_VEH__5BE2A6F2" Association="Self.FK__EMBARQUE__ID_VEH__5BE2A6F2">
+            <End Role="VEHICULO" EntitySet="VEHICULO" />
+            <End Role="EMBARQUE" EntitySet="EMBARQUE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ENTREGA__ID_EMBA__5EBF139D" Association="Self.FK__ENTREGA__ID_EMBA__5EBF139D">
+            <End Role="EMBARQUE" EntitySet="EMBARQUE" />
+            <End Role="ENTREGA" EntitySet="ENTREGA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FORMULA__FK_INSU__412EB0B6" Association="Self.FK__FORMULA__FK_INSU__412EB0B6">
+            <End Role="INSUMO_ORDEN" EntitySet="INSUMO_ORDEN" />
+            <End Role="FORMULA" EntitySet="FORMULA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FORMULA__FK_PROD__403A8C7D" Association="Self.FK__FORMULA__FK_PROD__403A8C7D">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="FORMULA" EntitySet="FORMULA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__IMAGEN_PR__FK_PR__2A4B4B5E" Association="Self.FK__IMAGEN_PR__FK_PR__2A4B4B5E">
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+            <End Role="IMAGEN_PRODUCTO" EntitySet="IMAGEN_PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INSUMO_OR__FK_IN__3C69FB99" Association="Self.FK__INSUMO_OR__FK_IN__3C69FB99">
+            <End Role="INSUMO" EntitySet="INSUMO" />
+            <End Role="INSUMO_ORDEN" EntitySet="INSUMO_ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INSUMO_OR__FK_OR__3B75D760" Association="Self.FK__INSUMO_OR__FK_OR__3B75D760">
+            <End Role="ORDEN_PROVEEDOR" EntitySet="ORDEN_PROVEEDOR" />
+            <End Role="INSUMO_ORDEN" EntitySet="INSUMO_ORDEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTA__FK_ORDEN__5070F446" Association="Self.FK__VENTA__FK_ORDEN__5070F446">
+            <End Role="ORDEN" EntitySet="ORDEN" />
+            <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDEN_PRO__FK_PR__34C8D9D1" Association="Self.FK__ORDEN_PRO__FK_PR__34C8D9D1">
+            <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+            <End Role="ORDEN_PROVEEDOR" EntitySet="ORDEN_PROVEEDOR" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HealthModelStoreContainer" CdmEntityContainer="HealthEntities">
+          <EntitySetMapping Name="CATEGORIA">
+            <EntityTypeMapping TypeName="HealthModel.CATEGORIA">
+              <MappingFragment StoreEntitySet="CATEGORIA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTE">
+            <EntityTypeMapping TypeName="HealthModel.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDOS" ColumnName="APELLIDOS" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="FK_DIRECCION" ColumnName="FK_DIRECCION" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="ROL" ColumnName="ROL" />
+                <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE_ORDEN">
+            <EntityTypeMapping TypeName="HealthModel.DETALLE_ORDEN">
+              <MappingFragment StoreEntitySet="DETALLE_ORDEN">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FK_ORDEN" ColumnName="FK_ORDEN" />
+                <ScalarProperty Name="FK_PRODUCTO" ColumnName="FK_PRODUCTO" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="SUBTOTAL" ColumnName="SUBTOTAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIRECCION">
+            <EntityTypeMapping TypeName="HealthModel.DIRECCION">
+              <MappingFragment StoreEntitySet="DIRECCION">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="CIUDAD" ColumnName="CIUDAD" />
+                <ScalarProperty Name="MUNICIPIO" ColumnName="MUNICIPIO" />
+                <ScalarProperty Name="COLONIA" ColumnName="COLONIA" />
+                <ScalarProperty Name="CALLE" ColumnName="CALLE" />
+                <ScalarProperty Name="CP" ColumnName="CP" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMBARQUE">
+            <EntityTypeMapping TypeName="HealthModel.EMBARQUE">
+              <MappingFragment StoreEntitySet="EMBARQUE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_RUTA" ColumnName="ID_RUTA" />
+                <ScalarProperty Name="ID_VEHICULO" ColumnName="ID_VEHICULO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLEADO">
+            <EntityTypeMapping TypeName="HealthModel.EMPLEADO">
+              <MappingFragment StoreEntitySet="EMPLEADO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="APELIDO_PATERNO" ColumnName="APELIDO_PATERNO" />
+                <ScalarProperty Name="APELLIDO_MATERNO" ColumnName="APELLIDO_MATERNO" />
+                <ScalarProperty Name="ROL" ColumnName="ROL" />
+                <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ENTREGA">
+            <EntityTypeMapping TypeName="HealthModel.ENTREGA">
+              <MappingFragment StoreEntitySet="ENTREGA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ID_VENTA" ColumnName="ID_VENTA" />
+                <ScalarProperty Name="ID_EMBARQUE" ColumnName="ID_EMBARQUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FORMULA">
+            <EntityTypeMapping TypeName="HealthModel.FORMULA">
+              <MappingFragment StoreEntitySet="FORMULA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FK_PRODUCTO" ColumnName="FK_PRODUCTO" />
+                <ScalarProperty Name="FK_INSUMO_ORDEN" ColumnName="FK_INSUMO_ORDEN" />
+                <ScalarProperty Name="UNIDAD_MEDIDA" ColumnName="UNIDAD_MEDIDA" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IMAGEN_PRODUCTO">
+            <EntityTypeMapping TypeName="HealthModel.IMAGEN_PRODUCTO">
+              <MappingFragment StoreEntitySet="IMAGEN_PRODUCTO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IMAGEN" ColumnName="IMAGEN" />
+                <ScalarProperty Name="FK_PRODUCTO" ColumnName="FK_PRODUCTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INSUMO">
+            <EntityTypeMapping TypeName="HealthModel.INSUMO">
+              <MappingFragment StoreEntitySet="INSUMO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INSUMO_ORDEN">
+            <EntityTypeMapping TypeName="HealthModel.INSUMO_ORDEN">
+              <MappingFragment StoreEntitySet="INSUMO_ORDEN">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+                <ScalarProperty Name="UNIDAD_MEDIDA" ColumnName="UNIDAD_MEDIDA" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
+                <ScalarProperty Name="FK_ORDEN_PROVEEDOR" ColumnName="FK_ORDEN_PROVEEDOR" />
+                <ScalarProperty Name="FK_INSUMO" ColumnName="FK_INSUMO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDEN">
+            <EntityTypeMapping TypeName="HealthModel.ORDEN">
+              <MappingFragment StoreEntitySet="ORDEN">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="FK_CLIENTE" ColumnName="FK_CLIENTE" />
+                <ScalarProperty Name="ESTATUS" ColumnName="ESTATUS" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDEN_PROVEEDOR">
+            <EntityTypeMapping TypeName="HealthModel.ORDEN_PROVEEDOR">
+              <MappingFragment StoreEntitySet="ORDEN_PROVEEDOR">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FK_PROVEEDOR" ColumnName="FK_PROVEEDOR" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTO">
+            <EntityTypeMapping TypeName="HealthModel.PRODUCTO">
+              <MappingFragment StoreEntitySet="PRODUCTO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="FK_CATEGORIA" ColumnName="FK_CATEGORIA" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROVEEDOR">
+            <EntityTypeMapping TypeName="HealthModel.PROVEEDOR">
+              <MappingFragment StoreEntitySet="PROVEEDOR">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="TELEFONO" ColumnName="TELEFONO" />
+                <ScalarProperty Name="CORREO" ColumnName="CORREO" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="FK_DIRECCION" ColumnName="FK_DIRECCION" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RUTA">
+            <EntityTypeMapping TypeName="HealthModel.RUTA">
+              <MappingFragment StoreEntitySet="RUTA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="INICIO" ColumnName="INICIO" />
+                <ScalarProperty Name="FIN" ColumnName="FIN" />
+                <ScalarProperty Name="DISTANCIA" ColumnName="DISTANCIA" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VEHICULO">
+            <EntityTypeMapping TypeName="HealthModel.VEHICULO">
+              <MappingFragment StoreEntitySet="VEHICULO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="MARCA" ColumnName="MARCA" />
+                <ScalarProperty Name="MODELO" ColumnName="MODELO" />
+                <ScalarProperty Name="CAPACIDAD" ColumnName="CAPACIDAD" />
+                <ScalarProperty Name="PESO" ColumnName="PESO" />
+                <ScalarProperty Name="CILINDROS" ColumnName="CILINDROS" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+                <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VENTA">
+            <EntityTypeMapping TypeName="HealthModel.VENTA">
+              <MappingFragment StoreEntitySet="VENTA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FK_ORDEN" ColumnName="FK_ORDEN" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="FK_DIRECCION" ColumnName="FK_DIRECCION" />
+                <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

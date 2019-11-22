@@ -49,6 +49,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -178,8 +180,77 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CATEGORIA.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CLIENTE.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DETALLE_ORDEN.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DIRECCION.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EMBARQUE.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EMPLEADO.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ENTREGA.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FORMULA.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IMAGEN_PRODUCTO.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\INSUMO.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\INSUMO_ORDEN.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ModelHealth.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelHealth.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelHealth.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelHealth.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelHealth.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORDEN.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORDEN_PROVEEDOR.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRODUCTO.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PROVEEDOR.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RUTA.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VEHICULO.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VENTA.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -435,6 +506,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\ModelHealth.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelHealth.edmx</DependentUpon>
+      <LastGenOutput>ModelHealth.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ModelHealth.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelHealth.edmx</DependentUpon>
+      <LastGenOutput>ModelHealth.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\Admin\app.js" />
     <Content Include="Scripts\Admin\bootstrap.bundle.min.js" />
     <Content Include="Scripts\Admin\jquery.min.js" />
@@ -491,6 +572,13 @@
     <Content Include="Content\Web\plugins\slick\fonts\slick.ttf" />
     <Content Include="Content\Web\plugins\slick\fonts\slick.woff" />
     <Content Include="Content\Web\plugins\slick\fonts\slickd41d.eot" />
+    <EntityDeploy Include="Models\ModelHealth.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelHealth.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ModelHealth.edmx.diagram">
+      <DependentUpon>ModelHealth.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -555,6 +643,9 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

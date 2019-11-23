@@ -43,5 +43,7 @@ namespace Web.HealthFoot.Models
         public virtual DbSet<RUTA> RUTA { get; set; }
         public virtual DbSet<VEHICULO> VEHICULO { get; set; }
         public virtual DbSet<VENTA> VENTA { get; set; }
+
+        public System.Data.Entity.DbSet<Web.HealthFoot.Models.ProviderAddress> ProviderAddresses { get; set; }
     }
 }

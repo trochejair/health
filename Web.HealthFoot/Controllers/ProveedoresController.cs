@@ -10,10 +10,37 @@ namespace Web.HealthFoot.Controllers
     public class ProveedoresController : Controller
     {
 
+        HealthEntities db = new HealthEntities();
+
         // GET: Proveedores
         public ActionResult Index()
         {
-            return View();
+            List<ProviderAddress> list;
+
+            list = (from p in db.PROVEEDOR
+                    join d in db.DIRECCION
+                    on p.FK_DIRECCION equals d.ID
+                    select new ProviderAddress
+                    {
+                        IDADDRESS = d.ID,
+                        ESTADO = d.ESTADO,
+                        CIUDAD = d.CIUDAD,
+                        MUNICIPIO = d.MUNICIPIO,
+                        COLONIA = d.COLONIA,
+                        CALLE = d.COLONIA,
+                        CP = d.CP,
+                        NUMERO = d.NUMERO,
+
+                        ID = p.ID,
+                        NOMBRE = p.NOMBRE,
+                        TELEFONO = p.TELEFONO,
+                        CORREO = p.CORREO,
+                        RFC = p.RFC
+                    }).ToList();
+
+
+
+            return View(list);
         }
 
         // GET: Proveedores/Details/5
@@ -67,6 +94,7 @@ namespace Web.HealthFoot.Controllers
                 {
 
                     DIRECCION address = new DIRECCION();
+                    address.ID = 0;
                     address.ACTIVO = 1;
                     address.CALLE = models.CALLE;
                     address.ESTADO = models.ESTADO;
@@ -89,8 +117,7 @@ namespace Web.HealthFoot.Controllers
                     db.SaveChanges();
 
                 }
-                return RedirectToAction("Proveedores", "Compras");
-
+                return RedirectToAction("Index");
 
             }
             return View(models);
@@ -125,24 +152,55 @@ namespace Web.HealthFoot.Controllers
                                 RFC = p.RFC
                             }).ToList().First();
             }
-            
+
 
             return View(provider);
         }
 
         // POST: Proveedores/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, ProviderAddress models)
         {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
+            using (HealthEntities db = new HealthEntities())
             {
-                return View();
+                using (var transaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+
+
+                        PROVEEDOR provider = db.PROVEEDOR.Find(id);
+                        DIRECCION address = provider.DIRECCION;
+
+                        address.CALLE = models.CALLE;
+                        address.ESTADO = models.ESTADO;
+                        address.CIUDAD = models.CIUDAD;
+                        address.MUNICIPIO = models.MUNICIPIO;
+                        address.COLONIA = models.COLONIA;
+                        address.CP = models.CP;
+                        address.NUMERO = models.NUMERO;
+
+                        provider.NOMBRE = models.NOMBRE;
+                        provider.TELEFONO = models.TELEFONO;
+                        provider.CORREO = models.CORREO;
+                        provider.RFC = models.RFC;
+                        provider.DIRECCION = address;
+
+                        db.Entry(provider).State = System.Data.Entity.EntityState.Modified;
+                        
+                        db.Entry(address).State = System.Data.Entity.EntityState.Modified;
+
+                        db.SaveChanges();
+
+                        transaction.Commit();
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                    }
+                }
+                return RedirectToAction("Index");
             }
         }
 

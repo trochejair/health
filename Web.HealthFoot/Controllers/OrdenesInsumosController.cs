@@ -13,7 +13,9 @@ namespace Web.HealthFoot.Controllers
         // GET: OrdenesInsumos
         public ActionResult Index()
         {
-            return View();
+            List<ORDEN_PROVEEDOR> list;
+            list = db.ORDEN_PROVEEDOR.ToList();
+            return View(list);
         }
 
         // GET: OrdenesInsumos/Details/5
@@ -79,7 +81,7 @@ namespace Web.HealthFoot.Controllers
                     db.SaveChanges();
 
 
-                    return RedirectToAction("Ordenes", "Compras");
+                    return RedirectToAction("Index");
                 }
                 else {
 

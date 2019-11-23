@@ -170,7 +170,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ComprasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InsumosController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -261,6 +260,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Admin\bootstrap.min.css" />
+    <Content Include="Content\Admin\commons\tooltip.js" />
     <Content Include="Content\Admin\datatables\autoFill.bootstrap4.css" />
     <Content Include="Content\Admin\datatables\autoFill.bootstrap4.min.js" />
     <Content Include="Content\Admin\datatables\dataTables.autoFill.min.js" />
@@ -634,7 +634,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\_LayoutWeb.cshtml" />
-    <Content Include="Views\Compras\Proveedores.cshtml" />
     <Content Include="Views\Insumos\Create.cshtml" />
     <Content Include="Views\OrdenesInsumos\Create.cshtml" />
     <Content Include="Views\Productos\Create.cshtml" />
@@ -644,8 +643,10 @@
     <Content Include="Views\Proveedores\Create.cshtml" />
     <Content Include="Views\Proveedores\Details.cshtml" />
     <Content Include="Views\Proveedores\Ordenes.cshtml" />
-    <Content Include="Views\Compras\Insumos.cshtml" />
-    <Content Include="Views\Compras\Ordenes.cshtml" />
+    <Content Include="Views\Proveedores\Index.cshtml" />
+    <Content Include="Views\Insumos\Index.cshtml" />
+    <Content Include="Views\OrdenesInsumos\Index.cshtml" />
+    <Content Include="Views\Proveedores\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

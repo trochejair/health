@@ -1,0 +1,61 @@
+﻿@model List<Web.HealthFoot.Models.ProviderAddress>
+@{
+    ViewBag.Title = "Proveedores";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section botones{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ActionLink("Agregar", "Create", "Proveedores", new { area = "" }, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}
+@section scripts{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    @Scripts.Render("~/Content/Admin/Provider/index.js")
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Proveedores</h2>
+    </div>
+    <div class="col-md-12">
+        <table class="table datatable">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Correo</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var provider in Model)
+                {
+                    <tr>
+                        <td>@provider.ID</td>
+                        <td>@provider.NOMBRE </td>
+                        <td>@provider.CALLE</td>
+                        <td>@provider.TELEFONO</td>
+                        <td>@provider.CORREO</td>
+                        <td style="font-size:18px;">
+                            <div class="d-flex w-100 justify-content-around mx-2">
+                                <a data-toggle="tooltip" data-placement="top" title="Información" href="@Url.Action("Details","Proveedores", new { id = provider.ID })" class="fas fa-eye"></a>
+                                <a data-toggle="tooltip" data-placement="top" title="Editar" href="@Url.Action("Edit","Proveedores", new { id = provider.ID })" class="fas fa-edit"></a>
+                                <a data-toggle="tooltip" data-placement="top" title="Ver pedidos" href="@Url.Action("Details", "Proveedores", new { id = provider.ID })" class="fas fa-clipboard"></a>
+                                    <a data-toggle="tooltip" data-placement="top" title="Desactivar" href="@Url.Action("Delete","Proveedores", new { id = provider.ID })" class="fas fa-trash"></a>
+
+                            </div>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>

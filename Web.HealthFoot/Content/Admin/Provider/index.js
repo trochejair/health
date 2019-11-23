@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
-    var $title = "¿Eliminar?";
-    var $text = "Esta seguro de eliminar al proveedor";
+    var $title = "¿Desactivar proveedor?";
+    var $text = "No podras hacer pedidos a proveedores desactivados";
     var $icon = 'warning';
     $(document).on('click', '.fa-trash', function (e) {
         e.preventDefault();

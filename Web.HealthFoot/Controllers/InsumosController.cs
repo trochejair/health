@@ -14,7 +14,11 @@ namespace Web.HealthFoot.Controllers
         // GET: Insumos
         public ActionResult Index()
         {
-            return View();
+
+
+            List<INSUMO> list;
+            list = db.INSUMO.ToList();
+            return View(list);
         }
 
         // GET: Insumos/Details/5
@@ -42,10 +46,11 @@ namespace Web.HealthFoot.Controllers
                     insumo.ACTIVO = 1;
                     insumo.CANTIDAD = 0;
                     insumo.CREATED_AT = DateTime.Now;
+                    insumo.NOMBRE = insumoView.NOMBRE;
                     db.INSUMO.Add(insumo);
                     db.SaveChanges();
-                    
-                    return RedirectToAction("Insumo","Compras");
+
+                    return RedirectToAction("Index");
                 }
 
             }

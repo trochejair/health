@@ -15,15 +15,31 @@ namespace Web.HealthFoot.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            return View();
+        }
 
+        public ActionResult Product()
+        {
+            /*using (var prod = new DefaultConnectionEntities())
+            {
+                var productos = prod.PRODUCTO.ToList();
+                return View(productos);
+            }*/
+            return View();
+        }
+
+        public ActionResult ProductDetail()
+        {
+            return View();
+        }
+
+        public ActionResult TermsAndConditions()
+        {
             return View();
         }
     }

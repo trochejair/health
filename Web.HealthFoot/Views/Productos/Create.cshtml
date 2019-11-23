@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "Crear Producto";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section css{
+    @Styles.Render("~/Content/Commons/dropzone/dropzone.css")
+}
+
+@section scripts{
+    @Scripts.Render("~/Content/Commons/dropzone/dropzone.js")
+    @Scripts.Render("~/Content/Admin/Products/dropzone_init.js")
+}
+<div class="row">
+    <div class="col-md-12 text-center my-3">
+        <h2>Agregar producto</h2>
+    </div>
+    <div class="col-md-8 mx-auto">
+        <form class="form-row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea type="text" class="form-control" id="descripcion" placeholder="Descripción"></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" class="form-control" id="cantidad" placeholder="Cantidad">
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="precio">Precio</label>
+                    <input type="number" class="form-control" id="precio" placeholder="Precio">
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="categoria">Categoría</label>
+                    <select class="form-control" id="categoria">
+                        <option>Categoría 1</option>
+                        <option>Categoría 2</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div id="zdrop" class="dropzone ">
+                    <div class="dz-default dz-message">
+                        <span>Subir imagen</span>
+                        <h1><i class="fas fa-upload  fa-7x" style="font-size:40px"></i></h1>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-12 text-center my-3">
+                <h4>Agregar fórmula</h4>
+            </div>
+            <div class="col-md-12">
+                <div class="form-row shadow p-3 mb-5 bg-white rounded">
+                    <div class="form-group col-md-6">
+                        <label for="insumo">Insumo</label>
+                        <select class="form-control" id="insumo">
+                            <option>Insumo 1</option>
+                            <option>Insumo 2</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="cantidad">Cantidad</label>
+                        <input type="text" class="form-control" id="cantidad" placeholder="Cantidad">
+                    </div>
+                    <div class="col-md-2">
+                        <div>
+                            <i class="fas fa-plus-circle fa-3x"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-12 text-center">
+                <button for="control" type="button" class="btn btn-primary">Guardar</button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

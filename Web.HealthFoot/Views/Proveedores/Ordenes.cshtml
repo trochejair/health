@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Ordenes";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section botones{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ActionLink("Agregar", "AgergarOrden", "Proveedores", new { area = "" }, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-md-12">
+        <h2>Ordenes del proveedor 1</h2>
+    </div>
+    <div class="col-md-12">
+        <table class="table datatable">
+            <thead>
+                <tr>
+                    CANTIDAD INT,
+                    PRECIO FLOAT,
+                    FECHA DATE,
+                    <th>Id</th>
+                    <th>Insumos</th>
+                    <th>Fecha</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int x = 1; x < 12; x++)
+                {
+                    <tr>
+                        <td>@x </td>
+                        <td>
+                            Insumo @x  kg<br />
+                            Insumo 3  kg<br />
+                        </td>
+                        <td>2019-12-@x</td>
+                        <td>
+                            <i class="fas fa-eye"></i>
+                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-clipboard"></i>
+                            <i class="fas fa-trash"></i>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>

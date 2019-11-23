@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Ver Producto";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 text-center my-3">
+        <h2>Ver producto</h2>
+    </div>
+
+    <div class="col-md-6 mx-auto">
+        
+        <form>
+            <fieldset disabled>
+                <div class="row form-row shadow p-3 mb-5 bg-white rounded">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="descripcion">Descripción</label>
+                            <textarea type="text" class="form-control" id="descripcion" placeholder="Descripción"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="cantidad">Cantidad</label>
+                            <input type="number" class="form-control" id="cantidad" placeholder="Cantidad">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="precio">Precio</label>
+                            <input type="number" class="form-control" id="precio" placeholder="Precio">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="categoria">Categoría</label>
+                            <input type="text" class="form-control" id="categoria" placeholder="Categoría">
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="imagen">Imágenes</label>
+                            <br />
+                            <img src="~/Content/Images/crema.jpeg" width="60" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="estatus">Estatus</label>
+                            <input type="text" class="form-control" id="estatus" placeholder="Estatus">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center my-3">
+                    <h4>Fórmula</h4>
+                </div>
+
+                <div class="form-row shadow p-3 mb-5 bg-white rounded">
+                    <div class="form-group col-md-6">
+                        <label for="insumo">Insumo</label>
+                        <input type="text" class="form-control" id="insumo" placeholder="Insumo">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="cantidad">Cantidad</label>
+                        <input type="text" class="form-control" id="cantidad" placeholder="Cantidad">
+                    </div>
+                </div>
+            </fieldset>
+                <div class="col-md-12 text-center">
+                    <a class="btn btn-primary" href="@Url.Action("Edit","Productos")" role="button">Editar</a>
+                </div>
+       
+        </form>
+    </div>
+</div>

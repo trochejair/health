@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "Crear Producto";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 text-center my-3">
+        <h2>Editar producto</h2>
+    </div>
+
+    <div class="col-md-6 mx-auto">
+
+        <form>
+            <div class="row form-row shadow p-3 mb-5 bg-white rounded">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="descripcion">Descripción</label>
+                        <textarea type="text" class="form-control" id="descripcion" placeholder="Descripción"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad</label>
+                        <input type="number" class="form-control" id="cantidad" placeholder="Cantidad">
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="precio">Precio</label>
+                        <input type="number" class="form-control" id="precio" placeholder="Precio">
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="categoria">Categoría</label>
+                        <select class="form-control" id="categoria">
+                            <option>Categoría 1</option>
+                            <option>Categoría 2</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="imagen">Imágenes</label>
+                        <div class="row">
+                            <div class="col col-lg-3">
+                                <img src="~/Content/Images/crema.jpeg" width="60" />
+
+                            </div>
+                            <div class="col d-flex align-items-center">
+                                <i class="fas fa-trash fa-lg "></i>
+                            </div>
+                        </div>
+                            <br />
+                                <input type="file" class="form-control-file" id="imagen">
+                            
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="estatus">Estatus</label>
+                        <select class="form-control" id="estatus">
+                            <option>Activo</option>
+                            <option>Inactivo</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 text-center my-3">
+                <h4>Editar fórmula</h4>
+            </div>
+            <div class="text-right">
+                <i class="fas fa-plus-circle fa-3x"></i>
+            </div>
+
+            <div class="form-row shadow p-3 mb-5 bg-white rounded">
+                <div class="form-group col-md-6">
+                    <label for="insumo">Insumo</label>
+                    <select class="form-control" id="insumo">
+                        <option>Insumo 1</option>
+                        <option>Insumo 2</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="text" class="form-control" id="cantidad" placeholder="Cantidad">
+                </div>
+                <div class="form-group col-md-1">
+                    <label>Acción</label>
+                    <i class="fas fa-trash fa-lg"></i>
+                </div>
+                
+            </div>
+
+            <div class="col-md-12 text-center">
+                <button for="control" type="button" class="btn btn-primary">Guardar</button>
+            </div>
+
+        </form>
+    </div>
+</div>

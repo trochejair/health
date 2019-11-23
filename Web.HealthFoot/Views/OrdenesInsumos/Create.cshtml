@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 text-center my-3">
+        <h2>Agregar orden</h2>
+    </div>
+    <div class="col-md-10 mx-auto">
+        <form action="@Url.Action("Create","OrdenesInsumos")" method="POST">
+            @Html.AntiForgeryToken()
+            <div class="row">
+                @if (!(String.IsNullOrEmpty(ViewBag.Errors)))
+                {
+                    <div class="col-md-12">
+                        <div class="alert alert-danger" role="alert">
+                            @ViewBag.Errors
+                        </div>
+                    </div>
+                }
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="my-1 mr-2" for="Providers">Proveedor</label>
+
+                        @Html.DropDownList("Providers", null, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label for="inp-name">Nombre</label>
+                        <input type="text" class="form-control" id="inp-name" placeholder="Nombre">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-group">
+                        <label for="inp-price">Precio</label>
+                        <input type="number" class="form-control" id="inp-price" placeholder="$$">
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="form-group">
+                        <label for="inp-quantity">Cantidad</label>
+                        <input type="number" class="form-control" id="inp-quantity" placeholder="$$">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label for="inp-unit">Unidad de medida</label>
+                        <input type="text" class="form-control" id="inp-unit" placeholder="kg, g, ml, L, etc">
+                    </div>
+                </div>
+                <div class="col-1">
+                    <div class="h-100 d-flex">
+                        <i class="fas fa-plus-circle align-self-center"></i>
+                    </div>
+                </div>
+                <div class="col-md-12 my-3">
+                    <div class="row" id="content-products">
+
+                    </div>
+                </div>
+                <div class="col-md-12 text-center">
+                    <button type="submit" class="btn btn-primary rounded">
+                        Agregar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/Content/Admin/OrdenInsumo/create.js")
+}

@@ -1,12 +1,10 @@
 ﻿$(document).ready(function () {
-    var inpName = $('#inp-name');
+    var inpName = $('#Supplies');
     var inpQuantity = $('#inp-quantity');
     var inpPrice = $('#inp-price');
     var inpUnit = $('#inp-unit');
     var count = 0;
-    console.log("Carga");
     $(document).on('click', '.fa-plus-circle', function () {
-        console.log("Carga click");
         if (inpName.val().length > 0 && inpPrice.val().length > 0 && inpUnit.val().length > 0) {
 
             count++;
@@ -32,7 +30,7 @@
             }).val(inpQuantity.val());
 
 
-            var divNam = $('<div>', { class: 'col-md-3' }).html(inpName.val());
+            var divNam = $('<div>', { class: 'col-md-3' }).html($('#Supplies option:selected').text());
             var divPrice = $('<div>', { class: 'col-md-3' }).html(inpPrice.val());
             var divUnit = $('<div>', { class: 'col-md-3' }).html(inpUnit.val());
             var divQuantity = $('<div>', { class: 'col-md-2' }).html(inpQuantity.val());
@@ -67,7 +65,6 @@
 
     });
     function clearInps() {
-        inpName.val("");
         inpPrice.val("");
         inpUnit.val("");
     }

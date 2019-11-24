@@ -44,10 +44,25 @@
                         <td>@provider.CORREO</td>
                         <td style="font-size:18px;">
                             <div class="d-flex w-100 justify-content-around mx-2">
-                                <a data-toggle="tooltip" data-placement="top" title="Información" href="@Url.Action("Details","Proveedores", new { id = provider.ID })" class="fas fa-eye"></a>
-                                <a data-toggle="tooltip" data-placement="top" title="Editar" href="@Url.Action("Edit","Proveedores", new { id = provider.ID })" class="fas fa-edit"></a>
-                                <a data-toggle="tooltip" data-placement="top" title="Ver pedidos" href="@Url.Action("Details", "Proveedores", new { id = provider.ID })" class="fas fa-clipboard"></a>
-                                    <a data-toggle="tooltip" data-placement="top" title="Desactivar" href="@Url.Action("Delete","Proveedores", new { id = provider.ID })" class="fas fa-trash"></a>
+
+                                <a data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="Desactivar" href="@Url.Action("Delete","Proveedores", new { id = provider.ID })"
+                                   class="fas fa-trash"></a>
+
+                                <a data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="Información" href="@Url.Action("Details","Proveedores", new { id = provider.ID })"
+                                   class="fas fa-eye"></a>
+                                <a data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="Editar" href="@Url.Action("Edit","Proveedores", new { id = provider.ID })"
+                                   class="fas fa-edit"></a>
+                                <a data-toggle="tooltip"
+                                   data-placement="top"
+                                   title="Ver pedidos"
+                                   href="@Url.Action("Ordenes", "Proveedores", new { id = provider.ID})"
+                                   class="fas fa-clipboard"></a>
 
                             </div>
                         </td>

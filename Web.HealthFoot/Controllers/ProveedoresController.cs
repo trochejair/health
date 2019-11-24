@@ -20,6 +20,7 @@ namespace Web.HealthFoot.Controllers
             list = (from p in db.PROVEEDOR
                     join d in db.DIRECCION
                     on p.FK_DIRECCION equals d.ID
+                    where p.ACTIVO == 1 
                     select new ProviderAddress
                     {
                         IDADDRESS = d.ID,
@@ -207,28 +208,36 @@ namespace Web.HealthFoot.Controllers
         // GET: Proveedores/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
-        }
+            var success = false;
+            var message = "Error";
 
-        // POST: Proveedores/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+            if (id != null) {
+                using(HealthEntities db = new HealthEntities()){
+                    PROVEEDOR provider = db.PROVEEDOR.Find(id);
+                    provider.ACTIVO = 0;
+                    db.Entry(provider).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                }
+                success = true;
+                message = "Transaccion correcta";
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return Json(new {
+                success,
+                message 
+            }, JsonRequestBehavior.AllowGet);
         }
+        
 
         public ActionResult Ordenes(int id)
         {
-            return RedirectToAction("Index");
+            HealthEntities db = new HealthEntities();
+
+            List<ORDEN_PROVEEDOR> orders = db.ORDEN_PROVEEDOR
+                .Where(order => order.FK_PROVEEDOR == id)
+                .ToList();
+
+            return View(orders);
         }
     }
 }

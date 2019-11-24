@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
-    var $title = "¿Desactivar proveedor?";
-    var $text = "No podras hacer pedidos a proveedores desactivados";
+    var $title = "¿Eliminar proveedor?";
+    var $text = "Se eliminaran los datos del proveedor";
     var $icon = 'warning';
     $(document).on('click', '.fa-trash', function (e) {
         e.preventDefault();
@@ -16,11 +16,15 @@
             confirmButtonText: 'Sí, Eliminar'
         }).then((result) => {
             if (result.value) {
-                Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
+                var url = $(this).attr('href');
+                $.ajax({
+                    url: url,
+                    success: function (response) {
+                        if (response.success) {  
+                            location.reload();
+                        }
+                    }
+                });
             }
         })
 

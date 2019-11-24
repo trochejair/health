@@ -30,20 +30,20 @@
                 <div class="col-3">
                     <div class="form-group">
                         <label for="inp-name">Nombre</label>
-                        <input type="text" class="form-control" id="inp-name" placeholder="Nombre">
+                        @Html.DropDownList("Supplies", null, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="col-2">
                     <div class="form-group">
                         <label for="inp-price">Precio</label>
-                        <input type="number" class="form-control" id="inp-price" placeholder="$$">
+                        <input type="number" class="form-control" id="inp-price" placeholder="">
                     </div>
                 </div>
 
                 <div class="col-3">
                     <div class="form-group">
                         <label for="inp-quantity">Cantidad</label>
-                        <input type="number" class="form-control" id="inp-quantity" placeholder="$$">
+                        <input type="number" class="form-control" id="inp-quantity" placeholder="">
                     </div>
                 </div>
                 <div class="col-3">

@@ -22,20 +22,28 @@
                 <tr>
                     <th>Id</th>
                     <th>Nombre</th>
+                    <th></th>
                 </tr>
             </thead>
 
             <tbody>
                 @foreach (var insumo in Model)
                 {
-                    <tr>
-                        <td>@insumo.ID </td>
-                        <td>@insumo.NOMBRE</td>
-                    </tr>
-
+                <tr>
+                    <td>@insumo.ID </td>
+                    <td>@insumo.NOMBRE</td>
+                    <td>
+                        <a data-toggle="tooltip" 
+                           data-placement="top" 
+                           title="Desactivar" 
+                           href="@Url.Action("Delete","Insumo", new { id = insumo.ID })" 
+                           class="fas fa-trash">
+                        </a>
+                    </td>
+                    
+                </tr>
                 }
             </tbody>
-
         </table>
     </div>
 </div>

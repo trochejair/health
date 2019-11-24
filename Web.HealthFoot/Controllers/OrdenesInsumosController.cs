@@ -9,11 +9,11 @@ namespace Web.HealthFoot.Controllers
 {
     public class OrdenesInsumosController : Controller
     {
-        HealthEntities db = new HealthEntities();
         // GET: OrdenesInsumos
         public ActionResult Index()
         {
             List<ORDEN_PROVEEDOR> list;
+            HealthEntities db = new HealthEntities();
             list = db.ORDEN_PROVEEDOR.ToList();
             return View(list);
         }
@@ -28,14 +28,18 @@ namespace Web.HealthFoot.Controllers
         public ActionResult Create()
         {
 
-
             List<PROVEEDOR> provider;
+            List<INSUMO> supplies;
 
-            provider = db.PROVEEDOR.ToList();
-
-
+            using (HealthEntities db = new HealthEntities())
+            {
+                provider = db.PROVEEDOR.ToList();
+                supplies = db.INSUMO.Where(input => input.ACTIVO == 1)
+                                          .ToList();
+            }
 
             ViewBag.Providers = new SelectList(provider, "ID", "NOMBRE"); ;
+            ViewBag.Supplies = new SelectList(supplies, "ID", "NOMBRE"); ;
             return View();
         }
 
@@ -43,59 +47,80 @@ namespace Web.HealthFoot.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
-            try
+
+            var allKey = collection.AllKeys;
+            var count = allKey.Length;
+            List<PROVEEDOR> providers;
+            List<INSUMO> supplies;
+
+            if (count > 5)
             {
-                var allKey = collection.AllKeys;
-                var count = allKey.Length;
-                if (count > 2)
+                using (HealthEntities db = new HealthEntities())
                 {
-                    ORDEN_PROVEEDOR ordenProveedor = new ORDEN_PROVEEDOR();
-                    ordenProveedor.FK_PROVEEDOR = Int32.Parse(collection["Providers"]);
-                    ordenProveedor.CREATED_AT = DateTime.Now;
-                    ordenProveedor.FECHA = DateTime.Now;
-                    ordenProveedor = db.ORDEN_PROVEEDOR.Add(ordenProveedor);
-                    db.SaveChanges();
-                    for (var x = 2; x < count; x++)
+                    using (var transaction = db.Database.BeginTransaction())
                     {
-                        string key = allKey[x];
-                        var name = collection[key];
-                        string id = key.Replace("arrayInsumos[", "")
-                                       .Replace("][name]", "");
-                        var price = collection["arrayInsumos[" + id + "]" + "[price]"];
-                        var quantity = collection["arrayInsumos[" + id + "]" + "[quantity]"];
-                        var unit = collection["arrayInsumos[" + id + "]" + "[unit]"];
+                       try
+                        {
+                            ORDEN_PROVEEDOR ordenProveedor = new ORDEN_PROVEEDOR
+                            {
+                                FK_PROVEEDOR = Int32.Parse(collection["Providers"]),
+                                CREATED_AT = DateTime.Now,
+                                FECHA = DateTime.Now
+                            };
+                            ordenProveedor = db.ORDEN_PROVEEDOR.Add(ordenProveedor);
+                            for (var x = 3; x < count; x++)
+                            {
+                                string key = allKey[x];
+                                var name = collection[key];
+                                string id = key.Replace("arrayInsumos[", "")
+                                               .Replace("][name]", "");
+                                var price = collection["arrayInsumos[" + id + "]" + "[price]"];
+                                var quantity = collection["arrayInsumos[" + id + "]" + "[quantity]"];
+                                var unit = collection["arrayInsumos[" + id + "]" + "[unit]"];
 
-                        x = x + 3;
+                                x = x + 3;
 
-                        INSUMO insumo = new INSUMO();
-                        insumo.NOMBRE = name;
-                        insumo.CANTIDAD = Int32.Parse(quantity);
-                        //insumo.DESCRIPCION = "";
-                        //insumo.UNIDAD_MEDIDA = unit;
-                        insumo.ACTIVO = 1;
-                        //insumo.FK_ORDEN_PROVEEDOR = ordenProveedor.ID;
-                        insumo.CREATED_AT = DateTime.Now;
-                        db.INSUMO.Add(insumo);
-
+                                INSUMO_ORDEN insumo = new INSUMO_ORDEN
+                                {
+                                    PRECIO = float.Parse(price),
+                                    UNIDAD_MEDIDA= unit,
+                                    FK_INSUMO= Int32.Parse(name),
+                                    FK_ORDEN_PROVEEDOR= ordenProveedor.ID,
+                                    CANTIDAD = Int32.Parse(quantity),
+                                    ACTIVO = 1,
+                                    CREATED_AT = DateTime.Now
+                                };
+                                db.INSUMO_ORDEN.Add(insumo);
+                            }
+                            db.SaveChanges();
+                           transaction.Commit();
+                        return RedirectToAction("Index");
+                        }
+                        catch
+                        {
+                            transaction.Rollback();
+                            ViewBag.Errors = "Almenos agregue un insumo Error";
+                        }
                     }
-                    db.SaveChanges();
-
-
-                    return RedirectToAction("Index");
-                }
-                else {
-
-                    ViewBag.Errors = "Almenos agregue un insumo";
                 }
             }
-            catch
+            else
             {
+
+                ViewBag.Errors = "Almenos agregue un insumo";
             }
 
+            using (HealthEntities db = new HealthEntities())
+            {
+                providers = db.PROVEEDOR.Where(provider => provider.ACTIVO == 1)
+                    .ToList();
 
-            List<PROVEEDOR> provider;
-            provider = db.PROVEEDOR.ToList();
-            ViewBag.Providers = new SelectList(provider, "ID", "NOMBRE"); ;
+                supplies = db.INSUMO.Where(input => input.ACTIVO == 1)
+                          .ToList();
+            }
+
+            ViewBag.Providers = new SelectList(providers, "ID", "NOMBRE"); ;
+            ViewBag.Supplies = new SelectList(supplies, "ID", "NOMBRE"); ;
             return View();
 
         }

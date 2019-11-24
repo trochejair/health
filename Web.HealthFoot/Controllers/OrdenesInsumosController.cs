@@ -21,7 +21,10 @@ namespace Web.HealthFoot.Controllers
         // GET: OrdenesInsumos/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            HealthEntities db = new HealthEntities();
+            ORDEN_PROVEEDOR order = db.ORDEN_PROVEEDOR.Find(id);
+
+            return View(order);
         }
 
         // GET: OrdenesInsumos/Create

@@ -28,12 +28,13 @@
                     <th></th>
                 </tr>
             </thead>
-
+            @{
+                double? total = 0.0;
+             }
             <tbody>
                 @foreach (var order in Model)
                 {
-                    
-                        double? total = 0.0;
+                    total = 0.0;
                     
                     <tr>
                         <td>@order.ID </td>

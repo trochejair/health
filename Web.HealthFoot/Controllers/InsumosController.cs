@@ -17,7 +17,8 @@ namespace Web.HealthFoot.Controllers
 
 
             List<INSUMO> list;
-            list = db.INSUMO.ToList();
+            list = db.INSUMO.Where(input => input.ACTIVO == 1)
+                .ToList();
             return View(list);
         }
 
@@ -84,26 +85,31 @@ namespace Web.HealthFoot.Controllers
             }
         }
 
-        // GET: Insumos/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var success = false;
+            var message = "Error";
+
+            if (id != null)
+            {
+                using (HealthEntities db = new HealthEntities())
+                {
+                    INSUMO provider = db.INSUMO.Find(id);
+                    provider.ACTIVO = 0;
+                    db.Entry(provider).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                }
+                success = true;
+                message = "Transaccion correcta";
+            }
+
+            return Json(new
+            {
+                success,
+                message
+            }, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: Insumos/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

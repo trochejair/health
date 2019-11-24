@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,23 +12,119 @@ namespace Web.HealthFoot.Controllers
     {
 
 
-        HealthEntities db = new HealthEntities();
+
         // GET: Productos
         public ActionResult Index()
         {
 
+            HealthEntities db = new HealthEntities();
+            List<PRODUCTO> products = db.PRODUCTO.ToList();
 
-            return View();
+            return View(products);
         }
 
         // GET: Productos/Create
         public ActionResult Create()
         {
-            List<INSUMO> insumos = db.INSUMO.ToList();
-            List<CATEGORIA> categorias = db.CATEGORIA.ToList();
-            ViewBag.insumos = insumos;
-            ViewBag.categotias = categorias;
+            HealthEntities db = new HealthEntities();
+            List<INSUMO> supplies = db.INSUMO.ToList();
+            List<CATEGORIA> category = db.CATEGORIA.ToList();
+            ViewBag.insumos = supplies;
+            ViewBag.categotias = category;
+
+            ViewBag.Category = new SelectList(category, "ID", "NOMBRE"); ;
+            ViewBag.Supplies = new SelectList(supplies, "ID", "NOMBRE"); ;
+
             return View();
+        }
+        [HttpPost]
+        public ActionResult Create(FormCollection formCollection)
+        {
+            var success = false;
+            var message = "";
+            var data = 0;
+            List<List<string>> errors = new List<List<string>>();
+
+            var nombre = formCollection["nombre"];
+            var descripcion = formCollection["descripcion"];
+            var cantidad = formCollection["cantidad"];
+            var categoria = formCollection["Category"];
+            var precio = formCollection["precio"];
+
+            if (nombre.Trim().Length == 0)
+            {
+                List<string> name = new List<string>();
+                name.Add("nombre");
+                name.Add("Nombre necesario");
+                errors.Add(name);
+            }
+            if (descripcion.Trim().Length == 0)
+            {
+                List<string> description = new List<string>();
+                description.Add("descripcion");
+                description.Add("Descripcion necesaria");
+                errors.Add(description);
+            }
+            if (cantidad.Trim().Length == 0)
+            {
+                List<string> quantity = new List<string>();
+                quantity.Add("cantidad");
+                quantity.Add("Cantidad necesaria");
+                errors.Add(quantity);
+            }
+            if (precio.Trim().Length == 0)
+            {
+                List<string> price = new List<string>();
+                price.Add("precio");
+                price.Add("Precio necesario");
+                errors.Add(price);
+            }
+
+            if (errors.Count == 0)
+            {
+                using (HealthEntities db = new HealthEntities())
+                {
+                    using (var transaction = db.Database.BeginTransaction())
+                    {
+                        //                 try
+                        //                   {
+                        PRODUCTO product = new PRODUCTO();
+                        product.NOMBRE = nombre;
+                        product.DESCRIPCION = descripcion;
+                        product.CANTIDAD = Int32.Parse(cantidad);
+                        product.ACTIVO = 1;
+                        product.FK_CATEGORIA = Int32.Parse(categoria);
+                        product.PRECIO = float.Parse(precio);
+                        product.CREATED_AT = DateTime.Now;
+                        db.PRODUCTO.Add(product);
+                        db.SaveChanges();
+                        transaction.Commit();
+                        data = product.ID;
+                        success = true;
+
+
+                        //                    }
+                        // catch
+                        //{
+                        //   transaction.Rollback();
+
+                        //}
+
+
+                    }
+
+                }
+            }
+
+
+
+            return Json(new
+            {
+                success,
+                message,
+                data,
+                errors
+            });
         }
 
         public ActionResult Edit()
@@ -40,75 +137,58 @@ namespace Web.HealthFoot.Controllers
         {
             return View();
         }
-
-        /*
-        // GET: Productos/Details/5
-        public ActionResult Details(int id)
+        [HttpPost]
+        public ActionResult Images(int id)
         {
-            return View();
+            var success = false;
+            var message = "";
+
+
+            bool isSavedSuccessfully = true;
+            string fName = "";
+            try
+            {
+                foreach (string fileName in Request.Files)
+                {
+                    HttpPostedFileBase file = Request.Files[fileName];
+                    //Save file content goes here
+                    fName = file.FileName;
+                    if (file != null && file.ContentLength > 0)
+                    {
+
+                        var originalDirectory = new DirectoryInfo(string.Format("{0}Content", Server.MapPath(@"\")));
+
+                        string pathString = System.IO.Path.Combine(originalDirectory.ToString(), "ImagesProduct");
+
+                        bool isExists = System.IO.Directory.Exists(pathString);
+
+                        if (!isExists)
+                            System.IO.Directory.CreateDirectory(pathString);
+
+                        var fileNamedb = "img_" + id + System.DateTime.Now + "_" + file.FileName;
+                        var path = string.Format("{0}\\{1}", pathString, fileNamedb);
+                        file.SaveAs(path);
+
+                        using (HealthEntities db = new HealthEntities())
+                        {
+                            IMAGEN_PRODUCTO image = new IMAGEN_PRODUCTO();
+                            image.FK_PRODUCTO = id;
+                            image.IMAGEN = fileNamedb;
+                            db.IMAGEN_PRODUCTO.Add(image);
+                            db.SaveChanges();
+                        }
+
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                isSavedSuccessfully = false;
+            }
+            return Json(new { Message = fName });
         }
 
-
-       
-                // POST: Productos/Create
-                [HttpPost]
-                public ActionResult Create(FormCollection collection)
-                {
-                    try
-                    {
-                        // TODO: Add insert logic here
-
-                        return RedirectToAction("Index");
-                    }
-                    catch
-                    {
-                        return View();
-                    }
-                }
-
-                // GET: Productos/Edit/5
-                public ActionResult Edit(int id)
-                {
-                    return View();
-                }
-
-                // POST: Productos/Edit/5
-                [HttpPost]
-                public ActionResult Edit(int id, FormCollection collection)
-                {
-                    try
-                    {
-                        // TODO: Add update logic here
-
-                        return RedirectToAction("Index");
-                    }
-                    catch
-                    {
-                        return View();
-                    }
-                }
-
-                // GET: Productos/Delete/5
-                public ActionResult Delete(int id)
-                {
-                    return View();
-                }
-
-                // POST: Productos/Delete/5
-                [HttpPost]
-                public ActionResult Delete(int id, FormCollection collection)
-                {
-                    try
-                    {
-                        // TODO: Add delete logic here
-
-                        return RedirectToAction("Index");
-                    }
-                    catch
-                    {
-                        return View();
-                    }
-                }
-                */
     }
 }

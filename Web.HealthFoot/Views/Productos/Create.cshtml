@@ -5,54 +5,69 @@
 }
 
 @section css{
-    @Styles.Render("~/Content/Commons/dropzone/dropzone.css")
+    @Styles.Render("~/Content/Admin/commons/dropzone/dropzone.css")
 }
 
 @section scripts{
-    @Scripts.Render("~/Content/Commons/dropzone/dropzone.js")
-    @Scripts.Render("~/Content/Admin/Products/dropzone_init.js")
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    @Scripts.Render("~/Content/Admin/commons/dropzone/dropzone.js")
+    @Scripts.Render("~/Content/Admin/Products/create.js")
 }
 <div class="row">
+    <input id="inp-url-image" type="hidden" value="@Url.Action("Images","Productos")" />
     <div class="col-md-12 text-center my-3">
         <h2>Agregar producto</h2>
     </div>
     <div class="col-md-8 mx-auto">
-        <form class="form-row">
+        <form id="form-upsert"
+              class="form-row"
+              method="POST"
+              action="@Url.Action("Create","Productos")">
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" placeholder="Nombre">
+                    <input type="text" class="form-control" id="nombre" name="nombre">
+                    <span class="field-validation-valid text-danger" 
+                          data-valmsg-for="nombre" 
+                          data-valmsg-replace="true"></span>
                 </div>
             </div>
 
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="descripcion">Descripción</label>
-                    <textarea type="text" class="form-control" id="descripcion" placeholder="Descripción"></textarea>
+                    <textarea type="text" class="form-control" id="descripcion" name="descripcion"></textarea>
+                    <span class="field-validation-valid text-danger"
+                          data-valmsg-for="descripcion"
+                          data-valmsg-replace="true"></span>
                 </div>
             </div>
 
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="cantidad">Cantidad</label>
-                    <input type="number" class="form-control" id="cantidad" placeholder="Cantidad">
+                    <input type="number" class="form-control" id="cantidad" name="cantidad">
+                    <span class="field-validation-valid text-danger"
+                          data-valmsg-for="cantidad"
+                          data-valmsg-replace="true"></span>
                 </div>
             </div>
 
             <div class="col-md-12">
                 <div class="form-group">
                     <label for="precio">Precio</label>
-                    <input type="number" class="form-control" id="precio" placeholder="Precio">
+                    <input type="number" class="form-control" id="precio" name="precio">
+                    <span class="field-validation-valid text-danger"
+                          data-valmsg-for="precio"
+                          data-valmsg-replace="true"></span>
                 </div>
             </div>
 
             <div class="col-md-12">
                 <div class="form-group">
-                    <label for="categoria">Categoría</label>
-                    <select class="form-control" id="categoria">
-                        <option>Categoría 1</option>
-                        <option>Categoría 2</option>
-                    </select>
+                    <label for="Supplies">Categoría</label>
+
+                    @Html.DropDownList("Category", null, new { @class = "form-control" })
                 </div>
             </div>
 
@@ -65,7 +80,6 @@
                 </div>
             </div>
 
-
             <div class="col-md-12 text-center my-3">
                 <h4>Agregar fórmula</h4>
             </div>
@@ -73,10 +87,7 @@
                 <div class="form-row shadow p-3 mb-5 bg-white rounded">
                     <div class="form-group col-md-6">
                         <label for="insumo">Insumo</label>
-                        <select class="form-control" id="insumo">
-                            <option>Insumo 1</option>
-                            <option>Insumo 2</option>
-                        </select>
+                        @Html.DropDownList("Supplies", null, new { @class = "form-control" })
                     </div>
                     <div class="form-group col-md-4">
                         <label for="cantidad">Cantidad</label>
@@ -92,7 +103,11 @@
             </div>
 
             <div class="col-md-12 text-center">
-                <button for="control" type="button" class="btn btn-primary">Guardar</button>
+                <button for="control"
+                        type="submit"
+                        class="btn btn-primary">
+                    Guardar
+                </button>
             </div>
 
         </form>

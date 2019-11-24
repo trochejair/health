@@ -260,6 +260,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Admin\bootstrap.min.css" />
+    <Content Include="Content\Admin\commons\dropzone\dropzone.css" />
+    <Content Include="Content\Admin\commons\dropzone\dropzone.js" />
     <Content Include="Content\Admin\commons\tooltip.js" />
     <Content Include="Content\Admin\datatables\autoFill.bootstrap4.css" />
     <Content Include="Content\Admin\datatables\autoFill.bootstrap4.min.js" />
@@ -284,9 +286,11 @@
     <Content Include="Content\Admin\icons.css" />
     <Content Include="Content\Admin\metismenu.min.css" />
     <Content Include="Content\Admin\OrdenInsumo\create.js" />
+    <Content Include="Content\Admin\Products\create.js" />
     <Content Include="Content\Admin\Products\dropzone_init.js" />
     <Content Include="Content\Admin\Provider\index.js" />
     <Content Include="Content\Admin\style.css" />
+    <Content Include="Content\Admin\Supplied\index.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />

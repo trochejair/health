@@ -288,6 +288,7 @@
     <Content Include="Content\Admin\OrdenInsumo\create.js" />
     <Content Include="Content\Admin\Products\create.js" />
     <Content Include="Content\Admin\Products\dropzone_init.js" />
+    <Content Include="Content\Admin\Products\edit.js" />
     <Content Include="Content\Admin\Provider\index.js" />
     <Content Include="Content\Admin\style.css" />
     <Content Include="Content\Admin\Supplied\index.js" />

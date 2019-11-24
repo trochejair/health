@@ -12,7 +12,7 @@
 }
 <div class="row">
     <div class="col-md-12">
-        <h2>Proveedores</h2>
+        <h2>Productos</h2>
     </div>
     <div class="col-md-12">
         <table class="table datatable">
@@ -36,8 +36,8 @@
                         <td>@product.CATEGORIA.NOMBRE</td>
                         <td>@product.PRECIO</td>
                         <td>
-                            <a href="@Url.Action("Details","Productos")"><i class="fas fa-eye"></i></a>
-                            <a href="@Url.Action("Edit","Productos")"> <i class="fas fa-edit"></i></a>
+                            <a href="@Url.Action("Details","Productos", new {id = product.ID})"><i class="fas fa-eye"></i></a>
+                            <a href="@Url.Action("Edit","Productos", new { id = product.ID})"> <i class="fas fa-edit"></i></a>
                             <i class="fas fa-trash"></i>
                         </td>
                     </tr>

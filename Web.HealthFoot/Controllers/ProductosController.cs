@@ -8,6 +8,7 @@ using Web.HealthFoot.Models;
 
 namespace Web.HealthFoot.Controllers
 {
+    [Authorize]
     public class ProductosController : Controller
     {
 
@@ -313,6 +314,33 @@ namespace Web.HealthFoot.Controllers
                 message = "Se eliminarion imagenes";
             }
 
+
+            return Json(new
+            {
+                success,
+                message,
+            });
+        }
+
+
+        [HttpPost]
+        public ActionResult DeleteFormula(int id,FormCollection formCollection)
+        {
+            var success = false;
+            var message = "";
+            
+            return Json(new
+            {
+                success,
+                message,
+            });
+        }
+
+        [HttpPost]
+        public ActionResult NewFormula(int id,FormCollection formCollection)
+        {
+            var success = false;
+            var message = "";
 
             return Json(new
             {

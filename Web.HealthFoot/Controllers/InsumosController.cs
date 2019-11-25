@@ -8,6 +8,7 @@ using Web.HealthFoot.Models.ViewModels;
 
 namespace Web.HealthFoot.Controllers
 {
+    [Authorize]
     public class InsumosController : Controller
     {
         HealthEntities db = new HealthEntities();

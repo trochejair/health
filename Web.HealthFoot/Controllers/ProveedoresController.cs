@@ -7,6 +7,7 @@ using Web.HealthFoot.Models;
 
 namespace Web.HealthFoot.Controllers
 {
+    [Authorize]
     public class ProveedoresController : Controller
     {
 

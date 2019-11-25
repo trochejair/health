@@ -7,6 +7,7 @@ using Web.HealthFoot.Models;
 
 namespace Web.HealthFoot.Controllers
 {
+    [Authorize]
     public class OrdenesInsumosController : Controller
     {
         // GET: OrdenesInsumos
@@ -36,7 +37,8 @@ namespace Web.HealthFoot.Controllers
 
             using (HealthEntities db = new HealthEntities())
             {
-                provider = db.PROVEEDOR.ToList();
+                provider = db.PROVEEDOR.Where(providerModel => providerModel.ACTIVO==1)
+                    .ToList();
                 supplies = db.INSUMO.Where(input => input.ACTIVO == 1)
                                           .ToList();
             }

@@ -14,6 +14,12 @@ namespace Web.HealthFoot.Models
     
     public partial class CLIENTE
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CLIENTE()
+        {
+            this.ORDEN = new HashSet<ORDEN>();
+        }
+    
         public int ID { get; set; }
         public string NOMBRE { get; set; }
         public string APELLIDOS { get; set; }
@@ -21,5 +27,8 @@ namespace Web.HealthFoot.Models
         public Nullable<int> ACTIVO { get; set; }
         public Nullable<int> ROL { get; set; }
         public System.DateTime CREATED_AT { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ORDEN> ORDEN { get; set; }
     }
 }

@@ -174,8 +174,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\DireccionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UserId.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -292,6 +294,18 @@
     <Content Include="Content\Images\product4.jpg" />
     <Content Include="Content\Images\team.jpg" />
     <Content Include="Content\Images\woman.jpg" />
+    <Content Include="Content\productos\chocolatespicard.jpg" />
+    <Content Include="Content\productos\diabettxcrema.jpg" />
+    <Content Include="Content\productos\diabettxplus.png" />
+    <Content Include="Content\productos\diabettxtalco.jpg" />
+    <Content Include="Content\productos\diebecon.jpg" />
+    <Content Include="Content\productos\endulzantestevia.jpg" />
+    <Content Include="Content\productos\endulzantesteviabake.jpg" />
+    <Content Include="Content\productos\endulzantesteviamaqui.jpg" />
+    <Content Include="Content\productos\endulzantestevianatural.jpg" />
+    <Content Include="Content\productos\endulzantesteviasinlactosa.jpg" />
+    <Content Include="Content\productos\galletastaifelds.jpg" />
+    <Content Include="Content\productos\galletasvoortman.jpg" />
     <Content Include="Content\Web\css\colors\default.html" />
     <Content Include="Content\Web\css\default.css" />
     <Content Include="Content\Web\css\style.css" />
@@ -640,6 +654,12 @@
     <Content Include="Views\Home\ProductDetail.cshtml" />
     <Content Include="Views\Home\TermsAndConditions.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Direccion\Create.cshtml" />
+    <Content Include="Views\Direccion\Delete.cshtml" />
+    <Content Include="Views\Direccion\Details.cshtml" />
+    <Content Include="Views\Direccion\Edit.cshtml" />
+    <Content Include="Views\Direccion\Index.cshtml" />
+    <Content Include="Views\Cart\Entrega.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -9,10 +9,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>HealtFoot - @ViewBag.Title</title>
-
     <!-- PLUGINS CSS STYLE -->
     @Styles.Render("~/Content/webcss")
+    @Styles.Render("~/Content/font")
     @RenderSection("estilos", required: false)
+
+
 </head>
 
 <body class="body-wrapper version2">
@@ -89,7 +91,7 @@
                     <div class="dropdown cart-dropdown">
                         <a href="javascript:void(0)" class="dropdown-toggle shop-cart" data-toggle="dropdown">
                             <i class="fa fa-shopping-cart"></i>
-                            
+
 
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
@@ -168,8 +170,11 @@
                 </div>
             </div>
         </div>
+
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/webjs")
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        @RenderSection("scripts", required: false)
     </div>
 </body>
 

@@ -35,15 +35,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -174,9 +165,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\DireccionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InsumosController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UserId.cs" />
     <Compile Include="Controllers\OrdenesInsumosController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
@@ -322,6 +315,18 @@
     <Content Include="Content\Images\product4.jpg" />
     <Content Include="Content\Images\team.jpg" />
     <Content Include="Content\Images\woman.jpg" />
+    <Content Include="Content\productos\chocolatespicard.jpg" />
+    <Content Include="Content\productos\diabettxcrema.jpg" />
+    <Content Include="Content\productos\diabettxplus.png" />
+    <Content Include="Content\productos\diabettxtalco.jpg" />
+    <Content Include="Content\productos\diebecon.jpg" />
+    <Content Include="Content\productos\endulzantestevia.jpg" />
+    <Content Include="Content\productos\endulzantesteviabake.jpg" />
+    <Content Include="Content\productos\endulzantesteviamaqui.jpg" />
+    <Content Include="Content\productos\endulzantestevianatural.jpg" />
+    <Content Include="Content\productos\endulzantesteviasinlactosa.jpg" />
+    <Content Include="Content\productos\galletastaifelds.jpg" />
+    <Content Include="Content\productos\galletasvoortman.jpg" />
     <Content Include="Content\Web\css\colors\default.html" />
     <Content Include="Content\Web\css\default.css" />
     <Content Include="Content\Web\css\style.css" />
@@ -686,6 +691,13 @@
     <Content Include="Views\Home\ProductDetail.cshtml" />
     <Content Include="Views\Home\Profile.cshtml" />
     <Content Include="Views\Home\TermsAndConditions.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Direccion\Create.cshtml" />
+    <Content Include="Views\Direccion\Delete.cshtml" />
+    <Content Include="Views\Direccion\Details.cshtml" />
+    <Content Include="Views\Direccion\Edit.cshtml" />
+    <Content Include="Views\Direccion\Index.cshtml" />
+    <Content Include="Views\Cart\Entrega.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

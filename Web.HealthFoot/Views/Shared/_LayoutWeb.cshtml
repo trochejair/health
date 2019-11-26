@@ -9,10 +9,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>HealtFoot - @ViewBag.Title</title>
-
     <!-- PLUGINS CSS STYLE -->
     @Styles.Render("~/Content/webcss")
+    @Styles.Render("~/Content/font")
     @RenderSection("estilos", required: false)
+
+
 </head>
 <!--Campo Url AddCart-->
 <input type="hidden" id="inp-url-add-cart" value="@Url.Action("AddCart", "Cart")" />
@@ -101,7 +103,34 @@
                             }
 
                             <li class="nav-item">
+                                @Html.ActionLink("Iniciar Sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link", @role = "button" })
+                            </li>
+
+                            <li class="nav-item">
+                                @Html.ActionLink("Registrarse", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link", @role = "button" })
+                            </li>
+                            <li class="nav-item">
+                                @Html.ActionLink("Carro", "Index", "Cart", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link", @role = "button" })
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!--Aquí van las opciones del carrito-->
+                    <div class="dropdown cart-dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle shop-cart" data-toggle="dropdown">
+                            <i class="fa fa-shopping-cart"></i>
+
+
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li>
+                                <div class="btn-group" role="group" aria-label="...">
+                                    <button type="button" class="btn btn-default" onclick="if (!window.__cfRLUnblockHandlers) return false; location.href='checkout-step-1.html';" data-cf-modified-ec9c15c58e8eb9110320e8f5-="">Ver</button>
+                                    <button type="button" class="btn btn-default" onclick="if (!window.__cfRLUnblockHandlers) return false; location.href='cart-page.html';" data-cf-modified-ec9c15c58e8eb9110320e8f5-="">Comprar</button>
+
+                                </div>
                                 <a href="@Url.Action("Index", "Cart")" class="nav-link">Carro <i class="fa fa-shopping-cart"></i></a>
+
                             </li>
                         </ul>
                     </div>
@@ -171,10 +200,12 @@
                 </div>
             </div>
         </div>
+
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/webjs")
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
         @Scripts.Render("~/Content/Cart/AddCart.js")
+        @RenderSection("scripts", required: false)
 
     </div>
 </body>

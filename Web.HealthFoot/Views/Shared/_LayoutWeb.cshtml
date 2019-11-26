@@ -79,10 +79,11 @@
                                         @User.Identity.Name
                                     </a>
 
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        @Html.ActionLink("Perfil", "Profile", "Home", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "dropdown-item", @role = "button" })
-                                        @Html.ActionLink("Productos", "Product", "Home", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "dropdown-item", @role = "button" })
-                                        <a class="dropdown-item" href="@Url.Action("LogOff", "Account")">Cerrar Sesión</a>
+                                    <div class="dropdown-menu rounded" aria-labelledby="dropdownMenuLink">
+                                        @Html.ActionLink("Perfil", "Profile", "Home", routeValues: null, htmlAttributes: new { @class = "dropdown-item", @role = "button" })
+                                        @Html.ActionLink("Productos", "Product", "Home", routeValues: null, htmlAttributes: new { @class = "dropdown-item", @role = "button" })
+                                        @Html.ActionLink("Cerrar Sesión", "LogOff", "Account", routeValues: null, htmlAttributes: new { @class = "dropdown-item", @role = "button" })
+                                        
                                     </div>
                                 
                             </li>
@@ -102,25 +103,7 @@
                             }
 
                             <li class="nav-item">
-                                @Html.ActionLink("Carro", "Index", "Cart", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link", @role = "button" })
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!--Aquí van las opciones del carrito-->
-                    <div class="dropdown cart-dropdown">
-                        <a href="javascript:void(0)" class="dropdown-toggle shop-cart" data-toggle="dropdown">
-                            <i class="fa fa-shopping-cart"></i>
-
-
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li>
-                                <div class="btn-group" role="group" aria-label="...">
-                                    <button type="button" class="btn btn-default" onclick="if (!window.__cfRLUnblockHandlers) return false; location.href='checkout-step-1.html';" data-cf-modified-ec9c15c58e8eb9110320e8f5-="">Ver</button>
-                                    <button type="button" class="btn btn-default" onclick="if (!window.__cfRLUnblockHandlers) return false; location.href='cart-page.html';" data-cf-modified-ec9c15c58e8eb9110320e8f5-="">Comprar</button>
-
-                                </div>
+                               <a href="@Url.Action("Index", "Cart")" class="nav-link">Carro <i class="fa fa-shopping-cart"></i></a>
                             </li>
                         </ul>
                     </div>

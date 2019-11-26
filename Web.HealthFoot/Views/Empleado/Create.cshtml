@@ -1,0 +1,319 @@
+﻿@model Web.HealthFoot.Models.ViewModelsEmpRol.ViewModelEmpleado
+
+@{
+    ViewBag.Title = "Crear Empleado";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section botones{
+
+    <div class="row">
+
+        <div class="col-md-6">
+
+            <label for="submit-form" class="btn btn-primary">Guardar</label>
+
+        </div>
+
+        <div class="col-md-6">
+
+            @Html.ActionLink("Cancelar", "List", "Usuarios", new { @class = "btn btn-danger" })
+
+        </div>
+
+    </div>
+}
+
+<div class="col-12 container">
+
+    <h2>Crear Empleado</h2>
+
+</div>
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="text-danger">
+
+        @ViewBag.Mensaje
+
+    </div>
+
+    <div class="col-12">
+
+        <label>Detalle de Usuario</label>
+
+    </div>
+
+    <div class="container card border border-dark">
+
+        <div class="col-12 p-4">
+
+            <div class="col-12">
+
+                <div class="form-group row">
+
+                    <label for="example-text-input" class="col-sm-2 col-form-label">
+
+                        Nombre:
+
+                    </label>
+
+                    <div class="col-sm-10">
+
+                        @Html.TextBoxFor(e => e.UserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(e => e.UserName, "", new { @class = "text-danger" })
+
+                        <!--
+                        <input class="form-control form-control-sm" type="text" placeholder="Introduzca nombre del empleado" id="UserName" name="UserName">
+                        -->
+
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+
+                    <label for="example-text-input" class="col-sm-2 col-form-label">
+
+                        Apellido Paterno:
+
+                    </label>
+
+                    <div class="col-sm-10">
+
+                        @Html.TextBoxFor(e => e.APELIDO_PATERNO, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(e => e.APELIDO_PATERNO, "", new { @class = "text-danger" })
+
+                        <!--
+                        <input class="form-control form-control-sm" type="text" placeholder="Introduzca apellido paterno del empleado" id="APELLIDO_PATERNO" name="APELLIDO_PATERNO">
+                        -->
+
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+
+                    <label for="example-text-input" class="col-sm-2 col-form-label">
+
+                        Apellido Materno:
+
+                    </label>
+
+                    <div class="col-sm-10">
+
+                        @Html.TextBoxFor(e => e.APELLIDO_MATERNO, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(e => e.APELLIDO_MATERNO, "", new { @class = "text-danger" })
+
+                        <!--
+                        <input class="form-control form-control-sm" type="text" placeholder="Introduzca apellido materno del empleado" id="APELLIDO_MATERNO" name="APELLIDO_MATERNO">
+                        -->
+
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+
+                    <label for="example-text-input" class="col-sm-2 col-form-label">
+
+                        Telefono:
+
+                    </label>
+
+                    <div class="col-sm-10">
+
+                        @Html.TextBoxFor(e => e.PhoneNumber, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(e => e.PhoneNumber, "", new { @class = "text-danger" })
+
+                        <!--
+                        <input class="form-control form-control-sm" type="text" placeholder="Introduzca nombre del empleado" id="UserName" name="UserName">
+                        -->
+
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+
+                    <label for="example-text-input" class="col-sm-2 col-form-label">
+
+                        Email:
+
+                    </label>
+
+                    <div class="col-sm-10">
+
+                        @Html.TextBoxFor(e => e.EMAIL, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(e => e.EMAIL, "", new { @class = "text-danger" })
+
+                        <!--
+                        <input class="form-control form-control-sm" type="text" placeholder="Introduzca email del empleado" id="EMAIL" name="EMAIL">
+                        -->
+
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+
+                    <label class="col-sm-2 col-form-label">
+                        Status
+                    </label>
+
+                    <div class="col-sm-10">
+
+                        @Html.RadioButtonFor(e => e.ACTIVO, 1)
+                        @Html.Label("Activo")
+                        @Html.RadioButtonFor(e => e.ACTIVO, 0)
+                        @Html.Label("Desactivo")
+
+                        <!--
+                        <div class="custom-control custom-radio custom-control-inline">
+
+                            <input value=1 type="radio" id="Status1" name="ACTIVO" class="custom-control-input">
+                            <label class="custom-control-label" for="Status1">
+
+                                Activo
+
+                            </label>
+
+                        </div>
+
+                        <div class="custom-control custom-radio custom-control-inline">
+
+                            <input value=0 type="radio" id="Status2" name="ACTIVO" class="custom-control-input">
+                            <label class="custom-control-label" for="Status2">
+
+                                Desactivo
+
+                            </label>
+
+                        </div>
+                        -->
+
+                        @Html.ValidationMessageFor(e => e.ACTIVO, "", new { @class = "text-danger" })
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-12">
+
+        <label>Contraseña</label>
+
+    </div>
+
+    <div class="container card border border-dark">
+
+        <div class="col-12 p-4">
+
+            <div class="col-12">
+
+                <div class="form-group row">
+
+                    <label for="example-text-input" class="col-sm-2 col-form-label">
+
+                        Contraseña:
+
+                    </label>
+
+                    <div class="col-sm-10">
+
+                        @Html.ValidationMessageFor(e => e.Password, "", new { @class = "text-danger" })
+                        @Html.PasswordFor(e => e.Password, new { @class = "form-control" })
+
+                        <!--
+                        <input class="form-control form-control-sm" type="text" placeholder="Introduzca nueva contraseña" id="password" name="password">
+                        -->
+
+                    </div>
+
+                </div>
+
+                <div class="form-group row">
+
+                    <label for="example-text-input" class="col-sm-2 col-form-label">
+
+                        Confirmar:
+
+                    </label>
+
+                    <div class="col-sm-10">
+
+                        @Html.ValidationMessageFor(e => e.ConfirmPassword, "", new { @class = "text-danger" })
+                        @Html.PasswordFor(e => e.ConfirmPassword, new { @class = "form-control" })
+
+                        <!--
+                        <input class="form-control form-control-sm" type="text" placeholder="Vuelva a introducir su contraseña" id="Confirmar" name="Condirmar">
+                        -->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-12">
+
+        <label>Información de acceso</label>
+
+    </div>
+
+    <div class="container card border border-dark">
+
+        <div class="col-12 p-4">
+
+            <div class="col-12">
+
+                <div class="form-group row">
+
+                    <label class="col-sm-2 col-form-label">
+
+                        Rol
+
+                    </label>
+
+                    <div class="col-sm-10">
+
+                        @Html.TextBoxFor(e => e.ROL, new { @class = "form-control" })
+
+                        <!--
+    Html.DropDownListFor(e => e.ROL, new SelectList(ViewBag.Roles,"Id", "Name"))
+    -->
+
+                        @Html.ValidationMessageFor(e => e.ROL, "", new { @class = "text-danger" })
+
+                        <!--
+    <input class="form-control form-control-sm" type="text" placeholder="Introduzca rol" id="ROL" name="ROL">
+    -->
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <input type="submit" value="Guardar" id="submit-form" style="visibility:hidden" />
+
+}
+

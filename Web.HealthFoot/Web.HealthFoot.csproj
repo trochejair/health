@@ -164,11 +164,13 @@
     <Compile Include="App_Start\RouteConfig2.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\DireccionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InsumosController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\EmpleadoController.cs" />
     <Compile Include="Controllers\UserId.cs" />
     <Compile Include="Controllers\OrdenesInsumosController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
@@ -177,10 +179,25 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetRoles.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaims.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogins.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUsers.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CATEGORIA.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CLIENTE.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DETALLE_ORDEN.cs">
@@ -195,6 +212,7 @@
     <Compile Include="Models\EMPLEADO.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RolModelo.cs" />
     <Compile Include="Models\ENTREGA.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
@@ -212,6 +230,7 @@
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\EmpleadoModelo.cs" />
     <Compile Include="Models\ModelHealth.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -248,6 +267,9 @@
     <Compile Include="Models\VENTA.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModelsEmpRol\ViewModelEmpleadoEdit.cs" />
+    <Compile Include="Models\ViewModelsEmpRol\ViewModelEmpleado.cs" />
+    <Compile Include="Models\ViewModelsEmpRol\ViewModelRol.cs" />
     <Compile Include="Models\ViewModels\InsumoViewModel.cs" />
     <Compile Include="Models\ViewModels\ProductViewModel.cs" />
     <Compile Include="Models\ViewModels\ProviderAddress.cs" />
@@ -673,6 +695,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\_LayoutWeb.cshtml" />
+
     <Content Include="Views\Insumos\Create.cshtml" />
     <Content Include="Views\OrdenesInsumos\Create.cshtml" />
     <Content Include="Views\Productos\Create.cshtml" />
@@ -698,6 +721,7 @@
     <Content Include="Views\Direccion\Edit.cshtml" />
     <Content Include="Views\Direccion\Index.cshtml" />
     <Content Include="Views\Cart\Entrega.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

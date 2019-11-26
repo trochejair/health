@@ -4,6 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
+
       <Diagram DiagramId="42d794fe8a3847ebb3d3b88e439879b2" Name="Diagram1">
         <EntityTypeShape EntityType="HEALTHFOOTModel.CATEGORIA" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="HEALTHFOOTModel.CLIENTE" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
@@ -39,6 +40,7 @@
         <AssociationConnector Association="HEALTHFOOTModel.FK__INSUMO_OR__FK_OR__671F4F74" ManuallyRouted="false" />
         <AssociationConnector Association="HEALTHFOOTModel.FK__VENTA__FK_ORDEN__7B264821" ManuallyRouted="false" />
         <AssociationConnector Association="HEALTHFOOTModel.FK__ORDEN_PRO__FK_PR__607251E5" ManuallyRouted="false" />
+
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -37,9 +37,17 @@ namespace Web.HealthFoot.Controllers
 
                     if (db.ORDEN.ToList().Count > 0)
                     {
-                        order = db.ORDEN.Where(orderdb => orderdb.FK_CLIENTE == client.ID)
-                            .Where(orderdb => orderdb.ACTIVO == 1)
-                            .First();
+                        try
+                        {
+
+                            order = db.ORDEN.Where(orderdb => orderdb.FK_CLIENTE == client.ID)
+                                .Where(orderdb => orderdb.ACTIVO == 1)
+                                .First();
+                        }
+                        catch {
+                            order = null;
+                        }
+
                     }
                     product = db.PRODUCTO.Find(Int32.Parse( form["product-id"]));
                     if (product.CANTIDAD > 0)

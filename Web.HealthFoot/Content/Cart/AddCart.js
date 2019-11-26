@@ -21,8 +21,8 @@
                     })
                 } else {
                     Swal.fire({
-                        title: 'Error!',
-                        text: response.message,
+                        text: '',
+                        title: response.message,
                         icon: 'error',
                     })
                 }

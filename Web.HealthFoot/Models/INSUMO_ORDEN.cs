@@ -14,12 +14,6 @@ namespace Web.HealthFoot.Models
     
     public partial class INSUMO_ORDEN
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public INSUMO_ORDEN()
-        {
-            this.FORMULA = new HashSet<FORMULA>();
-        }
-    
         public int ID { get; set; }
         public Nullable<int> CANTIDAD { get; set; }
         public Nullable<double> PRECIO { get; set; }
@@ -29,8 +23,6 @@ namespace Web.HealthFoot.Models
         public int FK_ORDEN_PROVEEDOR { get; set; }
         public int FK_INSUMO { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FORMULA> FORMULA { get; set; }
         public virtual INSUMO INSUMO { get; set; }
         public virtual ORDEN_PROVEEDOR ORDEN_PROVEEDOR { get; set; }
     }

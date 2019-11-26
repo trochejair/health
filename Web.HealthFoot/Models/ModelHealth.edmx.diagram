@@ -4,40 +4,42 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="90203324c5824cedb6609d9c420b5ecf" Name="Diagram1">
-        <EntityTypeShape EntityType="HEALTHFOOTModel.CATEGORIA" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HEALTHFOOTModel.CLIENTE" Width="1.5" PointX="5.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HEALTHFOOTModel.DETALLE_ORDEN" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HEALTHFOOTModel.DIRECCION" Width="1.5" PointX="1.5" PointY="13.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HEALTHFOOTModel.EMBARQUE" Width="1.5" PointX="10" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="HEALTHFOOTModel.EMPLEADO" Width="1.5" PointX="7.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HEALTHFOOTModel.ENTREGA" Width="1.5" PointX="12.25" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="HEALTHFOOTModel.FORMULA" Width="1.5" PointX="8.25" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HEALTHFOOTModel.IMAGEN_PRODUCTO" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HEALTHFOOTModel.INSUMO" Width="1.5" PointX="3.75" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HEALTHFOOTModel.INSUMO_ORDEN" Width="1.5" PointX="6" PointY="16.5" IsExpanded="true" />
+      <Diagram DiagramId="9c41150101b94014a26134869fc1555c" Name="Diagram1">
+        <EntityTypeShape EntityType="HEALTHFOOTModel.CATEGORIA" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HEALTHFOOTModel.CLIENTE" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HEALTHFOOTModel.DETALLE_ORDEN" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="HEALTHFOOTModel.DIRECCION" Width="1.5" PointX="1.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HEALTHFOOTModel.EMBARQUE" Width="1.5" PointX="10" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HEALTHFOOTModel.EMPLEADO" Width="1.5" PointX="10.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HEALTHFOOTModel.ENTREGA" Width="1.5" PointX="12.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HEALTHFOOTModel.FORMULA" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HEALTHFOOTModel.IMAGEN_PRODUCTO" Width="1.5" PointX="5.25" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HEALTHFOOTModel.INSUMO" Width="1.5" PointX="6" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="HEALTHFOOTModel.INSUMO_ORDEN" Width="1.5" PointX="10.25" PointY="13.875" IsExpanded="true" />
         <EntityTypeShape EntityType="HEALTHFOOTModel.ORDEN" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HEALTHFOOTModel.ORDEN_PROVEEDOR" Width="1.5" PointX="3.75" PointY="18.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="HEALTHFOOTModel.PRODUCTO" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="HEALTHFOOTModel.PROVEEDOR" Width="1.5" PointX="1.5" PointY="18" IsExpanded="true" />
-        <EntityTypeShape EntityType="HEALTHFOOTModel.RUTA" Width="1.5" PointX="7.75" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HEALTHFOOTModel.VEHICULO" Width="1.5" PointX="7.75" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HEALTHFOOTModel.VENTA" Width="1.5" PointX="10.25" PointY="12.75" IsExpanded="true" />
-        <AssociationConnector Association="HEALTHFOOTModel.FK__PRODUCTO__FK_CAT__276EDEB3" ManuallyRouted="false" />
-        <AssociationConnector Association="HEALTHFOOTModel.FK__DETALLE_O__FK_OR__4CA06362" ManuallyRouted="false" />
-        <AssociationConnector Association="HEALTHFOOTModel.FK__DETALLE_O__FK_PR__4BAC3F29" ManuallyRouted="false" />
-        <AssociationConnector Association="HEALTHFOOTModel.FK__PROVEEDOR__FK_DI__30F848ED" ManuallyRouted="false" />
-        <AssociationConnector Association="HEALTHFOOTModel.FK__VENTA__FK_DIRECC__5165187F" ManuallyRouted="false" />
-        <AssociationConnector Association="HEALTHFOOTModel.FK__EMBARQUE__ID_RUT__5AEE82B9" ManuallyRouted="false" />
-        <AssociationConnector Association="HEALTHFOOTModel.FK__EMBARQUE__ID_VEH__5BE2A6F2" ManuallyRouted="false" />
-        <AssociationConnector Association="HEALTHFOOTModel.FK__ENTREGA__ID_EMBA__5EBF139D" ManuallyRouted="false" />
-        <AssociationConnector Association="HEALTHFOOTModel.FK__FORMULA__FK_INSU__412EB0B6" ManuallyRouted="false" />
-        <AssociationConnector Association="HEALTHFOOTModel.FK__FORMULA__FK_PROD__403A8C7D" ManuallyRouted="false" />
-        <AssociationConnector Association="HEALTHFOOTModel.FK__IMAGEN_PR__FK_PR__72C60C4A" ManuallyRouted="false" />
-        <AssociationConnector Association="HEALTHFOOTModel.FK__INSUMO_OR__FK_IN__3C69FB99" ManuallyRouted="false" />
-        <AssociationConnector Association="HEALTHFOOTModel.FK__INSUMO_OR__FK_OR__3B75D760" ManuallyRouted="false" />
-        <AssociationConnector Association="HEALTHFOOTModel.FK__VENTA__FK_ORDEN__5070F446" ManuallyRouted="false" />
-        <AssociationConnector Association="HEALTHFOOTModel.FK__ORDEN_PRO__FK_PR__34C8D9D1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HEALTHFOOTModel.ORDEN_PROVEEDOR" Width="1.5" PointX="6" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HEALTHFOOTModel.PRODUCTO" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HEALTHFOOTModel.PROVEEDOR" Width="1.5" PointX="3.75" PointY="18.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HEALTHFOOTModel.RUTA" Width="1.5" PointX="7.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="HEALTHFOOTModel.VEHICULO" Width="1.5" PointX="7.75" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HEALTHFOOTModel.VENTA" Width="1.5" PointX="8.25" PointY="1.875" IsExpanded="true" />
+        <AssociationConnector Association="HEALTHFOOTModel.FK__PRODUCTO__FK_CAT__73BA3083" ManuallyRouted="false" />
+        <AssociationConnector Association="HEALTHFOOTModel.FK__CLIENTE__FK_DIRE__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="HEALTHFOOTModel.FK__ORDEN__FK_CLIENT__151B244E" ManuallyRouted="false" />
+        <AssociationConnector Association="HEALTHFOOTModel.FK__DETALLE_O__FK_OR__18EBB532" ManuallyRouted="false" />
+        <AssociationConnector Association="HEALTHFOOTModel.FK__DETALLE_O__FK_PR__17F790F9" ManuallyRouted="false" />
+        <AssociationConnector Association="HEALTHFOOTModel.FK__PROVEEDOR__FK_DI__7D439ABD" ManuallyRouted="false" />
+        <AssociationConnector Association="HEALTHFOOTModel.FK__VENTA__FK_DIRECC__1DB06A4F" ManuallyRouted="false" />
+        <AssociationConnector Association="HEALTHFOOTModel.FK__EMBARQUE__ID_RUT__2739D489" ManuallyRouted="false" />
+        <AssociationConnector Association="HEALTHFOOTModel.FK__EMBARQUE__ID_VEH__282DF8C2" ManuallyRouted="false" />
+        <AssociationConnector Association="HEALTHFOOTModel.FK__ENTREGA__ID_EMBA__2B0A656D" ManuallyRouted="false" />
+        <AssociationConnector Association="HEALTHFOOTModel.FK__FORMULA__FK_INSU__0D7A0286" ManuallyRouted="false" />
+        <AssociationConnector Association="HEALTHFOOTModel.FK__FORMULA__FK_PROD__0C85DE4D" ManuallyRouted="false" />
+        <AssociationConnector Association="HEALTHFOOTModel.FK__IMAGEN_PR__FK_PR__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="HEALTHFOOTModel.FK__INSUMO_OR__FK_IN__08B54D69" ManuallyRouted="false" />
+        <AssociationConnector Association="HEALTHFOOTModel.FK__INSUMO_OR__FK_OR__07C12930" ManuallyRouted="false" />
+        <AssociationConnector Association="HEALTHFOOTModel.FK__VENTA__FK_ORDEN__1CBC4616" ManuallyRouted="false" />
+        <AssociationConnector Association="HEALTHFOOTModel.FK__ORDEN_PRO__FK_PR__01142BA1" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

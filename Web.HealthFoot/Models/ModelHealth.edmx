@@ -88,7 +88,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FK_PRODUCTO" Type="int" Nullable="false" />
-          <Property Name="FK_INSUMO_ORDEN" Type="int" Nullable="false" />
+          <Property Name="FK_INSUMO" Type="int" Nullable="false" />
           <Property Name="UNIDAD_MEDIDA" Type="nvarchar" MaxLength="50" />
           <Property Name="CANTIDAD" Type="int" />
           <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
@@ -217,7 +217,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DETALLE_O__FK_PR__4BAC3F29">
+        <Association Name="FK__DETALLE_O__FK_PR__17F790F9">
           <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
           <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -229,7 +229,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EMBARQUE__ID_RUT__5AEE82B9">
+        <Association Name="FK__EMBARQUE__ID_RUT__2739D489">
           <End Role="RUTA" Type="Self.RUTA" Multiplicity="1" />
           <End Role="EMBARQUE" Type="Self.EMBARQUE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -241,7 +241,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EMBARQUE__ID_VEH__5BE2A6F2">
+        <Association Name="FK__EMBARQUE__ID_VEH__282DF8C2">
           <End Role="VEHICULO" Type="Self.VEHICULO" Multiplicity="1" />
           <End Role="EMBARQUE" Type="Self.EMBARQUE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -253,7 +253,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ENTREGA__ID_EMBA__5EBF139D">
+        <Association Name="FK__ENTREGA__ID_EMBA__2B0A656D">
           <End Role="EMBARQUE" Type="Self.EMBARQUE" Multiplicity="1" />
           <End Role="ENTREGA" Type="Self.ENTREGA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -265,19 +265,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FORMULA__FK_INSU__412EB0B6">
-          <End Role="INSUMO_ORDEN" Type="Self.INSUMO_ORDEN" Multiplicity="1" />
+        <Association Name="FK__FORMULA__FK_INSU__0D7A0286">
+          <End Role="INSUMO" Type="Self.INSUMO" Multiplicity="1" />
           <End Role="FORMULA" Type="Self.FORMULA" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="INSUMO_ORDEN">
+            <Principal Role="INSUMO">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="FORMULA">
-              <PropertyRef Name="FK_INSUMO_ORDEN" />
+              <PropertyRef Name="FK_INSUMO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FORMULA__FK_PROD__403A8C7D">
+        <Association Name="FK__FORMULA__FK_PROD__0C85DE4D">
           <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
           <End Role="FORMULA" Type="Self.FORMULA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -301,7 +301,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__INSUMO_OR__FK_IN__3C69FB99">
+        <Association Name="FK__INSUMO_OR__FK_IN__08B54D69">
           <End Role="INSUMO" Type="Self.INSUMO" Multiplicity="1" />
           <End Role="INSUMO_ORDEN" Type="Self.INSUMO_ORDEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -313,7 +313,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__INSUMO_OR__FK_OR__3B75D760">
+        <Association Name="FK__INSUMO_OR__FK_OR__07C12930">
           <End Role="ORDEN_PROVEEDOR" Type="Self.ORDEN_PROVEEDOR" Multiplicity="1" />
           <End Role="INSUMO_ORDEN" Type="Self.INSUMO_ORDEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -325,7 +325,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ORDEN_PRO__FK_PR__34C8D9D1">
+        <Association Name="FK__ORDEN__FK_CLIENT__151B244E">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDEN">
+              <PropertyRef Name="FK_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDEN_PRO__FK_PR__01142BA1">
           <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
           <End Role="ORDEN_PROVEEDOR" Type="Self.ORDEN_PROVEEDOR" Multiplicity="*" />
           <ReferentialConstraint>
@@ -337,7 +349,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PRODUCTO__FK_CAT__276EDEB3">
+        <Association Name="FK__PRODUCTO__FK_CAT__73BA3083">
           <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="1" />
           <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -349,7 +361,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PROVEEDOR__FK_DI__30F848ED">
+        <Association Name="FK__PROVEEDOR__FK_DI__7D439ABD">
           <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="1" />
           <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
           <ReferentialConstraint>
@@ -361,7 +373,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VENTA__FK_DIRECC__5165187F">
+        <Association Name="FK__VENTA__FK_DIRECC__1DB06A4F">
           <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="1" />
           <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -373,7 +385,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VENTA__FK_ORDEN__5070F446">
+        <Association Name="FK__VENTA__FK_ORDEN__1CBC4616">
           <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="1" />
           <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -404,31 +416,35 @@
           <EntitySet Name="RUTA" EntityType="Self.RUTA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VEHICULO" EntityType="Self.VEHICULO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VENTA" EntityType="Self.VENTA" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__DETALLE_O__FK_OR__4CA06362" Association="Self.FK__DETALLE_O__FK_OR__4CA06362">
+          <AssociationSet Name="FK__CLIENTE__FK_DIRE__114A936A" Association="Self.FK__CLIENTE__FK_DIRE__114A936A">
+            <End Role="DIRECCION" EntitySet="DIRECCION" />
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DETALLE_O__FK_OR__18EBB532" Association="Self.FK__DETALLE_O__FK_OR__18EBB532">
             <End Role="ORDEN" EntitySet="ORDEN" />
             <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__DETALLE_O__FK_PR__4BAC3F29" Association="Self.FK__DETALLE_O__FK_PR__4BAC3F29">
+          <AssociationSet Name="FK__DETALLE_O__FK_PR__17F790F9" Association="Self.FK__DETALLE_O__FK_PR__17F790F9">
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__EMBARQUE__ID_RUT__5AEE82B9" Association="Self.FK__EMBARQUE__ID_RUT__5AEE82B9">
+          <AssociationSet Name="FK__EMBARQUE__ID_RUT__2739D489" Association="Self.FK__EMBARQUE__ID_RUT__2739D489">
             <End Role="RUTA" EntitySet="RUTA" />
             <End Role="EMBARQUE" EntitySet="EMBARQUE" />
           </AssociationSet>
-          <AssociationSet Name="FK__EMBARQUE__ID_VEH__5BE2A6F2" Association="Self.FK__EMBARQUE__ID_VEH__5BE2A6F2">
+          <AssociationSet Name="FK__EMBARQUE__ID_VEH__282DF8C2" Association="Self.FK__EMBARQUE__ID_VEH__282DF8C2">
             <End Role="VEHICULO" EntitySet="VEHICULO" />
             <End Role="EMBARQUE" EntitySet="EMBARQUE" />
           </AssociationSet>
-          <AssociationSet Name="FK__ENTREGA__ID_EMBA__5EBF139D" Association="Self.FK__ENTREGA__ID_EMBA__5EBF139D">
+          <AssociationSet Name="FK__ENTREGA__ID_EMBA__2B0A656D" Association="Self.FK__ENTREGA__ID_EMBA__2B0A656D">
             <End Role="EMBARQUE" EntitySet="EMBARQUE" />
             <End Role="ENTREGA" EntitySet="ENTREGA" />
           </AssociationSet>
-          <AssociationSet Name="FK__FORMULA__FK_INSU__412EB0B6" Association="Self.FK__FORMULA__FK_INSU__412EB0B6">
-            <End Role="INSUMO_ORDEN" EntitySet="INSUMO_ORDEN" />
+          <AssociationSet Name="FK__FORMULA__FK_INSU__0D7A0286" Association="Self.FK__FORMULA__FK_INSU__0D7A0286">
+            <End Role="INSUMO" EntitySet="INSUMO" />
             <End Role="FORMULA" EntitySet="FORMULA" />
           </AssociationSet>
-          <AssociationSet Name="FK__FORMULA__FK_PROD__403A8C7D" Association="Self.FK__FORMULA__FK_PROD__403A8C7D">
+          <AssociationSet Name="FK__FORMULA__FK_PROD__0C85DE4D" Association="Self.FK__FORMULA__FK_PROD__0C85DE4D">
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="FORMULA" EntitySet="FORMULA" />
           </AssociationSet>
@@ -436,11 +452,11 @@
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="IMAGEN_PRODUCTO" EntitySet="IMAGEN_PRODUCTO" />
           </AssociationSet>
-          <AssociationSet Name="FK__INSUMO_OR__FK_IN__3C69FB99" Association="Self.FK__INSUMO_OR__FK_IN__3C69FB99">
+          <AssociationSet Name="FK__INSUMO_OR__FK_IN__08B54D69" Association="Self.FK__INSUMO_OR__FK_IN__08B54D69">
             <End Role="INSUMO" EntitySet="INSUMO" />
             <End Role="INSUMO_ORDEN" EntitySet="INSUMO_ORDEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__INSUMO_OR__FK_OR__3B75D760" Association="Self.FK__INSUMO_OR__FK_OR__3B75D760">
+          <AssociationSet Name="FK__INSUMO_OR__FK_OR__07C12930" Association="Self.FK__INSUMO_OR__FK_OR__07C12930">
             <End Role="ORDEN_PROVEEDOR" EntitySet="ORDEN_PROVEEDOR" />
             <End Role="INSUMO_ORDEN" EntitySet="INSUMO_ORDEN" />
           </AssociationSet>
@@ -448,19 +464,19 @@
             <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
             <End Role="ORDEN_PROVEEDOR" EntitySet="ORDEN_PROVEEDOR" />
           </AssociationSet>
-          <AssociationSet Name="FK__PRODUCTO__FK_CAT__276EDEB3" Association="Self.FK__PRODUCTO__FK_CAT__276EDEB3">
+          <AssociationSet Name="FK__PRODUCTO__FK_CAT__73BA3083" Association="Self.FK__PRODUCTO__FK_CAT__73BA3083">
             <End Role="CATEGORIA" EntitySet="CATEGORIA" />
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
           </AssociationSet>
-          <AssociationSet Name="FK__PROVEEDOR__FK_DI__30F848ED" Association="Self.FK__PROVEEDOR__FK_DI__30F848ED">
+          <AssociationSet Name="FK__PROVEEDOR__FK_DI__7D439ABD" Association="Self.FK__PROVEEDOR__FK_DI__7D439ABD">
             <End Role="DIRECCION" EntitySet="DIRECCION" />
             <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
           </AssociationSet>
-          <AssociationSet Name="FK__VENTA__FK_DIRECC__5165187F" Association="Self.FK__VENTA__FK_DIRECC__5165187F">
+          <AssociationSet Name="FK__VENTA__FK_DIRECC__1DB06A4F" Association="Self.FK__VENTA__FK_DIRECC__1DB06A4F">
             <End Role="DIRECCION" EntitySet="DIRECCION" />
             <End Role="VENTA" EntitySet="VENTA" />
           </AssociationSet>
-          <AssociationSet Name="FK__VENTA__FK_ORDEN__5070F446" Association="Self.FK__VENTA__FK_ORDEN__5070F446">
+          <AssociationSet Name="FK__VENTA__FK_ORDEN__1CBC4616" Association="Self.FK__VENTA__FK_ORDEN__1CBC4616">
             <End Role="ORDEN" EntitySet="ORDEN" />
             <End Role="VENTA" EntitySet="VENTA" />
           </AssociationSet>
@@ -478,7 +494,7 @@
           <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__PRODUCTO__FK_CAT__276EDEB3" FromRole="CATEGORIA" ToRole="PRODUCTO" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__PRODUCTO__FK_CAT__73BA3083" FromRole="CATEGORIA" ToRole="PRODUCTO" />
         </EntityType>
         <EntityType Name="CLIENTE">
           <Key>
@@ -491,6 +507,8 @@
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="ROL" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DIRECCION" Relationship="Self.FK__CLIENTE__FK_DIRE__114A936A" FromRole="CLIENTE" ToRole="DIRECCION" />
+          <NavigationProperty Name="ORDEN" Relationship="Self.FK__ORDEN__FK_CLIENT__151B244E" FromRole="CLIENTE" ToRole="ORDEN" />
         </EntityType>
         <EntityType Name="DETALLE_ORDEN">
           <Key>
@@ -501,8 +519,8 @@
           <Property Name="FK_PRODUCTO" Type="Int32" Nullable="false" />
           <Property Name="CANTIDAD" Type="Int32" />
           <Property Name="SUBTOTAL" Type="Double" />
-          <NavigationProperty Name="ORDEN" Relationship="Self.FK__DETALLE_O__FK_OR__4CA06362" FromRole="DETALLE_ORDEN" ToRole="ORDEN" />
-          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__DETALLE_O__FK_PR__4BAC3F29" FromRole="DETALLE_ORDEN" ToRole="PRODUCTO" />
+          <NavigationProperty Name="ORDEN" Relationship="Self.FK__DETALLE_O__FK_OR__18EBB532" FromRole="DETALLE_ORDEN" ToRole="ORDEN" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__DETALLE_O__FK_PR__17F790F9" FromRole="DETALLE_ORDEN" ToRole="PRODUCTO" />
         </EntityType>
         <EntityType Name="DIRECCION">
           <Key>
@@ -518,8 +536,9 @@
           <Property Name="NUMERO" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK__PROVEEDOR__FK_DI__30F848ED" FromRole="DIRECCION" ToRole="PROVEEDOR" />
-          <NavigationProperty Name="VENTA" Relationship="Self.FK__VENTA__FK_DIRECC__5165187F" FromRole="DIRECCION" ToRole="VENTA" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__CLIENTE__FK_DIRE__114A936A" FromRole="DIRECCION" ToRole="CLIENTE" />
+          <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK__PROVEEDOR__FK_DI__7D439ABD" FromRole="DIRECCION" ToRole="PROVEEDOR" />
+          <NavigationProperty Name="VENTA" Relationship="Self.FK__VENTA__FK_DIRECC__1DB06A4F" FromRole="DIRECCION" ToRole="VENTA" />
         </EntityType>
         <EntityType Name="EMBARQUE">
           <Key>
@@ -531,9 +550,9 @@
           <Property Name="FECHA" Type="DateTime" Precision="0" />
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="RUTA" Relationship="Self.FK__EMBARQUE__ID_RUT__5AEE82B9" FromRole="EMBARQUE" ToRole="RUTA" />
-          <NavigationProperty Name="VEHICULO" Relationship="Self.FK__EMBARQUE__ID_VEH__5BE2A6F2" FromRole="EMBARQUE" ToRole="VEHICULO" />
-          <NavigationProperty Name="ENTREGA" Relationship="Self.FK__ENTREGA__ID_EMBA__5EBF139D" FromRole="EMBARQUE" ToRole="ENTREGA" />
+          <NavigationProperty Name="RUTA" Relationship="Self.FK__EMBARQUE__ID_RUT__2739D489" FromRole="EMBARQUE" ToRole="RUTA" />
+          <NavigationProperty Name="VEHICULO" Relationship="Self.FK__EMBARQUE__ID_VEH__282DF8C2" FromRole="EMBARQUE" ToRole="VEHICULO" />
+          <NavigationProperty Name="ENTREGA" Relationship="Self.FK__ENTREGA__ID_EMBA__2B0A656D" FromRole="EMBARQUE" ToRole="ENTREGA" />
         </EntityType>
         <EntityType Name="EMPLEADO">
           <Key>
@@ -554,7 +573,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_VENTA" Type="Int32" Nullable="false" />
           <Property Name="ID_EMBARQUE" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="EMBARQUE" Relationship="Self.FK__ENTREGA__ID_EMBA__5EBF139D" FromRole="ENTREGA" ToRole="EMBARQUE" />
+          <NavigationProperty Name="EMBARQUE" Relationship="Self.FK__ENTREGA__ID_EMBA__2B0A656D" FromRole="ENTREGA" ToRole="EMBARQUE" />
         </EntityType>
         <EntityType Name="FORMULA">
           <Key>
@@ -562,12 +581,12 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FK_PRODUCTO" Type="Int32" Nullable="false" />
-          <Property Name="FK_INSUMO_ORDEN" Type="Int32" Nullable="false" />
+          <Property Name="FK_INSUMO" Type="Int32" Nullable="false" />
           <Property Name="UNIDAD_MEDIDA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CANTIDAD" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="INSUMO_ORDEN" Relationship="Self.FK__FORMULA__FK_INSU__412EB0B6" FromRole="FORMULA" ToRole="INSUMO_ORDEN" />
-          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__FORMULA__FK_PROD__403A8C7D" FromRole="FORMULA" ToRole="PRODUCTO" />
+          <NavigationProperty Name="INSUMO" Relationship="Self.FK__FORMULA__FK_INSU__0D7A0286" FromRole="FORMULA" ToRole="INSUMO" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__FORMULA__FK_PROD__0C85DE4D" FromRole="FORMULA" ToRole="PRODUCTO" />
         </EntityType>
         <EntityType Name="IMAGEN_PRODUCTO">
           <Key>
@@ -576,7 +595,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IMAGEN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="FK_PRODUCTO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__IMAGEN_PR__FK_PR__72C60C4A" FromRole="IMAGEN_PRODUCTO" ToRole="PRODUCTO" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__IMAGEN_PR__FK_PR__76969D2E" FromRole="IMAGEN_PRODUCTO" ToRole="PRODUCTO" />
         </EntityType>
         <EntityType Name="INSUMO">
           <Key>
@@ -587,7 +606,8 @@
           <Property Name="CANTIDAD" Type="Int32" />
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="INSUMO_ORDEN" Relationship="Self.FK__INSUMO_OR__FK_IN__3C69FB99" FromRole="INSUMO" ToRole="INSUMO_ORDEN" />
+          <NavigationProperty Name="FORMULA" Relationship="Self.FK__FORMULA__FK_INSU__0D7A0286" FromRole="INSUMO" ToRole="FORMULA" />
+          <NavigationProperty Name="INSUMO_ORDEN" Relationship="Self.FK__INSUMO_OR__FK_IN__08B54D69" FromRole="INSUMO" ToRole="INSUMO_ORDEN" />
         </EntityType>
         <EntityType Name="INSUMO_ORDEN">
           <Key>
@@ -601,9 +621,8 @@
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FK_ORDEN_PROVEEDOR" Type="Int32" Nullable="false" />
           <Property Name="FK_INSUMO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="FORMULA" Relationship="Self.FK__FORMULA__FK_INSU__412EB0B6" FromRole="INSUMO_ORDEN" ToRole="FORMULA" />
-          <NavigationProperty Name="INSUMO" Relationship="Self.FK__INSUMO_OR__FK_IN__3C69FB99" FromRole="INSUMO_ORDEN" ToRole="INSUMO" />
-          <NavigationProperty Name="ORDEN_PROVEEDOR" Relationship="Self.FK__INSUMO_OR__FK_OR__3B75D760" FromRole="INSUMO_ORDEN" ToRole="ORDEN_PROVEEDOR" />
+          <NavigationProperty Name="INSUMO" Relationship="Self.FK__INSUMO_OR__FK_IN__08B54D69" FromRole="INSUMO_ORDEN" ToRole="INSUMO" />
+          <NavigationProperty Name="ORDEN_PROVEEDOR" Relationship="Self.FK__INSUMO_OR__FK_OR__07C12930" FromRole="INSUMO_ORDEN" ToRole="ORDEN_PROVEEDOR" />
         </EntityType>
         <EntityType Name="ORDEN">
           <Key>
@@ -615,8 +634,9 @@
           <Property Name="ESTATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK__DETALLE_O__FK_OR__4CA06362" FromRole="ORDEN" ToRole="DETALLE_ORDEN" />
-          <NavigationProperty Name="VENTA" Relationship="Self.FK__VENTA__FK_ORDEN__5070F446" FromRole="ORDEN" ToRole="VENTA" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__ORDEN__FK_CLIENT__151B244E" FromRole="ORDEN" ToRole="CLIENTE" />
+          <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK__DETALLE_O__FK_OR__18EBB532" FromRole="ORDEN" ToRole="DETALLE_ORDEN" />
+          <NavigationProperty Name="VENTA" Relationship="Self.FK__VENTA__FK_ORDEN__1CBC4616" FromRole="ORDEN" ToRole="VENTA" />
         </EntityType>
         <EntityType Name="ORDEN_PROVEEDOR">
           <Key>
@@ -626,8 +646,8 @@
           <Property Name="FK_PROVEEDOR" Type="Int32" Nullable="false" />
           <Property Name="FECHA" Type="DateTime" Precision="0" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="INSUMO_ORDEN" Relationship="Self.FK__INSUMO_OR__FK_OR__3B75D760" FromRole="ORDEN_PROVEEDOR" ToRole="INSUMO_ORDEN" />
-          <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK__ORDEN_PRO__FK_PR__34C8D9D1" FromRole="ORDEN_PROVEEDOR" ToRole="PROVEEDOR" />
+          <NavigationProperty Name="INSUMO_ORDEN" Relationship="Self.FK__INSUMO_OR__FK_OR__07C12930" FromRole="ORDEN_PROVEEDOR" ToRole="INSUMO_ORDEN" />
+          <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK__ORDEN_PRO__FK_PR__01142BA1" FromRole="ORDEN_PROVEEDOR" ToRole="PROVEEDOR" />
         </EntityType>
         <EntityType Name="PRODUCTO">
           <Key>
@@ -658,8 +678,8 @@
           <Property Name="FK_DIRECCION" Type="Int32" Nullable="false" />
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="DIRECCION" Relationship="Self.FK__PROVEEDOR__FK_DI__30F848ED" FromRole="PROVEEDOR" ToRole="DIRECCION" />
-          <NavigationProperty Name="ORDEN_PROVEEDOR" Relationship="Self.FK__ORDEN_PRO__FK_PR__34C8D9D1" FromRole="PROVEEDOR" ToRole="ORDEN_PROVEEDOR" />
+          <NavigationProperty Name="DIRECCION" Relationship="Self.FK__PROVEEDOR__FK_DI__7D439ABD" FromRole="PROVEEDOR" ToRole="DIRECCION" />
+          <NavigationProperty Name="ORDEN_PROVEEDOR" Relationship="Self.FK__ORDEN_PRO__FK_PR__01142BA1" FromRole="PROVEEDOR" ToRole="ORDEN_PROVEEDOR" />
         </EntityType>
         <EntityType Name="RUTA">
           <Key>
@@ -671,7 +691,7 @@
           <Property Name="DISTANCIA" Type="Int32" />
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="EMBARQUE" Relationship="Self.FK__EMBARQUE__ID_RUT__5AEE82B9" FromRole="RUTA" ToRole="EMBARQUE" />
+          <NavigationProperty Name="EMBARQUE" Relationship="Self.FK__EMBARQUE__ID_RUT__2739D489" FromRole="RUTA" ToRole="EMBARQUE" />
         </EntityType>
         <EntityType Name="VEHICULO">
           <Key>
@@ -686,7 +706,7 @@
           <Property Name="CILINDROS" Type="Int32" />
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="EMBARQUE" Relationship="Self.FK__EMBARQUE__ID_VEH__5BE2A6F2" FromRole="VEHICULO" ToRole="EMBARQUE" />
+          <NavigationProperty Name="EMBARQUE" Relationship="Self.FK__EMBARQUE__ID_VEH__282DF8C2" FromRole="VEHICULO" ToRole="EMBARQUE" />
         </EntityType>
         <EntityType Name="VENTA">
           <Key>
@@ -697,10 +717,10 @@
           <Property Name="FECHA" Type="DateTime" Precision="0" />
           <Property Name="FK_DIRECCION" Type="Int32" Nullable="false" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="DIRECCION" Relationship="Self.FK__VENTA__FK_DIRECC__5165187F" FromRole="VENTA" ToRole="DIRECCION" />
-          <NavigationProperty Name="ORDEN" Relationship="Self.FK__VENTA__FK_ORDEN__5070F446" FromRole="VENTA" ToRole="ORDEN" />
+          <NavigationProperty Name="DIRECCION" Relationship="Self.FK__VENTA__FK_DIRECC__1DB06A4F" FromRole="VENTA" ToRole="DIRECCION" />
+          <NavigationProperty Name="ORDEN" Relationship="Self.FK__VENTA__FK_ORDEN__1CBC4616" FromRole="VENTA" ToRole="ORDEN" />
         </EntityType>
-        <Association Name="FK__PRODUCTO__FK_CAT__276EDEB3">
+        <Association Name="FK__PRODUCTO__FK_CAT__73BA3083">
           <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="1" />
           <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -712,7 +732,32 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DETALLE_O__FK_OR__4CA06362">
+
+        <Association Name="FK__CLIENTE__FK_DIRE__114A936A">
+          <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="1" />
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIRECCION">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CLIENTE">
+              <PropertyRef Name="FK_DIRECCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDEN__FK_CLIENT__151B244E">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDEN">
+              <PropertyRef Name="FK_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DETALLE_O__FK_OR__18EBB532">
           <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="1" />
           <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -724,7 +769,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DETALLE_O__FK_PR__4BAC3F29">
+        <Association Name="FK__DETALLE_O__FK_PR__17F790F9">
           <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
           <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -736,7 +781,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PROVEEDOR__FK_DI__30F848ED">
+        <Association Name="FK__PROVEEDOR__FK_DI__7D439ABD">
           <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="1" />
           <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
           <ReferentialConstraint>
@@ -748,7 +793,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VENTA__FK_DIRECC__5165187F">
+        <Association Name="FK__VENTA__FK_DIRECC__1DB06A4F">
           <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="1" />
           <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -760,7 +805,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EMBARQUE__ID_RUT__5AEE82B9">
+        <Association Name="FK__EMBARQUE__ID_RUT__2739D489">
           <End Role="RUTA" Type="Self.RUTA" Multiplicity="1" />
           <End Role="EMBARQUE" Type="Self.EMBARQUE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -772,7 +817,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EMBARQUE__ID_VEH__5BE2A6F2">
+        <Association Name="FK__EMBARQUE__ID_VEH__282DF8C2">
           <End Role="VEHICULO" Type="Self.VEHICULO" Multiplicity="1" />
           <End Role="EMBARQUE" Type="Self.EMBARQUE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -784,7 +829,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ENTREGA__ID_EMBA__5EBF139D">
+        <Association Name="FK__ENTREGA__ID_EMBA__2B0A656D">
           <End Role="EMBARQUE" Type="Self.EMBARQUE" Multiplicity="1" />
           <End Role="ENTREGA" Type="Self.ENTREGA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -796,19 +841,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FORMULA__FK_INSU__412EB0B6">
-          <End Role="INSUMO_ORDEN" Type="Self.INSUMO_ORDEN" Multiplicity="1" />
+        <Association Name="FK__FORMULA__FK_INSU__0D7A0286">
+          <End Role="INSUMO" Type="Self.INSUMO" Multiplicity="1" />
           <End Role="FORMULA" Type="Self.FORMULA" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="INSUMO_ORDEN">
+            <Principal Role="INSUMO">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="FORMULA">
-              <PropertyRef Name="FK_INSUMO_ORDEN" />
+              <PropertyRef Name="FK_INSUMO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FORMULA__FK_PROD__403A8C7D">
+        <Association Name="FK__FORMULA__FK_PROD__0C85DE4D">
           <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
           <End Role="FORMULA" Type="Self.FORMULA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -820,7 +865,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__IMAGEN_PR__FK_PR__72C60C4A">
+        <Association Name="FK__IMAGEN_PR__FK_PR__76969D2E">
           <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
           <End Role="IMAGEN_PRODUCTO" Type="Self.IMAGEN_PRODUCTO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -832,7 +877,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__INSUMO_OR__FK_IN__3C69FB99">
+        <Association Name="FK__INSUMO_OR__FK_IN__08B54D69">
           <End Role="INSUMO" Type="Self.INSUMO" Multiplicity="1" />
           <End Role="INSUMO_ORDEN" Type="Self.INSUMO_ORDEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -844,7 +889,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__INSUMO_OR__FK_OR__3B75D760">
+        <Association Name="FK__INSUMO_OR__FK_OR__07C12930">
           <End Role="ORDEN_PROVEEDOR" Type="Self.ORDEN_PROVEEDOR" Multiplicity="1" />
           <End Role="INSUMO_ORDEN" Type="Self.INSUMO_ORDEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -856,7 +901,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VENTA__FK_ORDEN__5070F446">
+        <Association Name="FK__VENTA__FK_ORDEN__1CBC4616">
           <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="1" />
           <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -868,7 +913,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ORDEN_PRO__FK_PR__34C8D9D1">
+        <Association Name="FK__ORDEN_PRO__FK_PR__01142BA1">
           <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
           <End Role="ORDEN_PROVEEDOR" Type="Self.ORDEN_PROVEEDOR" Multiplicity="*" />
           <ReferentialConstraint>
@@ -899,7 +944,7 @@
           <EntitySet Name="RUTA" EntityType="Self.RUTA" />
           <EntitySet Name="VEHICULO" EntityType="Self.VEHICULO" />
           <EntitySet Name="VENTA" EntityType="Self.VENTA" />
-          <AssociationSet Name="FK__PRODUCTO__FK_CAT__276EDEB3" Association="Self.FK__PRODUCTO__FK_CAT__276EDEB3">
+          <AssociationSet Name="FK__PRODUCTO__FK_CAT__73BA3083" Association="Self.FK__PRODUCTO__FK_CAT__73BA3083">
             <End Role="CATEGORIA" EntitySet="CATEGORIA" />
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
           </AssociationSet>
@@ -907,35 +952,35 @@
             <End Role="ORDEN" EntitySet="ORDEN" />
             <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__DETALLE_O__FK_PR__4BAC3F29" Association="Self.FK__DETALLE_O__FK_PR__4BAC3F29">
+          <AssociationSet Name="FK__DETALLE_O__FK_PR__17F790F9" Association="Self.FK__DETALLE_O__FK_PR__17F790F9">
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__PROVEEDOR__FK_DI__30F848ED" Association="Self.FK__PROVEEDOR__FK_DI__30F848ED">
+          <AssociationSet Name="FK__PROVEEDOR__FK_DI__7D439ABD" Association="Self.FK__PROVEEDOR__FK_DI__7D439ABD">
             <End Role="DIRECCION" EntitySet="DIRECCION" />
             <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
           </AssociationSet>
-          <AssociationSet Name="FK__VENTA__FK_DIRECC__5165187F" Association="Self.FK__VENTA__FK_DIRECC__5165187F">
+          <AssociationSet Name="FK__VENTA__FK_DIRECC__1DB06A4F" Association="Self.FK__VENTA__FK_DIRECC__1DB06A4F">
             <End Role="DIRECCION" EntitySet="DIRECCION" />
             <End Role="VENTA" EntitySet="VENTA" />
           </AssociationSet>
-          <AssociationSet Name="FK__EMBARQUE__ID_RUT__5AEE82B9" Association="Self.FK__EMBARQUE__ID_RUT__5AEE82B9">
+          <AssociationSet Name="FK__EMBARQUE__ID_RUT__2739D489" Association="Self.FK__EMBARQUE__ID_RUT__2739D489">
             <End Role="RUTA" EntitySet="RUTA" />
             <End Role="EMBARQUE" EntitySet="EMBARQUE" />
           </AssociationSet>
-          <AssociationSet Name="FK__EMBARQUE__ID_VEH__5BE2A6F2" Association="Self.FK__EMBARQUE__ID_VEH__5BE2A6F2">
+          <AssociationSet Name="FK__EMBARQUE__ID_VEH__282DF8C2" Association="Self.FK__EMBARQUE__ID_VEH__282DF8C2">
             <End Role="VEHICULO" EntitySet="VEHICULO" />
             <End Role="EMBARQUE" EntitySet="EMBARQUE" />
           </AssociationSet>
-          <AssociationSet Name="FK__ENTREGA__ID_EMBA__5EBF139D" Association="Self.FK__ENTREGA__ID_EMBA__5EBF139D">
+          <AssociationSet Name="FK__ENTREGA__ID_EMBA__2B0A656D" Association="Self.FK__ENTREGA__ID_EMBA__2B0A656D">
             <End Role="EMBARQUE" EntitySet="EMBARQUE" />
             <End Role="ENTREGA" EntitySet="ENTREGA" />
           </AssociationSet>
-          <AssociationSet Name="FK__FORMULA__FK_INSU__412EB0B6" Association="Self.FK__FORMULA__FK_INSU__412EB0B6">
-            <End Role="INSUMO_ORDEN" EntitySet="INSUMO_ORDEN" />
+          <AssociationSet Name="FK__FORMULA__FK_INSU__0D7A0286" Association="Self.FK__FORMULA__FK_INSU__0D7A0286">
+            <End Role="INSUMO" EntitySet="INSUMO" />
             <End Role="FORMULA" EntitySet="FORMULA" />
           </AssociationSet>
-          <AssociationSet Name="FK__FORMULA__FK_PROD__403A8C7D" Association="Self.FK__FORMULA__FK_PROD__403A8C7D">
+          <AssociationSet Name="FK__FORMULA__FK_PROD__0C85DE4D" Association="Self.FK__FORMULA__FK_PROD__0C85DE4D">
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="FORMULA" EntitySet="FORMULA" />
           </AssociationSet>
@@ -943,19 +988,19 @@
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="IMAGEN_PRODUCTO" EntitySet="IMAGEN_PRODUCTO" />
           </AssociationSet>
-          <AssociationSet Name="FK__INSUMO_OR__FK_IN__3C69FB99" Association="Self.FK__INSUMO_OR__FK_IN__3C69FB99">
+          <AssociationSet Name="FK__INSUMO_OR__FK_IN__08B54D69" Association="Self.FK__INSUMO_OR__FK_IN__08B54D69">
             <End Role="INSUMO" EntitySet="INSUMO" />
             <End Role="INSUMO_ORDEN" EntitySet="INSUMO_ORDEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__INSUMO_OR__FK_OR__3B75D760" Association="Self.FK__INSUMO_OR__FK_OR__3B75D760">
+          <AssociationSet Name="FK__INSUMO_OR__FK_OR__07C12930" Association="Self.FK__INSUMO_OR__FK_OR__07C12930">
             <End Role="ORDEN_PROVEEDOR" EntitySet="ORDEN_PROVEEDOR" />
             <End Role="INSUMO_ORDEN" EntitySet="INSUMO_ORDEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__VENTA__FK_ORDEN__5070F446" Association="Self.FK__VENTA__FK_ORDEN__5070F446">
+          <AssociationSet Name="FK__VENTA__FK_ORDEN__1CBC4616" Association="Self.FK__VENTA__FK_ORDEN__1CBC4616">
             <End Role="ORDEN" EntitySet="ORDEN" />
             <End Role="VENTA" EntitySet="VENTA" />
           </AssociationSet>
-          <AssociationSet Name="FK__ORDEN_PRO__FK_PR__34C8D9D1" Association="Self.FK__ORDEN_PRO__FK_PR__34C8D9D1">
+          <AssociationSet Name="FK__ORDEN_PRO__FK_PR__01142BA1" Association="Self.FK__ORDEN_PRO__FK_PR__01142BA1">
             <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
             <End Role="ORDEN_PROVEEDOR" EntitySet="ORDEN_PROVEEDOR" />
           </AssociationSet>
@@ -1055,7 +1100,7 @@
               <MappingFragment StoreEntitySet="FORMULA">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FK_PRODUCTO" ColumnName="FK_PRODUCTO" />
-                <ScalarProperty Name="FK_INSUMO_ORDEN" ColumnName="FK_INSUMO_ORDEN" />
+                <ScalarProperty Name="FK_INSUMO" ColumnName="FK_INSUMO" />
                 <ScalarProperty Name="UNIDAD_MEDIDA" ColumnName="UNIDAD_MEDIDA" />
                 <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
                 <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />

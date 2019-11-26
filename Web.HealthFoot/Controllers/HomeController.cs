@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -53,6 +54,21 @@ namespace Web.HealthFoot.Controllers
         public ActionResult TermsAndConditions()
         {
             return View();
+        }
+        [Authorize]
+        public ActionResult Profile()
+        {
+            CLIENTE client = null;
+            using (HealthEntities db = new HealthEntities())
+
+            {
+                var email = User.Identity.GetUserName();
+
+                client = db.CLIENTE.Where(clientdb => clientdb.EMAIL == email).First();
+
+            }
+
+            return View(client);
         }
     }
 }

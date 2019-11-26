@@ -15,7 +15,7 @@
     @RenderSection("estilos", required: false)
 </head>
 <!--Campo Url AddCart-->
-<input  type="hidden" id="inp-url-add-cart" value="@Url.Action("AddCart", "Cart")"/>
+<input type="hidden" id="inp-url-add-cart" value="@Url.Action("AddCart", "Cart")" />
 <body class="body-wrapper version2">
 
     <!-- Preloader -->
@@ -72,14 +72,34 @@
                             <li class="nav-item">
                                 @Html.ActionLink("Productos", "Product", "Home", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link", @role = "button" })
                             </li>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                            <li  class="nav-item dropdown">
+                                    <a class="dropdown-toggle nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        @User.Identity.Name
+                                    </a>
 
-                            <li class="nav-item">
-                                @Html.ActionLink("Iniciar Sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link", @role = "button" })
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        @Html.ActionLink("Perfil", "Profile", "Home", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "dropdown-item", @role = "button" })
+                                        @Html.ActionLink("Productos", "Product", "Home", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "dropdown-item", @role = "button" })
+                                        <a class="dropdown-item" href="@Url.Action("LogOff", "Account")">Cerrar Sesión</a>
+                                    </div>
+                                
                             </li>
 
-                            <li class="nav-item">
-                                @Html.ActionLink("Registrarse", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link", @role = "button" })
-                            </li>
+
+                            }
+                            else
+                            {
+
+                                <li class="nav-item">
+                                    @Html.ActionLink("Iniciar Sesión", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link", @role = "button" })
+                                </li>
+
+                                <li class="nav-item">
+                                    @Html.ActionLink("Registrarse", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link", @role = "button" })
+                                </li>
+                            }
 
                             <li class="nav-item">
                                 @Html.ActionLink("Carro", "Index", "Cart", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link", @role = "button" })

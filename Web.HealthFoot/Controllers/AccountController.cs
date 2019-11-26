@@ -169,6 +169,7 @@ namespace Web.HealthFoot.Controllers
                         client.NOMBRE = model.Nombre;
                         client.APELLIDOS = model.Apellido;
                         client.EMAIL = model.Email;
+                        client.ACTIVO = 1;
                         client.ROL = 2;
                         client.CREATED_AT = System.DateTime.Now;
                         db.CLIENTE.Add(client);
@@ -400,8 +401,6 @@ namespace Web.HealthFoot.Controllers
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

@@ -13,104 +13,125 @@
     @Scripts.Render("~/Content/Admin/commons/dropzone/dropzone.js")
     @Scripts.Render("~/Content/Admin/Products/create.js")
 }
-<div class="row">
-    <input id="inp-url-image" type="hidden" value="@Url.Action("Images","Productos")" />
-    <div class="col-md-12 text-center my-3">
-        <h2>Agregar producto</h2>
-    </div>
-    <div class="col-md-8 mx-auto">
-        <form id="form-upsert"
-              class="form-row"
-              method="POST"
-              action="@Url.Action("Create","Productos")">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre">
-                    <span class="field-validation-valid text-danger" 
-                          data-valmsg-for="nombre" 
-                          data-valmsg-replace="true"></span>
-                </div>
-            </div>
+    <div class="row">
+        <input id="inp-url-image" type="hidden" value="@Url.Action("Images","Productos")" />
+        <input id="inp-url-image" type="hidden" value="@Url.Action("Formula","Productos")" />
 
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="descripcion">Descripción</label>
-                    <textarea type="text" class="form-control" id="descripcion" name="descripcion"></textarea>
-                    <span class="field-validation-valid text-danger"
-                          data-valmsg-for="descripcion"
-                          data-valmsg-replace="true"></span>
-                </div>
-            </div>
-
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="cantidad">Cantidad</label>
-                    <input type="number" class="form-control" id="cantidad" name="cantidad">
-                    <span class="field-validation-valid text-danger"
-                          data-valmsg-for="cantidad"
-                          data-valmsg-replace="true"></span>
-                </div>
-            </div>
-
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="precio">Precio</label>
-                    <input type="number" class="form-control" id="precio" name="precio">
-                    <span class="field-validation-valid text-danger"
-                          data-valmsg-for="precio"
-                          data-valmsg-replace="true"></span>
-                </div>
-            </div>
-
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="Supplies">Categoría</label>
-
-                    @Html.DropDownList("Category", null, new { @class = "form-control" })
-                </div>
-            </div>
-
-            <div class="col-md-12">
-                <div id="zdrop" class="dropzone ">
-                    <div class="dz-default dz-message">
-                        <span>Subir imagen</span>
-                        <h1><i class="fas fa-upload  fa-7x" style="font-size:40px"></i></h1>
+        <div class="col-md-12 text-center my-3">
+            <h2>Agregar producto</h2>
+        </div>
+        <div class="col-md-8 mx-auto">
+            <form id="form-upsert"
+                  class="form-row"
+                  method="POST"
+                  action="@Url.Action("Create","Productos")">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre">
+                        <span class="field-validation-valid text-danger"
+                              data-valmsg-for="nombre"
+                              data-valmsg-replace="true"></span>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-12 text-center my-3">
-                <h4>Agregar fórmula</h4>
-            </div>
-            <div class="col-md-12">
-                <div class="form-row shadow p-3 mb-5 bg-white rounded">
-                    <div class="form-group col-md-6">
-                        <label for="insumo">Insumo</label>
-                        @Html.DropDownList("Supplies", null, new { @class = "form-control" })
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="descripcion">Descripción</label>
+                        <textarea type="text" class="form-control" id="descripcion" name="descripcion"></textarea>
+                        <span class="field-validation-valid text-danger"
+                              data-valmsg-for="descripcion"
+                              data-valmsg-replace="true"></span>
                     </div>
-                    <div class="form-group col-md-4">
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
                         <label for="cantidad">Cantidad</label>
-                        <input type="text" class="form-control" id="cantidad" placeholder="Cantidad">
+                        <input type="number" class="form-control" id="cantidad" name="cantidad">
+                        <span class="field-validation-valid text-danger"
+                              data-valmsg-for="cantidad"
+                              data-valmsg-replace="true"></span>
                     </div>
-                    <div class="col-md-2">
-                        <div>
-                            <i class="fas fa-plus-circle fa-3x"></i>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="precio">Precio</label>
+                        <input type="number" class="form-control" id="precio" name="precio">
+                        <span class="field-validation-valid text-danger"
+                              data-valmsg-for="precio"
+                              data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="Supplies">Categoría</label>
+
+                        @Html.DropDownList("Category", null, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div id="zdrop" class="dropzone ">
+                        <div class="dz-default dz-message">
+                            <span>Subir imagen</span>
+                            <h1><i class="fas fa-upload  fa-7x" style="font-size:40px"></i></h1>
                         </div>
                     </div>
-
                 </div>
-            </div>
 
-            <div class="col-md-12 text-center">
-                <button for="control"
-                        type="submit"
-                        class="btn btn-primary">
-                    Guardar
-                </button>
-            </div>
+                <div class="col-md-12 text-center my-3">
+                    <h4>Fórmula</h4>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="insumo">Insumo</label>
+                                @Html.DropDownList("Supplies", null, new { @class = "form-control" })
+                            </div>
 
-        </form>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group ">
+                                <label for="cantidad">Cantidad</label>
+                                <input type="number"
+                                       class="form-control"
+                                       id="inp-quantity">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group ">
+                                <label for="unit">Unidad de medida</label>
+                                <input type="text" class="form-control" id="inp-unit" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="d-flex h-100">
+                                <i class="fas fa-plus-circle fa-2x align-self-center"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row" id="content-formula">
 
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-12 text-center mt-3">
+                    <button for="control"
+                            type="submit"
+                            class="btn btn-primary">
+                        Guardar
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
     </div>
-</div>

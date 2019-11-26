@@ -17,7 +17,6 @@ namespace Web.HealthFoot.Controllers
         // GET: Productos
         public ActionResult Index()
         {
-
             HealthEntities db = new HealthEntities();
             List<PRODUCTO> products = db.PRODUCTO.ToList();
 

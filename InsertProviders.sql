@@ -15,17 +15,17 @@ VALUES              ('México' , 'CDMX','Tláhuac','Santa Catarina', 'Felipe Ama
 go;
 /********* See address id ***********/
 INSERT INTO PROVEEDOR ( NOMBRE, TELEFONO, CORREO, RFC, FK_DIRECCION, ACTIVO,  CREATED_AT)
-VALUES              ('ACEITESNATURAL ES Y QUIMICOS FLOGA' , '334170840','aceitesnaturalesquimicos@aceites.com','RFC',1002,1, '2019-11-23 19:40:26');
+VALUES              ('ACEITESNATURAL ES Y QUIMICOS FLOGA' , '334170840','aceitesnaturalesquimicos@aceites.com','RFC', 1,1, '2019-11-23 19:40:26');
 INSERT INTO PROVEEDOR ( NOMBRE, TELEFONO, CORREO, RFC, FK_DIRECCION, ACTIVO,  CREATED_AT)
-VALUES              ('PRODUCTOS QUIMICOS Y DERIVADOS' , '83341151','pqd.mx@gmail.com','RFC',1003,1, '2019-11-23 19:40:26');
+VALUES              ('PRODUCTOS QUIMICOS Y DERIVADOS' , '83341151','pqd.mx@gmail.com','RFC', 2,1, '2019-11-23 19:40:26');
 INSERT INTO PROVEEDOR ( NOMBRE, TELEFONO, CORREO, RFC, FK_DIRECCION, ACTIVO,  CREATED_AT)
-VALUES              ('ALFADELTA' , '53733560','alfadelta@alfadelta.com','RFC', 1004,1, '2019-11-23 19:40:26');
+VALUES              ('ALFADELTA' , '53733560','alfadelta@alfadelta.com','RFC', 3,1, '2019-11-23 19:40:26');
 INSERT INTO PROVEEDOR ( NOMBRE, TELEFONO, CORREO, RFC, FK_DIRECCION, ACTIVO,  CREATED_AT)
-VALUES              ('CONDIMENTOS NATURALES TRES VIAS' , '56001305','condumentum@condumentum.com','RFC',1005,1, '2019-11-23 19:40:26');
+VALUES              ('CONDIMENTOS NATURALES TRES VIAS' , '56001305','condumentum@condumentum.com','RFC', 4,1, '2019-11-23 19:40:26');
 INSERT INTO PROVEEDOR ( NOMBRE, TELEFONO, CORREO, RFC, FK_DIRECCION, ACTIVO,  CREATED_AT)
-VALUES              ('CONDIMENTUM' , '76799871','condimentum@condimentum.com','RFC', 1006 , 1, '2019-11-23 19:40:26');
+VALUES              ('CONDIMENTUM' , '76799871','condimentum@condimentum.com','RFC', 5 , 1, '2019-11-23 19:40:26');
 INSERT INTO PROVEEDOR ( NOMBRE, TELEFONO, CORREO, RFC, FK_DIRECCION, ACTIVO,  CREATED_AT)
-VALUES              ('OLEOESPECIAL' , '38131424','oleoespeciales@oleoespeciales.com.mx','RFC',1007,1, '2019-11-23 19:40:26');
+VALUES              ('OLEOESPECIAL' , '38131424','oleoespeciales@oleoespeciales.com.mx','RFC',6,1, '2019-11-23 19:40:26');
 
 go
 

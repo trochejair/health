@@ -35,10 +35,19 @@
                         <td>@product.DESCRIPCION</td>
                         <td>@product.CATEGORIA.NOMBRE</td>
                         <td>@product.PRECIO</td>
-                        <td>
+                        <td style="font-size: 18px">
                             <a href="@Url.Action("Details","Productos", new {id = product.ID})"><i class="fas fa-eye"></i></a>
                             <a href="@Url.Action("Edit","Productos", new { id = product.ID})"> <i class="fas fa-edit"></i></a>
-                            <i class="fas fa-trash"></i>
+                            @if (product.ACTIVO == 1)
+                            {
+                                <a class="fas fa-toggle-on" href="@Url.Action("Desactive", "Productos")" style="color:green"></a>
+
+                            }
+                            else
+                            {
+                                <a class="fas fa-toggle-off" href="@Url.Action("Desactive", "Productos")"  style="color:red"></a>
+                            }
+
                         </td>
                     </tr>
 

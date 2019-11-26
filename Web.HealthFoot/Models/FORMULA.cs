@@ -16,12 +16,12 @@ namespace Web.HealthFoot.Models
     {
         public int ID { get; set; }
         public int FK_PRODUCTO { get; set; }
-        public int FK_INSUMO_ORDEN { get; set; }
+        public int FK_INSUMO { get; set; }
         public string UNIDAD_MEDIDA { get; set; }
         public Nullable<int> CANTIDAD { get; set; }
         public System.DateTime CREATED_AT { get; set; }
     
-        public virtual INSUMO_ORDEN INSUMO_ORDEN { get; set; }
+        public virtual INSUMO INSUMO { get; set; }
         public virtual PRODUCTO PRODUCTO { get; set; }
     }
 }

@@ -24,12 +24,10 @@ namespace Web.HealthFoot.Models
         public string NOMBRE { get; set; }
         public string APELLIDOS { get; set; }
         public string EMAIL { get; set; }
-        public int FK_DIRECCION { get; set; }
         public Nullable<int> ACTIVO { get; set; }
         public Nullable<int> ROL { get; set; }
         public System.DateTime CREATED_AT { get; set; }
     
-        public virtual DIRECCION DIRECCION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDEN> ORDEN { get; set; }
     }

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Web.HealthFoot.Models.PRODUCTO>
+@{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_LayoutWeb.cshtml";
 }
@@ -25,25 +26,25 @@
         </ol>
         <div class="carousel-inner" role="listbox">
             <!-- Slide One - Set the background image for this slide in the line below -->
-            <div class="carousel-item active" style="background-image: url('https://source.unsplash.com/LAaSoL0LrYs/1920x1080')">
+            <div class="carousel-item active" style="background-image: url('https://cdn.pixabay.com/photo/2017/08/09/09/06/scrub-2613852_960_720.jpg')">
                 <div class="carousel-caption d-none d-md-block">
                     <h2 class="display-4">First Slide</h2>
                     <p class="lead">This is a description for the first slide.</p>
                 </div>
             </div>
             <!-- Slide Two - Set the background image for this slide in the line below -->
-            <div class="carousel-item" style="background-image: url('https://source.unsplash.com/bF2vsubyHcQ/1920x1080')">
-                <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-item" style="background-image: url('https://cdn.pixabay.com/photo/2014/05/25/11/11/cosmetics-353526_960_720.jpg')">
+                <!--<div class="carousel-caption d-none d-md-block">
                     <h2 class="display-4">Second Slide</h2>
                     <p class="lead">This is a description for the second slide.</p>
-                </div>
+                </div>-->
             </div>
             <!-- Slide Three - Set the background image for this slide in the line below -->
-            <div class="carousel-item" style="background-image: url('https://source.unsplash.com/szFUQoyvrxM/1920x1080')">
-                <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-item" style="background-image: url('https://cdn.pixabay.com/photo/2016/02/17/20/00/skin-care-1205766_960_720.jpg')">
+                <!--<div class="carousel-caption d-none d-md-block">
                     <h2 class="display-4">Third Slide</h2>
                     <p class="lead">This is a description for the third slide.</p>
-                </div>
+                </div>-->
             </div>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -57,17 +58,150 @@
     </div>
 </header>
 <body>
-    <div class="row">
+    <div class="row  m-0">
         <div class="col-md-12">
             <div class="page-header">
+                <hr />
                 <h4 class="text-center">¡Últimos Artículos!</h4>
+                <hr />
+                <section class="mainContent clearfix productsContent pt-0">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            @foreach (var item in Model)
+                            {
+                                if (item.FK_CATEGORIA == 5)
+                                {
+
+                                    <div class="col-lg-3 col-md-12 ">
+                                        <div class="productBox">
+                                            <div class="productImage clearfix">
+
+                                                @foreach (var img in item.IMAGEN_PRODUCTO)
+                                                {
+                                                    <div class="d-flex justify-content-center">
+                                                        <img src="/Content/Images/@img.IMAGEN" class="mx-auto" height="300" style="width:auto" alt="products-img">
+
+                                                    </div>
+                                                    break;
+                                                }
+
+                                                <div class="productMasking">
+                                                    <ul class="list-inline btn-group" role="group">
+                                                        <li><a class="btn btn-default btn-add-cart" data-product="@item.ID" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="¡Agregado con éxito al carrito!"><i class="fa fa-shopping-cart"></i></a></li>
+                                                        <li><a class="btn btn-default" href="@Url.Action("ProductDetail","Home",new { id = item.ID })"><i class="fa fa-eye"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="productCaption clearfix">
+                                                <a href="single-product.html">
+                                                    <h5>@Html.DisplayFor(m => item.NOMBRE)</h5>
+                                                </a>
+                                                <h3>$ @Html.DisplayFor(m => item.PRECIO)</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+
+                            }
+                        </div>
+                    </div>
+                </section>
             </div>
             <div class="page-header">
                 <h4 class="text-center">¡Los más vendidos!</h4>
+                <hr />
+                <section class="mainContent clearfix productsContent pt-0">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            @foreach (var item in Model)
+                            {
+                                if (item.FK_CATEGORIA == 6)
+                                {
+
+                                    <div class="col-lg-3 col-md-4 ">
+                                        <div class="productBox">
+                                            <div class="productImage clearfix">
+
+                                                @foreach (var img in item.IMAGEN_PRODUCTO)
+                                                {
+                                                    <div class="d-flex justify-content-center">
+                                                        <img src="/Content/Images/@img.IMAGEN" class="mx-auto" height="300" style="width:auto" alt="products-img">
+
+                                                    </div>
+                                                    break;
+                                                }
+
+                                                <div class="productMasking">
+                                                    <ul class="list-inline btn-group" role="group">
+                                                        <li><a class="btn btn-default" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="¡Agregado con éxito al carrito!"><i class="fa fa-shopping-cart"></i></a></li>
+                                                        <li><a class="btn btn-default" href="@Url.Action("ProductDetail","Home",new { id = item.ID })"><i class="fa fa-eye"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="productCaption clearfix">
+                                                <a href="single-product.html">
+                                                    <h5>@Html.DisplayFor(m => item.NOMBRE)</h5>
+                                                </a>
+                                                <h3>$ @Html.DisplayFor(m => item.PRECIO)</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+                            }
+                        </div>
+                        </div>
+                </section>
             </div>
             <div class="page-header">
                 <h4 class="text-center">Sugerencias</h4>
+                <hr />
+                <section class="mainContent clearfix productsContent pt-0">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            @foreach (var item in Model)
+                            {
+                                if (item.FK_CATEGORIA == 7)
+                                {
+
+
+                                    <div class="col-lg-3 col-md-4 ">
+                                        <div class="productBox">
+                                            <div class="productImage clearfix">
+
+                                                @foreach (var img in item.IMAGEN_PRODUCTO)
+                                                {
+                                                    <div class="d-flex justify-content-center">
+                                                        <img src="/Content/Images/@img.IMAGEN" class="mx-auto" height="300" style="width:auto" alt="products-img">
+
+                                                    </div>
+                                                    break;
+                                                }
+
+                                                <div class="productMasking">
+                                                    <ul class="list-inline btn-group" role="group">
+                                                        <li><a class="btn btn-default" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="¡Agregado con éxito al carrito!"><i class="fa fa-shopping-cart"></i></a></li>
+                                                        <li><a class="btn btn-default" href="@Url.Action("ProductDetail","Home",new { id = item.ID })"><i class="fa fa-eye"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="productCaption clearfix">
+                                                <a href="single-product.html">
+                                                    <h5>@Html.DisplayFor(m => item.NOMBRE)</h5>
+                                                </a>
+                                                <h3>$ @Html.DisplayFor(m => item.PRECIO)</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+                            }
+                        </div>
+                        </div>
+                </section>
             </div>
+
         </div>
     </div>
 </body>

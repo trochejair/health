@@ -74,7 +74,7 @@
                             </li>
                             @if (User.Identity.IsAuthenticated)
                             {
-                            <li  class="nav-item dropdown">
+                                <li class="nav-item dropdown">
                                     <a class="dropdown-toggle nav-link" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         @User.Identity.Name
                                     </a>
@@ -83,12 +83,10 @@
                                         @Html.ActionLink("Perfil", "Profile", "Home", routeValues: null, htmlAttributes: new { @class = "dropdown-item", @role = "button" })
                                         @Html.ActionLink("Productos", "Product", "Home", routeValues: null, htmlAttributes: new { @class = "dropdown-item", @role = "button" })
                                         @Html.ActionLink("Cerrar Sesión", "LogOff", "Account", routeValues: null, htmlAttributes: new { @class = "dropdown-item", @role = "button" })
-                                        
+
                                     </div>
-                                
-                            </li>
 
-
+                                </li>
                             }
                             else
                             {
@@ -103,7 +101,7 @@
                             }
 
                             <li class="nav-item">
-                               <a href="@Url.Action("Index", "Cart")" class="nav-link">Carro <i class="fa fa-shopping-cart"></i></a>
+                                <a href="@Url.Action("Index", "Cart")" class="nav-link">Carro <i class="fa fa-shopping-cart"></i></a>
                             </li>
                         </ul>
                     </div>

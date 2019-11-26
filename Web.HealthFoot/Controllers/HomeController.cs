@@ -12,12 +12,13 @@ namespace Web.HealthFoot.Controllers
     {
         public ActionResult Index()
         {
-            using (var ind = new HealthEntities())
-            {
-                //Cuando es una búsqueda general, se invoca al método List
-                var productos = ind.PRODUCTO.ToList();
+            HealthEntities db = new HealthEntities();
+            
+                
+                var productos = db.PRODUCTO.Where(product => product.ACTIVO==1).ToList();
+                var img = db.IMAGEN_PRODUCTO.ToList();
                 return View(productos);
-            }
+            
             
         }
 
@@ -38,9 +39,6 @@ namespace Web.HealthFoot.Controllers
             var productos = prod.PRODUCTO.ToList();
             var img = prod.IMAGEN_PRODUCTO.ToList();
             return View(productos);
-            
-
-            
         }
 
         public ActionResult ProductDetail(int Id)

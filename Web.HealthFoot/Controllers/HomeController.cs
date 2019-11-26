@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web.HealthFoot.Models;
 
 namespace Web.HealthFoot.Controllers
 {
@@ -10,7 +11,13 @@ namespace Web.HealthFoot.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            using (var ind = new HealthEntities())
+            {
+                //Cuando es una búsqueda general, se invoca al método List
+                var productos = ind.PRODUCTO.ToList();
+                return View(productos);
+            }
+            
         }
 
         public ActionResult About()
@@ -25,17 +32,22 @@ namespace Web.HealthFoot.Controllers
 
         public ActionResult Product()
         {
-            /*using (var prod = new DefaultConnectionEntities())
-            {
-                var productos = prod.PRODUCTO.ToList();
-                return View(productos);
-            }*/
-            return View();
+            var prod = new HealthEntities();
+           
+            var productos = prod.PRODUCTO.ToList();
+            var img = prod.IMAGEN_PRODUCTO.ToList();
+            return View(productos);
+            
+
+            
         }
 
-        public ActionResult ProductDetail()
+        public ActionResult ProductDetail(int Id)
         {
-            return View();
+            var db = new HealthEntities();
+            var Producto = db.PRODUCTO.Find(Id);
+            return View(Producto);
+                          
         }
 
         public ActionResult TermsAndConditions()

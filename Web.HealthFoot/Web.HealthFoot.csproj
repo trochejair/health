@@ -283,6 +283,19 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Cart\AddCart.js" />
+    <Content Include="Content\Images\chocolatespicard.jpg" />
+    <Content Include="Content\Images\diabettxcrema.jpg" />
+    <Content Include="Content\Images\diabettxplus.png" />
+    <Content Include="Content\Images\diabettxtalco.jpg" />
+    <Content Include="Content\Images\diebecon.jpg" />
+    <Content Include="Content\Images\endulzantestevia.jpg" />
+    <Content Include="Content\Images\endulzantesteviabake.jpg" />
+    <Content Include="Content\Images\endulzantesteviamaqui.jpg" />
+    <Content Include="Content\Images\endulzantestevianatural.jpg" />
+    <Content Include="Content\Images\endulzantesteviasinlactosa.jpg" />
+    <Content Include="Content\Images\galletastaifelds.jpg" />
+    <Content Include="Content\Images\galletasvoortman.jpg" />
     <Content Include="Content\Images\im4.jpeg" />
     <Content Include="Content\Images\job.jpg" />
     <Content Include="Content\Images\logo.jpg" />
@@ -607,7 +620,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

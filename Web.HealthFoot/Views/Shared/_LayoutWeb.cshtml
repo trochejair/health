@@ -14,7 +14,8 @@
     @Styles.Render("~/Content/webcss")
     @RenderSection("estilos", required: false)
 </head>
-
+<!--Campo Url AddCart-->
+<input  type="hidden" id="inp-url-add-cart" value="@Url.Action("AddCart", "Cart")"/>
 <body class="body-wrapper version2">
 
     <!-- Preloader -->
@@ -79,6 +80,7 @@
                             <li class="nav-item">
                                 @Html.ActionLink("Registrarse", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link", @role = "button" })
                             </li>
+
                             <li class="nav-item">
                                 @Html.ActionLink("Carro", "Index", "Cart", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link", @role = "button" })
                             </li>
@@ -89,7 +91,7 @@
                     <div class="dropdown cart-dropdown">
                         <a href="javascript:void(0)" class="dropdown-toggle shop-cart" data-toggle="dropdown">
                             <i class="fa fa-shopping-cart"></i>
-                            
+
 
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
@@ -170,6 +172,9 @@
         </div>
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/webjs")
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        @Scripts.Render("~/Content/Cart/AddCart.js")
+
     </div>
 </body>
 

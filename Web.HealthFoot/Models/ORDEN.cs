@@ -28,7 +28,6 @@ namespace Web.HealthFoot.Models
         public Nullable<int> ACTIVO { get; set; }
         public System.DateTime CREATED_AT { get; set; }
     
-        public virtual CLIENTE CLIENTE { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DETALLE_ORDEN> DETALLE_ORDEN { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

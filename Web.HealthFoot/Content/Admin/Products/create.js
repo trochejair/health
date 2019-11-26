@@ -31,16 +31,7 @@ $(document).ready(function () {
                 success: function (response) {
                     console.log(response)
                     if (response.success) {
-                        var urlForm = $('').val();
-
-                        $.ajax({
-                            url: ,
-                            method: 'post',
-                            data: formula,
-                            success: function (response) {
-
-                            }
-                        });
+                      
 
 
                         dropzoneImages.options.url = $("#inp-url-image").val() +"/"+ response.data; 

@@ -668,7 +668,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\_LayoutWeb.cshtml" />
-
     <Content Include="Views\Insumos\Create.cshtml" />
     <Content Include="Views\OrdenesInsumos\Create.cshtml" />
     <Content Include="Views\Productos\Create.cshtml" />
@@ -683,6 +682,10 @@
     <Content Include="Views\OrdenesInsumos\Index.cshtml" />
     <Content Include="Views\Proveedores\Edit.cshtml" />
     <Content Include="Views\OrdenesInsumos\Details.cshtml" />
+    <Content Include="Views\Home\Product.cshtml" />
+    <Content Include="Views\Home\ProductDetail.cshtml" />
+    <Content Include="Views\Home\Profile.cshtml" />
+    <Content Include="Views\Home\TermsAndConditions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

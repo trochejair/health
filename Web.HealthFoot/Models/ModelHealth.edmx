@@ -22,7 +22,6 @@
           <Property Name="NOMBRE" Type="nvarchar" MaxLength="50" />
           <Property Name="APELLIDOS" Type="nvarchar" MaxLength="50" />
           <Property Name="EMAIL" Type="nvarchar" MaxLength="255" />
-          <Property Name="FK_DIRECCION" Type="int" Nullable="false" />
           <Property Name="ACTIVO" Type="int" />
           <Property Name="ROL" Type="int" />
           <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
@@ -206,19 +205,7 @@
           <Property Name="FK_DIRECCION" Type="int" Nullable="false" />
           <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
         </EntityType>
-        <Association Name="FK__CLIENTE__FK_DIRE__114A936A">
-          <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="1" />
-          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DIRECCION">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CLIENTE">
-              <PropertyRef Name="FK_DIRECCION" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DETALLE_O__FK_OR__18EBB532">
+        <Association Name="FK__DETALLE_O__FK_OR__4CA06362">
           <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="1" />
           <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -302,7 +289,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__IMAGEN_PR__FK_PR__76969D2E">
+        <Association Name="FK__IMAGEN_PR__FK_PR__72C60C4A">
           <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
           <End Role="IMAGEN_PRODUCTO" Type="Self.IMAGEN_PRODUCTO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -461,7 +448,7 @@
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="FORMULA" EntitySet="FORMULA" />
           </AssociationSet>
-          <AssociationSet Name="FK__IMAGEN_PR__FK_PR__76969D2E" Association="Self.FK__IMAGEN_PR__FK_PR__76969D2E">
+          <AssociationSet Name="FK__IMAGEN_PR__FK_PR__72C60C4A" Association="Self.FK__IMAGEN_PR__FK_PR__72C60C4A">
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="IMAGEN_PRODUCTO" EntitySet="IMAGEN_PRODUCTO" />
           </AssociationSet>
@@ -473,11 +460,7 @@
             <End Role="ORDEN_PROVEEDOR" EntitySet="ORDEN_PROVEEDOR" />
             <End Role="INSUMO_ORDEN" EntitySet="INSUMO_ORDEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__ORDEN__FK_CLIENT__151B244E" Association="Self.FK__ORDEN__FK_CLIENT__151B244E">
-            <End Role="CLIENTE" EntitySet="CLIENTE" />
-            <End Role="ORDEN" EntitySet="ORDEN" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ORDEN_PRO__FK_PR__01142BA1" Association="Self.FK__ORDEN_PRO__FK_PR__01142BA1">
+          <AssociationSet Name="FK__ORDEN_PRO__FK_PR__34C8D9D1" Association="Self.FK__ORDEN_PRO__FK_PR__34C8D9D1">
             <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
             <End Role="ORDEN_PROVEEDOR" EntitySet="ORDEN_PROVEEDOR" />
           </AssociationSet>
@@ -521,7 +504,6 @@
           <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="APELLIDOS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EMAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="FK_DIRECCION" Type="Int32" Nullable="false" />
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="ROL" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
@@ -679,10 +661,10 @@
           <Property Name="FK_CATEGORIA" Type="Int32" Nullable="false" />
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="CATEGORIA" Relationship="Self.FK__PRODUCTO__FK_CAT__73BA3083" FromRole="PRODUCTO" ToRole="CATEGORIA" />
-          <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK__DETALLE_O__FK_PR__17F790F9" FromRole="PRODUCTO" ToRole="DETALLE_ORDEN" />
-          <NavigationProperty Name="FORMULA" Relationship="Self.FK__FORMULA__FK_PROD__0C85DE4D" FromRole="PRODUCTO" ToRole="FORMULA" />
-          <NavigationProperty Name="IMAGEN_PRODUCTO" Relationship="Self.FK__IMAGEN_PR__FK_PR__76969D2E" FromRole="PRODUCTO" ToRole="IMAGEN_PRODUCTO" />
+          <NavigationProperty Name="CATEGORIA" Relationship="Self.FK__PRODUCTO__FK_CAT__276EDEB3" FromRole="PRODUCTO" ToRole="CATEGORIA" />
+          <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK__DETALLE_O__FK_PR__4BAC3F29" FromRole="PRODUCTO" ToRole="DETALLE_ORDEN" />
+          <NavigationProperty Name="FORMULA" Relationship="Self.FK__FORMULA__FK_PROD__403A8C7D" FromRole="PRODUCTO" ToRole="FORMULA" />
+          <NavigationProperty Name="IMAGEN_PRODUCTO" Relationship="Self.FK__IMAGEN_PR__FK_PR__72C60C4A" FromRole="PRODUCTO" ToRole="IMAGEN_PRODUCTO" />
         </EntityType>
         <EntityType Name="PROVEEDOR">
           <Key>
@@ -750,6 +732,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+
         <Association Name="FK__CLIENTE__FK_DIRE__114A936A">
           <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="1" />
           <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
@@ -965,15 +948,7 @@
             <End Role="CATEGORIA" EntitySet="CATEGORIA" />
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
           </AssociationSet>
-          <AssociationSet Name="FK__CLIENTE__FK_DIRE__114A936A" Association="Self.FK__CLIENTE__FK_DIRE__114A936A">
-            <End Role="DIRECCION" EntitySet="DIRECCION" />
-            <End Role="CLIENTE" EntitySet="CLIENTE" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ORDEN__FK_CLIENT__151B244E" Association="Self.FK__ORDEN__FK_CLIENT__151B244E">
-            <End Role="CLIENTE" EntitySet="CLIENTE" />
-            <End Role="ORDEN" EntitySet="ORDEN" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DETALLE_O__FK_OR__18EBB532" Association="Self.FK__DETALLE_O__FK_OR__18EBB532">
+          <AssociationSet Name="FK__DETALLE_O__FK_OR__4CA06362" Association="Self.FK__DETALLE_O__FK_OR__4CA06362">
             <End Role="ORDEN" EntitySet="ORDEN" />
             <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
           </AssociationSet>
@@ -1009,7 +984,7 @@
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="FORMULA" EntitySet="FORMULA" />
           </AssociationSet>
-          <AssociationSet Name="FK__IMAGEN_PR__FK_PR__76969D2E" Association="Self.FK__IMAGEN_PR__FK_PR__76969D2E">
+          <AssociationSet Name="FK__IMAGEN_PR__FK_PR__72C60C4A" Association="Self.FK__IMAGEN_PR__FK_PR__72C60C4A">
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="IMAGEN_PRODUCTO" EntitySet="IMAGEN_PRODUCTO" />
           </AssociationSet>
@@ -1053,7 +1028,6 @@
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="APELLIDOS" ColumnName="APELLIDOS" />
                 <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
-                <ScalarProperty Name="FK_DIRECCION" ColumnName="FK_DIRECCION" />
                 <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
                 <ScalarProperty Name="ROL" ColumnName="ROL" />
                 <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />

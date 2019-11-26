@@ -163,6 +163,20 @@ namespace Web.HealthFoot.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirmar cuenta", "Para confirmar la cuenta, haga clic <a href=\"" + callbackUrl + "\">aquí</a>");
 
+                    using(HealthEntities db = new HealthEntities())
+                    {
+                        CLIENTE client = new CLIENTE();
+                        client.NOMBRE = model.Nombre;
+                        client.APELLIDOS = model.Apellido;
+                        client.EMAIL = model.Email;
+                        client.ACTIVO = 1;
+                        client.ROL = 2;
+                        client.CREATED_AT = System.DateTime.Now;
+                        db.CLIENTE.Add(client);
+                        db.SaveChanges();
+                    }
+
+
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -387,8 +401,6 @@ namespace Web.HealthFoot.Controllers
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);

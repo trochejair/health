@@ -1,0 +1,85 @@
+﻿@model List<Web.HealthFoot.Models.ORDEN_PROVEEDOR>
+@{
+    ViewBag.Title = "Ordenes";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section botones{
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ActionLink("Agregar", "Create", "OrdenesInsumos", new { area = "" }, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Pedidos a proveedores</h2>
+    </div>
+    <div class="col-md-12">
+        <table class="table datatable">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Proveedor</th>
+                    <th>Insumo</th>
+                    <th>Total</th>
+                    <th>Fecha</th>
+                    <th></th>
+                </tr>
+            </thead>
+            @{
+                double? total = 0.0;
+             }
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    total = 0.0;
+                    
+                    <tr>
+                        <td>@order.ID </td>
+                        <td>@order.PROVEEDOR.NOMBRE </td>
+                        <td>
+                            <div class="row">
+
+                                @foreach (var insumo in order.INSUMO_ORDEN)
+                                {
+                                    <div class="col-md-12">
+
+                                        <b>
+                                            @insumo.INSUMO.NOMBRE
+                                        </b>
+                                        (
+                                        @insumo.CANTIDAD
+                                        @insumo.UNIDAD_MEDIDA
+                                        )
+                                        @{
+                                            total = total + insumo.PRECIO;
+                                        }
+
+                                    </div>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            @total
+                        </td>
+                        <td>
+                            @Convert.ToDateTime(order.FECHA).ToString("dd/MM/yyyy")
+                        </td>
+                        <td style="font-size:18px">
+                            <a data-toggle="tooltip"
+                               data-placement="top"
+                               title="Ver detalles"
+                               href="@Url.Action("Details", "OrdenesInsumos", new { id = order.ID })"
+                               class="fas fa-eye">
+
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</div>

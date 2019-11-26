@@ -1,0 +1,61 @@
+﻿@model Web.HealthFoot.Models.ORDEN_PROVEEDOR
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Orden numero @Model.ID</h2>
+    </div>
+    <div class="col-md-6 mt-2">
+        <b>Proveedor:</b>
+        @Html.DisplayFor(model => model.PROVEEDOR.NOMBRE)
+    </div>
+    <div class="col-md-6 mt-2">
+        <b>Fecha: </b>
+        @Convert.ToDateTime(Model.FECHA).ToString("dd/MM/yyyy")
+        
+    </div>
+    <div class="col-md-12">
+        <h3>Insumos: </h3>
+    </div>
+    <div class="col-lg-12">
+        @{
+            double? total = 0;
+        }
+        <div class="row">
+            @foreach (var input in Model.INSUMO_ORDEN)
+            {
+                <div class="col-md-8 mx-auto">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <b>
+                                @input.INSUMO.NOMBRE
+                            </b>
+                        </div>
+                        <div class="col-md-4">
+
+                            (
+                            @input.CANTIDAD
+                            @input.UNIDAD_MEDIDA
+                            )
+                        </div>
+                        <div class="col-md-4">
+                            @{
+                                total = total + input.PRECIO;
+                            }
+                            <b>
+                                $
+                                @input.PRECIO
+                            </b>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-lg-12 text-right">
+            <h4>Total del pedido: $@total</h4>
+        </div>
+    </div>

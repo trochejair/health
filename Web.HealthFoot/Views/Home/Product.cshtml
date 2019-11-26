@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Web.HealthFoot.Models.PRODUCTO>
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+<section class="lightSection clearfix pageHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-title">
+                    <h2 class="text-center">Productos</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mainContent clearfix productsContent pt-0">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+
+                <div class="col-lg-3 col-md-4 ">
+                    <div class="productBox">
+                        <div class="productImage clearfix">
+                            
+                                @foreach (var img in item.IMAGEN_PRODUCTO)
+                                {
+                                <div class="d-flex justify-content-center">
+                                    <img src="/Content/ImagesProduct/@img.IMAGEN" class="mx-auto" height="300" style="width:auto" alt="products-img">
+                                
+                                </div>
+                                    break;
+                                }
+                            <div class="productMasking">
+                                <ul class="list-inline btn-group" role="group">
+                                    <li>
+                                        <a class="btn btn-default" 
+                                           data-toast data-toast-type="success" 
+                                           data-toast-position="topRight" 
+                                           data-toast-icon="icon-circle-check" 
+                                           data-toast-title="Product" 
+                                           data-toast-message="¡Agregado con éxito al carrito!">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        </a>
+                                    </li>
+                                    <li><a class="btn btn-default" href="@Url.Action("ProductDetail", "Home", new { id = item.ID })"><i class="fa fa-eye"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="productCaption clearfix">
+                            <a href="single-product.html">
+                                <h5>@Html.DisplayFor(m => item.NOMBRE)</h5>
+                            </a>
+                            <h3>$ @Html.DisplayFor(m => item.PRECIO)</h3>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

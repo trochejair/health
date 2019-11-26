@@ -11,6 +11,8 @@
     @Styles.Render("~/Content/font")
     @Styles.Render("~/Content/styleadmin")
 
+    @RenderSection("css", required: false)
+
 </head>
 <body>
     <!-- Begin page -->
@@ -126,9 +128,51 @@
                         <li class="menu-title">Administración</li>
                         <li><a href="index.html" class="waves-effect"><i class="fa fa-home" aria-hidden="true"></i><span>Inicio</span></a></li>
 
+                        <!-- ========================= Shopping ===============================-->
+                        <li>
+                            <a href="@Url.Action("Index","Proveedores")" class="waves-effect">
+                                <i class="fas fa-users"></i>
+                                <span> Proveedores</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="@Url.Action("Index","Insumos")" class="waves-effect">
+                                <i class="fas fa-fill"></i>
+                                <span> Insumos</span>
+                            </a>
+                        </li>
+                        <!--
+
+    <li>
+        <a href="@Url.Action("Index","Almacen")" class="waves-effect">
+            <i class="fas fa-boxes"></i>
+            <span> Almacen</span>
+        </a>
+    </li>
+
+        -->
+                        <li>
+                            <a href="@Url.Action("Index","OrdenesInsumos")" class="waves-effect">
+                                <i class="fas fa-box"></i>
+                                <span> Pedidos</span>
+                            </a>
+                        </li>
+                        <!--======================================================== -->
+                        <!--==========================Products===============================-->
+                        <li>
+                            <a href="@Url.Action("Index","Productos")" class="waves-effect">
+                                <i class="fas fa-store"></i>
+                                <span> Productos</span>
+                            </a>
+                        </li>
+                        <!--=========================================================-->
+
+
                         <li><a href="@Url.Action("Index","Ruta")" class="waves-effect"><i class="ti-direction"></i><span> Rutas</span></a></li>
                         <li><a href="@Url.Action("Index","Entrega")" class="waves-effect"><i class="ti-shopping-cart"></i><span> Entregas</span></a></li>
                         <li><a href="@Url.Action("Index","Vehículo")" class="waves-effect"><i class="ti-car"></i><span> Vehículo</span></a></li>
+
 
                         <!---------------------------------------------------------------------------------------------------------------->
                         <!--------------------------------USUARIOS------------------------------------------------------------------------>
@@ -155,6 +199,7 @@
 
                         <!---------------------------------------------------------------------------------------------------------------->
                         <!---------------------------------------------------------------------------------------------------------------->
+
 
 
                     </ul>
@@ -227,6 +272,8 @@
     @Scripts.Render("~/bundles/bootbox")
 
     @Scripts.Render("~/bundles/init")
+
+    @Scripts.Render("~/Content/Admin/commons/tooltip.js")
 
     @RenderSection("scripts", required: false)
 </body>

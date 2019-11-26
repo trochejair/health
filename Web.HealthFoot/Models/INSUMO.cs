@@ -17,6 +17,7 @@ namespace Web.HealthFoot.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public INSUMO()
         {
+            this.FORMULA = new HashSet<FORMULA>();
             this.INSUMO_ORDEN = new HashSet<INSUMO_ORDEN>();
         }
     
@@ -26,6 +27,8 @@ namespace Web.HealthFoot.Models
         public Nullable<int> ACTIVO { get; set; }
         public System.DateTime CREATED_AT { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FORMULA> FORMULA { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<INSUMO_ORDEN> INSUMO_ORDEN { get; set; }
     }

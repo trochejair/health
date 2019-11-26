@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -21,7 +21,7 @@ namespace Web.HealthFoot.Controllers
             string username = User.Identity.GetUserName();
             var cliente = db.CLIENTE.Where(d => d.EMAIL == username).First();
             int idcliente = cliente.ID;
-            var dIRECCION = db.DIRECCION.Include(d => d.CLIENTE).Where(d=> d.FK_CLIENTE==idcliente);
+            var dIRECCION = db.DIRECCION.Include(d => d.CLIENTE).Where(d => d.FK_CLIENTE == idcliente);
             return View(dIRECCION.ToList());
         }
 
@@ -59,6 +59,13 @@ namespace Web.HealthFoot.Controllers
         {
             if (ModelState.IsValid)
             {
+                var emailAuth = User.Identity.GetUserName();
+                dIRECCION.CREATED_AT = System.DateTime.Now;
+
+                var cliente = db.CLIENTE.Where(client => client.EMAIL == emailAuth).First();
+
+                dIRECCION.FK_CLIENTE = cliente.ID;
+                dIRECCION.ACTIVO = 1;
                 db.DIRECCION.Add(dIRECCION);
                 db.SaveChanges();
                 return RedirectToAction("Index");

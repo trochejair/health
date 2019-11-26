@@ -24,28 +24,20 @@
                 <div class="col-lg-3 col-md-4 ">
                     <div class="productBox">
                         <div class="productImage clearfix">
-                            
-                                @foreach (var img in item.IMAGEN_PRODUCTO)
-                                {
+
+                            @foreach (var img in item.IMAGEN_PRODUCTO)
+                            {
                                 <div class="d-flex justify-content-center">
-                                    <img src="/Content/ImagesProduct/@img.IMAGEN" class="mx-auto" height="300" style="width:auto" alt="products-img">
-                                
+                                    <img src="~/Content/ImagesProduct/@img.IMAGEN" class="mx-auto" height="300" style="width:auto" alt="products-img">
+
                                 </div>
-                                    break;
-                                }
+                                break;
+                            }
+
                             <div class="productMasking">
                                 <ul class="list-inline btn-group" role="group">
-                                    <li>
-                                        <a class="btn btn-default" 
-                                           data-toast data-toast-type="success" 
-                                           data-toast-position="topRight" 
-                                           data-toast-icon="icon-circle-check" 
-                                           data-toast-title="Product" 
-                                           data-toast-message="¡Agregado con éxito al carrito!">
-                                        <i class="fa fa-shopping-cart"></i>
-                                        </a>
-                                    </li>
-                                    <li><a class="btn btn-default" href="@Url.Action("ProductDetail", "Home", new { id = item.ID })"><i class="fa fa-eye"></i></a></li>
+                                    <li><a class="btn btn-default btn-add-cart" data-product="@item.ID" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="¡Agregado con éxito al carrito!"><i class="fa fa-shopping-cart"></i></a></li>
+                                    <li><a class="btn btn-default" href="@Url.Action("ProductDetail","Home",new { id = item.ID })"><i class="fa fa-eye"></i></a></li>
                                 </ul>
                             </div>
                         </div>

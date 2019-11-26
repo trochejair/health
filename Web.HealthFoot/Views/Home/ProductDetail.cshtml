@@ -28,7 +28,7 @@
                                     @foreach (var img in Model.IMAGEN_PRODUCTO)
                                     {
                                       
-                                            <img src="/Content/Images/@img.IMAGEN" class="w-100" alt="products-img">
+                                            <img src="/Content/ImagesProduct/@img.IMAGEN" class="w-100" alt="products-img">
                                         break;
                                     }
                                 </div>
@@ -39,7 +39,7 @@
                                 <div class="carousel-inner">
                                     @foreach (var img in Model.IMAGEN_PRODUCTO)
                                     {
-                                        <div data-target="#carousel" data-slide-to="" class="thumb"><img src="/Content/Images/@img.IMAGEN"></div>
+                                        <div data-target="#carousel" data-slide-to="" class="thumb"><img src="/Content/ImagesProduct/@img.IMAGEN"></div>
                                     }
                                 </div>
                                 <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">

@@ -59,7 +59,11 @@
                                                 {
                                                     <tr>
                                                         <td>
-                                                            <img src="~/Content/productos/@item.PRODUCTO.IMAGEN_PRODUCTO" width="60" />
+                                                            @foreach (var img in item.PRODUCTO.IMAGEN_PRODUCTO)
+                                                            {
+                                                                <img src="~/Content/ImagesProduct/@img.IMAGEN" width="60" />
+                                                                break;
+                                                            }
                                                         </td>
                                                         <td>
                                                             @Html.DisplayFor(modelItem => item.PRODUCTO.NOMBRE)

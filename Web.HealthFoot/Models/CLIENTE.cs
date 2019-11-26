@@ -17,6 +17,7 @@ namespace Web.HealthFoot.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CLIENTE()
         {
+            this.DIRECCION = new HashSet<DIRECCION>();
             this.ORDEN = new HashSet<ORDEN>();
         }
     
@@ -28,6 +29,8 @@ namespace Web.HealthFoot.Models
         public Nullable<int> ROL { get; set; }
         public System.DateTime CREATED_AT { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DIRECCION> DIRECCION { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDEN> ORDEN { get; set; }
     }

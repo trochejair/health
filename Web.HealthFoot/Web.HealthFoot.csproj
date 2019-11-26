@@ -197,9 +197,6 @@
     <Compile Include="Models\CLIENTE.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>ModelHealth.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DETALLE_ORDEN.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
@@ -212,14 +209,12 @@
     <Compile Include="Models\EMPLEADO.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RolModelo.cs" />
     <Compile Include="Models\ENTREGA.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FORMULA.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IMAGEN_PRODUCTO.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
@@ -229,8 +224,6 @@
     <Compile Include="Models\INSUMO_ORDEN.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\EmpleadoModelo.cs" />
     <Compile Include="Models\ModelHealth.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -258,6 +251,10 @@
     <Compile Include="Models\PROVEEDOR.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RolModelo.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\EmpleadoModelo.cs" />
     <Compile Include="Models\RUTA.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
@@ -695,7 +692,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\_LayoutWeb.cshtml" />
-
     <Content Include="Views\Insumos\Create.cshtml" />
     <Content Include="Views\OrdenesInsumos\Create.cshtml" />
     <Content Include="Views\Productos\Create.cshtml" />
@@ -721,7 +717,6 @@
     <Content Include="Views\Direccion\Edit.cshtml" />
     <Content Include="Views\Direccion\Index.cshtml" />
     <Content Include="Views\Cart\Entrega.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

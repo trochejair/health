@@ -25,6 +25,11 @@ namespace Web.HealthFoot.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<CATEGORIA> CATEGORIA { get; set; }
         public virtual DbSet<CLIENTE> CLIENTE { get; set; }
         public virtual DbSet<DETALLE_ORDEN> DETALLE_ORDEN { get; set; }

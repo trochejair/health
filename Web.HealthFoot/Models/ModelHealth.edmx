@@ -4,7 +4,68 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HealthModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="HEALTHFOOTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <EntityType Name="CATEGORIA">
           <Key>
             <PropertyRef Name="ID" />
@@ -410,7 +471,69 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="HealthModelStoreContainer">
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HEALTHFOOTModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DETALLE_ORDEN" EntityType="Self.DETALLE_ORDEN" Schema="dbo" store:Type="Tables" />
@@ -497,12 +620,87 @@
             <End Role="ORDEN" EntitySet="ORDEN" />
             <End Role="VENTA" EntitySet="VENTA" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="HealthModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="HEALTHFOOTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
         <EntityType Name="CATEGORIA">
           <Key>
             <PropertyRef Name="ID" />
@@ -738,6 +936,34 @@
           <NavigationProperty Name="DIRECCION" Relationship="Self.FK__VENTA__FK_DIRECC__5165187F" FromRole="VENTA" ToRole="DIRECCION" />
           <NavigationProperty Name="ORDEN" Relationship="Self.FK__VENTA__FK_ORDEN__5070F446" FromRole="VENTA" ToRole="ORDEN" />
         </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__PRODUCTO__FK_CAT__276EDEB3">
           <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="1" />
           <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
@@ -942,7 +1168,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+        </Association>
         <EntityContainer Name="HealthEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
           <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" />
           <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
           <EntitySet Name="DETALLE_ORDEN" EntityType="Self.DETALLE_ORDEN" />
@@ -961,6 +1196,14 @@
           <EntitySet Name="RUTA" EntityType="Self.RUTA" />
           <EntitySet Name="VEHICULO" EntityType="Self.VEHICULO" />
           <EntitySet Name="VENTA" EntityType="Self.VENTA" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
           <AssociationSet Name="FK__PRODUCTO__FK_CAT__276EDEB3" Association="Self.FK__PRODUCTO__FK_CAT__276EDEB3">
             <End Role="CATEGORIA" EntitySet="CATEGORIA" />
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
@@ -1029,15 +1272,74 @@
             <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
             <End Role="ORDEN_PROVEEDOR" EntitySet="ORDEN_PROVEEDOR" />
           </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="HealthModelStoreContainer" CdmEntityContainer="HealthEntities">
+        <EntityContainerMapping StorageEntityContainer="HEALTHFOOTModelStoreContainer" CdmEntityContainer="HealthEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CATEGORIA">
-            <EntityTypeMapping TypeName="HealthModel.CATEGORIA">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.CATEGORIA">
               <MappingFragment StoreEntitySet="CATEGORIA">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
@@ -1047,7 +1349,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CLIENTE">
-            <EntityTypeMapping TypeName="HealthModel.CLIENTE">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.CLIENTE">
               <MappingFragment StoreEntitySet="CLIENTE">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
@@ -1061,7 +1363,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DETALLE_ORDEN">
-            <EntityTypeMapping TypeName="HealthModel.DETALLE_ORDEN">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.DETALLE_ORDEN">
               <MappingFragment StoreEntitySet="DETALLE_ORDEN">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FK_ORDEN" ColumnName="FK_ORDEN" />
@@ -1072,7 +1374,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DIRECCION">
-            <EntityTypeMapping TypeName="HealthModel.DIRECCION">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.DIRECCION">
               <MappingFragment StoreEntitySet="DIRECCION">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
@@ -1088,7 +1390,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EMBARQUE">
-            <EntityTypeMapping TypeName="HealthModel.EMBARQUE">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.EMBARQUE">
               <MappingFragment StoreEntitySet="EMBARQUE">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ID_RUTA" ColumnName="ID_RUTA" />
@@ -1100,7 +1402,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EMPLEADO">
-            <EntityTypeMapping TypeName="HealthModel.EMPLEADO">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.EMPLEADO">
               <MappingFragment StoreEntitySet="EMPLEADO">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
@@ -1113,7 +1415,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ENTREGA">
-            <EntityTypeMapping TypeName="HealthModel.ENTREGA">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.ENTREGA">
               <MappingFragment StoreEntitySet="ENTREGA">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ID_VENTA" ColumnName="ID_VENTA" />
@@ -1122,7 +1424,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FORMULA">
-            <EntityTypeMapping TypeName="HealthModel.FORMULA">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.FORMULA">
               <MappingFragment StoreEntitySet="FORMULA">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FK_PRODUCTO" ColumnName="FK_PRODUCTO" />
@@ -1134,7 +1436,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="IMAGEN_PRODUCTO">
-            <EntityTypeMapping TypeName="HealthModel.IMAGEN_PRODUCTO">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.IMAGEN_PRODUCTO">
               <MappingFragment StoreEntitySet="IMAGEN_PRODUCTO">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="IMAGEN" ColumnName="IMAGEN" />
@@ -1143,7 +1445,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="INSUMO">
-            <EntityTypeMapping TypeName="HealthModel.INSUMO">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.INSUMO">
               <MappingFragment StoreEntitySet="INSUMO">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
@@ -1154,7 +1456,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="INSUMO_ORDEN">
-            <EntityTypeMapping TypeName="HealthModel.INSUMO_ORDEN">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.INSUMO_ORDEN">
               <MappingFragment StoreEntitySet="INSUMO_ORDEN">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
@@ -1168,7 +1470,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ORDEN">
-            <EntityTypeMapping TypeName="HealthModel.ORDEN">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.ORDEN">
               <MappingFragment StoreEntitySet="ORDEN">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FECHA" ColumnName="FECHA" />
@@ -1180,7 +1482,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ORDEN_PROVEEDOR">
-            <EntityTypeMapping TypeName="HealthModel.ORDEN_PROVEEDOR">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.ORDEN_PROVEEDOR">
               <MappingFragment StoreEntitySet="ORDEN_PROVEEDOR">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FK_PROVEEDOR" ColumnName="FK_PROVEEDOR" />
@@ -1190,7 +1492,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PRODUCTO">
-            <EntityTypeMapping TypeName="HealthModel.PRODUCTO">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.PRODUCTO">
               <MappingFragment StoreEntitySet="PRODUCTO">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
@@ -1204,7 +1506,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PROVEEDOR">
-            <EntityTypeMapping TypeName="HealthModel.PROVEEDOR">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.PROVEEDOR">
               <MappingFragment StoreEntitySet="PROVEEDOR">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
@@ -1218,7 +1520,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RUTA">
-            <EntityTypeMapping TypeName="HealthModel.RUTA">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.RUTA">
               <MappingFragment StoreEntitySet="RUTA">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="INICIO" ColumnName="INICIO" />
@@ -1230,7 +1532,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VEHICULO">
-            <EntityTypeMapping TypeName="HealthModel.VEHICULO">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.VEHICULO">
               <MappingFragment StoreEntitySet="VEHICULO">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
@@ -1245,7 +1547,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VENTA">
-            <EntityTypeMapping TypeName="HealthModel.VENTA">
+            <EntityTypeMapping TypeName="HEALTHFOOTModel.VENTA">
               <MappingFragment StoreEntitySet="VENTA">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FK_ORDEN" ColumnName="FK_ORDEN" />
@@ -1255,6 +1557,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="HEALTHFOOTModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

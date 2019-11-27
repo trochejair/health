@@ -264,8 +264,22 @@ namespace Web.HealthFoot.Controllers
             }
             else
             {
-                DETALLE_ORDEN detalle = db.DETALLE_ORDEN.Where(d => d.FK_ORDEN==orden.ID).Where(d=>d.FK_PRODUCTO==id).First();
-                return RedirectToAction("Agregar","Cart",new { id= detalle.ID});
+                try
+                {
+                    DETALLE_ORDEN detalle = db.DETALLE_ORDEN.Where(d => d.FK_ORDEN == orden.ID).Where(d => d.FK_PRODUCTO == id).First();
+                    return RedirectToAction("Agregar", "Cart", new { id = detalle.ID });
+                }
+                catch
+                {
+                    PRODUCTO pro = db.PRODUCTO.Find(id);
+                    DETALLE_ORDEN detalle = new DETALLE_ORDEN();
+                    detalle.FK_ORDEN = orden.ID;
+                    detalle.FK_PRODUCTO = id;
+                    detalle.CANTIDAD = 1;
+                    detalle.SUBTOTAL = pro.ID;
+                }
+
+                }
                 
             }
 

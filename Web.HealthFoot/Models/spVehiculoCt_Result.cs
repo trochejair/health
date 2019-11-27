@@ -10,15 +10,16 @@
 namespace Web.HealthFoot.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ENTREGA
+    public partial class spVehiculoCt_Result
     {
         public int ID { get; set; }
-        public int ID_VENTA { get; set; }
-        public int ID_EMBARQUE { get; set; }
-    
-        public virtual EMBARQUE EMBARQUE { get; set; }
-        public virtual VENTA VENTA { get; set; }
+        public string NOMBRE { get; set; }
+        public string MARCA { get; set; }
+        public string MODELO { get; set; }
+        public string CAPACIDAD { get; set; }
+        public string PESO { get; set; }
+        public Nullable<int> CILINDROS { get; set; }
+        public Nullable<int> ACTIVO { get; set; }
     }
 }

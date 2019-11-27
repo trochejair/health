@@ -258,6 +258,12 @@
     <Compile Include="Models\RUTA.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\spEMBARQUECt_Result.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spVehiculoCt_Result.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\VEHICULO.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>

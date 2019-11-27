@@ -47,6 +47,7 @@
         <AssociationConnector Association="HealthModel.FK__VENTA__FK_ORDEN__34E8D562" ManuallyRouted="false" />
         <AssociationConnector Association="HealthModel.FK__ORDEN_PRO__FK_PR__1D114BD1" ManuallyRouted="false" />
         <AssociationConnector Association="HealthModel.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthModel.FK__ENTREGA__ID_VENT__51851410" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

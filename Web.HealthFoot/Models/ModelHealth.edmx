@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HealthModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HealthModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
@@ -317,7 +317,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ENTREGA__ID_EMBA__4336F4B9">
+        <Association Name="FK__ENTREGA__ID_EMBA__5090EFD7">
           <End Role="EMBARQUE" Type="Self.EMBARQUE" Multiplicity="1" />
           <End Role="ENTREGA" Type="Self.ENTREGA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -326,6 +326,18 @@
             </Principal>
             <Dependent Role="ENTREGA">
               <PropertyRef Name="ID_EMBARQUE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ENTREGA__ID_VENT__51851410">
+          <End Role="VENTA" Type="Self.VENTA" Multiplicity="1" />
+          <End Role="ENTREGA" Type="Self.ENTREGA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ENTREGA">
+              <PropertyRef Name="ID_VENTA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -517,6 +529,64 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spEMBARQUECt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spEmbarqueEl" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDEM" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEmbarqueIn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDEM" Type="int" Mode="InOut" />
+          <Parameter Name="IDR" Type="int" Mode="In" />
+          <Parameter Name="IDV" Type="int" Mode="In" />
+          <Parameter Name="FECHA" Type="date" Mode="In" />
+        </Function>
+        <Function Name="spEmbarqueUp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDEM" Type="int" Mode="In" />
+          <Parameter Name="IDR" Type="int" Mode="In" />
+          <Parameter Name="IDV" Type="int" Mode="In" />
+          <Parameter Name="FECHA" Type="date" Mode="In" />
+        </Function>
+        <Function Name="spENTREGAEl" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDE" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spRUTAEd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDRUTA" Type="int" Mode="In" />
+          <Parameter Name="INICIO" Type="nvarchar" Mode="In" />
+          <Parameter Name="FIN" Type="nvarchar" Mode="In" />
+          <Parameter Name="DISTANCIA" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spRUTAEl" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDE" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spRUTAIn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDR" Type="int" Mode="InOut" />
+          <Parameter Name="INICIO" Type="nvarchar" Mode="In" />
+          <Parameter Name="FIN" Type="nvarchar" Mode="In" />
+          <Parameter Name="DISTANCIA" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spVehiculoCt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spVEHICULOEd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDV" Type="int" Mode="In" />
+          <Parameter Name="NOMBRE" Type="nvarchar" Mode="In" />
+          <Parameter Name="MARCA" Type="nvarchar" Mode="In" />
+          <Parameter Name="MODELO" Type="nvarchar" Mode="In" />
+          <Parameter Name="CAPACIDAD" Type="nvarchar" Mode="In" />
+          <Parameter Name="PESO" Type="nvarchar" Mode="In" />
+          <Parameter Name="CILINDROS" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spVEHICULOEl" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDV" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spVEHICULOIn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDV" Type="int" Mode="InOut" />
+          <Parameter Name="NOMBRE" Type="nvarchar" Mode="In" />
+          <Parameter Name="MARCA" Type="nvarchar" Mode="In" />
+          <Parameter Name="MODELO" Type="nvarchar" Mode="In" />
+          <Parameter Name="CAPACIDAD" Type="nvarchar" Mode="In" />
+          <Parameter Name="PESO" Type="nvarchar" Mode="In" />
+          <Parameter Name="CILINDROS" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="HealthModelStoreContainer">
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -561,8 +631,12 @@
             <End Role="VEHICULO" EntitySet="VEHICULO" />
             <End Role="EMBARQUE" EntitySet="EMBARQUE" />
           </AssociationSet>
-          <AssociationSet Name="FK__ENTREGA__ID_EMBA__4336F4B9" Association="Self.FK__ENTREGA__ID_EMBA__4336F4B9">
+          <AssociationSet Name="FK__ENTREGA__ID_EMBA__5090EFD7" Association="Self.FK__ENTREGA__ID_EMBA__5090EFD7">
             <End Role="EMBARQUE" EntitySet="EMBARQUE" />
+            <End Role="ENTREGA" EntitySet="ENTREGA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ENTREGA__ID_VENT__51851410" Association="Self.FK__ENTREGA__ID_VENT__51851410">
+            <End Role="VENTA" EntitySet="VENTA" />
             <End Role="ENTREGA" EntitySet="ENTREGA" />
           </AssociationSet>
           <AssociationSet Name="FK__FORMULA__FK_INSU__297722B6" Association="Self.FK__FORMULA__FK_INSU__297722B6">
@@ -626,8 +700,7 @@
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HealthModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -769,6 +842,7 @@
           <Property Name="ID_VENTA" Type="Int32" Nullable="false" />
           <Property Name="ID_EMBARQUE" Type="Int32" Nullable="false" />
           <NavigationProperty Name="EMBARQUE" Relationship="Self.FK__ENTREGA__ID_EMBA__4336F4B9" FromRole="ENTREGA" ToRole="EMBARQUE" />
+          <NavigationProperty Name="VENTA" Relationship="HealthModel.FK__ENTREGA__ID_VENT__51851410" FromRole="ENTREGA" ToRole="VENTA" />
         </EntityType>
         <EntityType Name="FORMULA">
           <Key>
@@ -914,6 +988,7 @@
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="DIRECCION" Relationship="Self.FK__VENTA__FK_DIRECC__35DCF99B" FromRole="VENTA" ToRole="DIRECCION" />
           <NavigationProperty Name="ORDEN" Relationship="Self.FK__VENTA__FK_ORDEN__34E8D562" FromRole="VENTA" ToRole="ORDEN" />
+          <NavigationProperty Name="ENTREGA" Relationship="HealthModel.FK__ENTREGA__ID_VENT__51851410" FromRole="VENTA" ToRole="ENTREGA" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -1254,7 +1329,97 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <AssociationSet Name="FK__ENTREGA__ID_VENT__51851410" Association="HealthModel.FK__ENTREGA__ID_VENT__51851410">
+            <End Role="VENTA" EntitySet="VENTA" />
+            <End Role="ENTREGA" EntitySet="ENTREGA" />
+          </AssociationSet>
+          <FunctionImport Name="spEMBARQUECt" ReturnType="Collection(HealthModel.spEMBARQUECt_Result)" />
+          <FunctionImport Name="spEmbarqueEl">
+            <Parameter Name="IDEM" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEmbarqueIn">
+            <Parameter Name="IDEM" Mode="InOut" Type="Int32" />
+            <Parameter Name="IDR" Mode="In" Type="Int32" />
+            <Parameter Name="IDV" Mode="In" Type="Int32" />
+            <Parameter Name="FECHA" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="spEmbarqueUp">
+            <Parameter Name="IDEM" Mode="In" Type="Int32" />
+            <Parameter Name="IDR" Mode="In" Type="Int32" />
+            <Parameter Name="IDV" Mode="In" Type="Int32" />
+            <Parameter Name="FECHA" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="spENTREGAEl">
+            <Parameter Name="IDE" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spRUTAEd">
+            <Parameter Name="IDRUTA" Mode="In" Type="Int32" />
+            <Parameter Name="INICIO" Mode="In" Type="String" />
+            <Parameter Name="FIN" Mode="In" Type="String" />
+            <Parameter Name="DISTANCIA" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spRUTAEl">
+            <Parameter Name="IDE" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spRUTAIn">
+            <Parameter Name="IDR" Mode="InOut" Type="Int32" />
+            <Parameter Name="INICIO" Mode="In" Type="String" />
+            <Parameter Name="FIN" Mode="In" Type="String" />
+            <Parameter Name="DISTANCIA" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spVehiculoCt" ReturnType="Collection(HealthModel.spVehiculoCt_Result)">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spVEHICULOEd">
+            <Parameter Name="IDV" Mode="In" Type="Int32" />
+            <Parameter Name="NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="MARCA" Mode="In" Type="String" />
+            <Parameter Name="MODELO" Mode="In" Type="String" />
+            <Parameter Name="CAPACIDAD" Mode="In" Type="String" />
+            <Parameter Name="PESO" Mode="In" Type="String" />
+            <Parameter Name="CILINDROS" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spVEHICULOEl">
+            <Parameter Name="IDV" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spVEHICULOIn">
+            <Parameter Name="IDV" Mode="InOut" Type="Int32" />
+            <Parameter Name="NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="MARCA" Mode="In" Type="String" />
+            <Parameter Name="MODELO" Mode="In" Type="String" />
+            <Parameter Name="CAPACIDAD" Mode="In" Type="String" />
+            <Parameter Name="PESO" Mode="In" Type="String" />
+            <Parameter Name="CILINDROS" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
+        <Association Name="FK__ENTREGA__ID_VENT__51851410">
+          <End Type="HealthModel.VENTA" Role="VENTA" Multiplicity="1" />
+          <End Type="HealthModel.ENTREGA" Role="ENTREGA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ENTREGA">
+              <PropertyRef Name="ID_VENTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="spEMBARQUECt_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="DateTime" Name="FECHA" Nullable="true" />
+          <Property Type="String" Name="VEHICULO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="RUTA" Nullable="false" MaxLength="101" />
+        </ComplexType>
+        <ComplexType Name="spVehiculoCt_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="NOMBRE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MARCA" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MODELO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CAPACIDAD" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PESO" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="CILINDROS" Nullable="true" />
+          <Property Type="Int32" Name="ACTIVO" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1533,6 +1698,40 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="spEMBARQUECt" FunctionName="HealthModel.Store.spEMBARQUECt">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HealthModel.spEMBARQUECt_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="VEHICULO" ColumnName="VEHICULO" />
+                <ScalarProperty Name="RUTA" ColumnName="RUTA" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spEmbarqueEl" FunctionName="HealthModel.Store.spEmbarqueEl" />
+          <FunctionImportMapping FunctionImportName="spEmbarqueIn" FunctionName="HealthModel.Store.spEmbarqueIn" />
+          <FunctionImportMapping FunctionImportName="spEmbarqueUp" FunctionName="HealthModel.Store.spEmbarqueUp" />
+          <FunctionImportMapping FunctionImportName="spENTREGAEl" FunctionName="HealthModel.Store.spENTREGAEl" />
+          <FunctionImportMapping FunctionImportName="spRUTAEd" FunctionName="HealthModel.Store.spRUTAEd" />
+          <FunctionImportMapping FunctionImportName="spRUTAEl" FunctionName="HealthModel.Store.spRUTAEl" />
+          <FunctionImportMapping FunctionImportName="spRUTAIn" FunctionName="HealthModel.Store.spRUTAIn" />
+          <FunctionImportMapping FunctionImportName="spVehiculoCt" FunctionName="HealthModel.Store.spVehiculoCt">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HealthModel.spVehiculoCt_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="MARCA" ColumnName="MARCA" />
+                <ScalarProperty Name="MODELO" ColumnName="MODELO" />
+                <ScalarProperty Name="CAPACIDAD" ColumnName="CAPACIDAD" />
+                <ScalarProperty Name="PESO" ColumnName="PESO" />
+                <ScalarProperty Name="CILINDROS" ColumnName="CILINDROS" />
+                <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spVEHICULOEd" FunctionName="HealthModel.Store.spVEHICULOEd" />
+          <FunctionImportMapping FunctionImportName="spVEHICULOEl" FunctionName="HealthModel.Store.spVEHICULOEl" />
+          <FunctionImportMapping FunctionImportName="spVEHICULOIn" FunctionName="HealthModel.Store.spVEHICULOIn" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

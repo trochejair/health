@@ -14,6 +14,12 @@ namespace Web.HealthFoot.Models
     
     public partial class VENTA
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public VENTA()
+        {
+            this.ENTREGA = new HashSet<ENTREGA>();
+        }
+    
         public int ID { get; set; }
         public int FK_ORDEN { get; set; }
         public Nullable<System.DateTime> FECHA { get; set; }
@@ -22,5 +28,7 @@ namespace Web.HealthFoot.Models
     
         public virtual DIRECCION DIRECCION { get; set; }
         public virtual ORDEN ORDEN { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ENTREGA> ENTREGA { get; set; }
     }
 }

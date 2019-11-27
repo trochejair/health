@@ -10,15 +10,12 @@
 namespace Web.HealthFoot.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class ENTREGA
+    public partial class spEMBARQUECt_Result
     {
         public int ID { get; set; }
-        public int ID_VENTA { get; set; }
-        public int ID_EMBARQUE { get; set; }
-    
-        public virtual EMBARQUE EMBARQUE { get; set; }
-        public virtual VENTA VENTA { get; set; }
+        public Nullable<System.DateTime> FECHA { get; set; }
+        public string VEHICULO { get; set; }
+        public string RUTA { get; set; }
     }
 }

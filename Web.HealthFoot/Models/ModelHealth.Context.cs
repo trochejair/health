@@ -12,6 +12,8 @@ namespace Web.HealthFoot.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class HealthEntities : DbContext
     {
@@ -47,5 +49,193 @@ namespace Web.HealthFoot.Models
         public virtual DbSet<RUTA> RUTA { get; set; }
         public virtual DbSet<VEHICULO> VEHICULO { get; set; }
         public virtual DbSet<VENTA> VENTA { get; set; }
+    
+        public virtual ObjectResult<spEMBARQUECt_Result> spEMBARQUECt()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spEMBARQUECt_Result>("spEMBARQUECt");
+        }
+    
+        public virtual int spEmbarqueEl(Nullable<int> iDEM)
+        {
+            var iDEMParameter = iDEM.HasValue ?
+                new ObjectParameter("IDEM", iDEM) :
+                new ObjectParameter("IDEM", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEmbarqueEl", iDEMParameter);
+        }
+    
+        public virtual int spEmbarqueIn(ObjectParameter iDEM, Nullable<int> iDR, Nullable<int> iDV, Nullable<System.DateTime> fECHA)
+        {
+            var iDRParameter = iDR.HasValue ?
+                new ObjectParameter("IDR", iDR) :
+                new ObjectParameter("IDR", typeof(int));
+    
+            var iDVParameter = iDV.HasValue ?
+                new ObjectParameter("IDV", iDV) :
+                new ObjectParameter("IDV", typeof(int));
+    
+            var fECHAParameter = fECHA.HasValue ?
+                new ObjectParameter("FECHA", fECHA) :
+                new ObjectParameter("FECHA", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEmbarqueIn", iDEM, iDRParameter, iDVParameter, fECHAParameter);
+        }
+    
+        public virtual int spEmbarqueUp(Nullable<int> iDEM, Nullable<int> iDR, Nullable<int> iDV, Nullable<System.DateTime> fECHA)
+        {
+            var iDEMParameter = iDEM.HasValue ?
+                new ObjectParameter("IDEM", iDEM) :
+                new ObjectParameter("IDEM", typeof(int));
+    
+            var iDRParameter = iDR.HasValue ?
+                new ObjectParameter("IDR", iDR) :
+                new ObjectParameter("IDR", typeof(int));
+    
+            var iDVParameter = iDV.HasValue ?
+                new ObjectParameter("IDV", iDV) :
+                new ObjectParameter("IDV", typeof(int));
+    
+            var fECHAParameter = fECHA.HasValue ?
+                new ObjectParameter("FECHA", fECHA) :
+                new ObjectParameter("FECHA", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEmbarqueUp", iDEMParameter, iDRParameter, iDVParameter, fECHAParameter);
+        }
+    
+        public virtual int spENTREGAEl(Nullable<int> iDE)
+        {
+            var iDEParameter = iDE.HasValue ?
+                new ObjectParameter("IDE", iDE) :
+                new ObjectParameter("IDE", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spENTREGAEl", iDEParameter);
+        }
+    
+        public virtual int spRUTAEd(Nullable<int> iDRUTA, string iNICIO, string fIN, Nullable<int> dISTANCIA)
+        {
+            var iDRUTAParameter = iDRUTA.HasValue ?
+                new ObjectParameter("IDRUTA", iDRUTA) :
+                new ObjectParameter("IDRUTA", typeof(int));
+    
+            var iNICIOParameter = iNICIO != null ?
+                new ObjectParameter("INICIO", iNICIO) :
+                new ObjectParameter("INICIO", typeof(string));
+    
+            var fINParameter = fIN != null ?
+                new ObjectParameter("FIN", fIN) :
+                new ObjectParameter("FIN", typeof(string));
+    
+            var dISTANCIAParameter = dISTANCIA.HasValue ?
+                new ObjectParameter("DISTANCIA", dISTANCIA) :
+                new ObjectParameter("DISTANCIA", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spRUTAEd", iDRUTAParameter, iNICIOParameter, fINParameter, dISTANCIAParameter);
+        }
+    
+        public virtual int spRUTAEl(Nullable<int> iDE)
+        {
+            var iDEParameter = iDE.HasValue ?
+                new ObjectParameter("IDE", iDE) :
+                new ObjectParameter("IDE", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spRUTAEl", iDEParameter);
+        }
+    
+        public virtual int spRUTAIn(ObjectParameter iDR, string iNICIO, string fIN, Nullable<int> dISTANCIA)
+        {
+            var iNICIOParameter = iNICIO != null ?
+                new ObjectParameter("INICIO", iNICIO) :
+                new ObjectParameter("INICIO", typeof(string));
+    
+            var fINParameter = fIN != null ?
+                new ObjectParameter("FIN", fIN) :
+                new ObjectParameter("FIN", typeof(string));
+    
+            var dISTANCIAParameter = dISTANCIA.HasValue ?
+                new ObjectParameter("DISTANCIA", dISTANCIA) :
+                new ObjectParameter("DISTANCIA", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spRUTAIn", iDR, iNICIOParameter, fINParameter, dISTANCIAParameter);
+        }
+    
+        public virtual ObjectResult<spVehiculoCt_Result> spVehiculoCt(Nullable<int> iD)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spVehiculoCt_Result>("spVehiculoCt", iDParameter);
+        }
+    
+        public virtual int spVEHICULOEd(Nullable<int> iDV, string nOMBRE, string mARCA, string mODELO, string cAPACIDAD, string pESO, Nullable<int> cILINDROS)
+        {
+            var iDVParameter = iDV.HasValue ?
+                new ObjectParameter("IDV", iDV) :
+                new ObjectParameter("IDV", typeof(int));
+    
+            var nOMBREParameter = nOMBRE != null ?
+                new ObjectParameter("NOMBRE", nOMBRE) :
+                new ObjectParameter("NOMBRE", typeof(string));
+    
+            var mARCAParameter = mARCA != null ?
+                new ObjectParameter("MARCA", mARCA) :
+                new ObjectParameter("MARCA", typeof(string));
+    
+            var mODELOParameter = mODELO != null ?
+                new ObjectParameter("MODELO", mODELO) :
+                new ObjectParameter("MODELO", typeof(string));
+    
+            var cAPACIDADParameter = cAPACIDAD != null ?
+                new ObjectParameter("CAPACIDAD", cAPACIDAD) :
+                new ObjectParameter("CAPACIDAD", typeof(string));
+    
+            var pESOParameter = pESO != null ?
+                new ObjectParameter("PESO", pESO) :
+                new ObjectParameter("PESO", typeof(string));
+    
+            var cILINDROSParameter = cILINDROS.HasValue ?
+                new ObjectParameter("CILINDROS", cILINDROS) :
+                new ObjectParameter("CILINDROS", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spVEHICULOEd", iDVParameter, nOMBREParameter, mARCAParameter, mODELOParameter, cAPACIDADParameter, pESOParameter, cILINDROSParameter);
+        }
+    
+        public virtual int spVEHICULOEl(Nullable<int> iDV)
+        {
+            var iDVParameter = iDV.HasValue ?
+                new ObjectParameter("IDV", iDV) :
+                new ObjectParameter("IDV", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spVEHICULOEl", iDVParameter);
+        }
+    
+        public virtual int spVEHICULOIn(ObjectParameter iDV, string nOMBRE, string mARCA, string mODELO, string cAPACIDAD, string pESO, Nullable<int> cILINDROS)
+        {
+            var nOMBREParameter = nOMBRE != null ?
+                new ObjectParameter("NOMBRE", nOMBRE) :
+                new ObjectParameter("NOMBRE", typeof(string));
+    
+            var mARCAParameter = mARCA != null ?
+                new ObjectParameter("MARCA", mARCA) :
+                new ObjectParameter("MARCA", typeof(string));
+    
+            var mODELOParameter = mODELO != null ?
+                new ObjectParameter("MODELO", mODELO) :
+                new ObjectParameter("MODELO", typeof(string));
+    
+            var cAPACIDADParameter = cAPACIDAD != null ?
+                new ObjectParameter("CAPACIDAD", cAPACIDAD) :
+                new ObjectParameter("CAPACIDAD", typeof(string));
+    
+            var pESOParameter = pESO != null ?
+                new ObjectParameter("PESO", pESO) :
+                new ObjectParameter("PESO", typeof(string));
+    
+            var cILINDROSParameter = cILINDROS.HasValue ?
+                new ObjectParameter("CILINDROS", cILINDROS) :
+                new ObjectParameter("CILINDROS", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spVEHICULOIn", iDV, nOMBREParameter, mARCAParameter, mODELOParameter, cAPACIDADParameter, pESOParameter, cILINDROSParameter);
+        }
     }
 }

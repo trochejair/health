@@ -221,5 +221,55 @@ namespace Web.HealthFoot.Controllers
                 message
             });
         }
+
+        public ActionResult agregarProd(int id)
+        {
+            HealthEntities db = new HealthEntities();
+            string username = User.Identity.GetUserName();
+            var cliente = db.CLIENTE.Where(d => d.EMAIL == username).First();
+            int idcliente = cliente.ID;
+            ORDEN orden = null;
+            try
+            {
+                 orden = db.ORDEN.Where(d => d.ACTIVO == 1).Where(d => d.FK_CLIENTE == idcliente).First();
+            }
+            catch
+            {
+                orden = null;
+            }
+            
+            
+            if (orden == null)
+            {
+                PRODUCTO pro = db.PRODUCTO.Find(id);
+                orden = new ORDEN();
+                orden.FECHA = System.DateTime.Now;
+                orden.FK_CLIENTE = idcliente;
+                orden.ESTATUS = "En compra";
+                orden.ACTIVO = 1;
+                orden.CREATED_AT = System.DateTime.Now;
+                db.ORDEN.Add(orden);
+                db.SaveChanges();
+                DETALLE_ORDEN detalle = new DETALLE_ORDEN();
+                detalle.CANTIDAD = 1;
+                detalle.FK_PRODUCTO = pro.ID;
+                detalle.FK_ORDEN = orden.ID;
+                detalle.SUBTOTAL = pro.PRECIO;
+                db.DETALLE_ORDEN.Add(detalle);
+                db.SaveChanges();
+                pro.CANTIDAD = pro.CANTIDAD - 1;
+                db.Entry(pro).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                DETALLE_ORDEN detalle = db.DETALLE_ORDEN.Where(d => d.FK_ORDEN==orden.ID).Where(d=>d.FK_PRODUCTO==id).First();
+                return RedirectToAction("Agregar","Cart",new { id= detalle.ID});
+                
+            }
+
+            
+        }
     }
 }

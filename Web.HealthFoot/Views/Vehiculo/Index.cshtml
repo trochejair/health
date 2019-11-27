@@ -1,0 +1,131 @@
+﻿@model IEnumerable<Web.HealthFoot.Models.VEHICULO>
+
+@{
+    ViewBag.Title = "Vehículo";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section botones{
+    <a class="btn btn-primary btn-sm" href="@Url.Action("Create","Vehiculo")"><i class="fa fa-plus"></i> Agregar</a>
+}
+
+<table class="table datatable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NOMBRE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MARCA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MODELO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CAPACIDAD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PESO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CILINDROS)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NOMBRE)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MARCA)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MODELO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CAPACIDAD) cm3
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PESO) Kg
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CILINDROS)
+                </td>
+                <td width="10%">
+                    <a class="btn btn-success btn-sm details" href="#" data-id="@item.ID"><i class="fa fa-eye"></i></a>
+                    <a class="btn btn-primary btn-sm" href="@Url.Action("Edit","Vehiculo",new { id = item.ID})"><i class="fa fa-edit"></i></a>
+                   
+                </td>
+                <td width="2px">
+                    @using (Html.BeginForm("Delete", "Vehiculo", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => item.ID, new { name = "Id" })
+                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="vehiculoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input class="form-control" type="text" id="nombre" readonly />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $('.details').on('click', function (e) {
+            console.log('Hola');
+            e.preventDefault();
+
+            var id = $(this).attr('data-id');
+
+            $.ajax({
+                url: "@Url.Action("Details","Vehiculo")",
+                method: "POST",
+                dataType: "json",
+                data: {id:id},
+                success: function (data) {
+                    console.log(data);
+
+                    $('#nombre').val(data.responseObject.NOMBRE);
+
+                    $('#vehiculoModal').modal('show');
+                },
+                error: function (jqXHR, status, error) {
+                    console.log('Error: ' + jqXHR.status);
+                },
+                complete: function (jqXHR, status) {
+
+                }
+            });
+
+        });
+    </script>
+}

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Web.HealthFoot.Models.RUTA>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section botones{
+    <a class="btn btn-primary btn-sm" href="@Url.Action("Create")">
+        <i class="fa fa-plus"> Agregar</i>
+    </a>
+}
+
+
+<table class="table datatable">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.INICIO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DISTANCIA)
+            </th>
+            <th></th>
+
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.INICIO)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FIN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DISTANCIA) Km
+                </td>
+                <td width="10%">
+                    @*<a class="btn btn-sm btn-success" href="#"><i class="fa fa-eye"></i></a>*@
+                    <a class="btn btn-sm btn-primary" href="@Url.Action("Edit",new { id= item.ID})"><i class="fa fa-edit"></i></a>
+                </td>
+                <td width="2px">
+                    @using (Html.BeginForm("Delete","Ruta",FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m=>item.ID)
+                        <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,94 @@
+﻿@model Web.HealthFoot.Models.EMBARQUE
+@{
+    ViewBag.Title = "Entrega";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="form-group">
+            <label>Ruta: @Model.RUTA.INICIO - @Model.RUTA.FIN</label>
+            <hr />
+            <label>Vehículo: </label> @Model.VEHICULO.NOMBRE
+            <hr />
+            <label>Fecha: </label> @Model.FECHA
+        </div>
+    </div>
+</div>
+<h4 class="header-title">Ventas</h4>
+<table class="table seleccionar">
+    <thead>
+        <tr>
+            <td>Títular</td>
+            <td>Dirección</td>
+            <td></td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var item in ViewBag.ventas)
+        {
+            <tr>
+                <td>@item.ORDEN.CLIENTE.NOMBRE @item.ORDEN.CLIENTE.APELLIDOS</td>
+                <td>@item.DIRECCION.CALLE, @item.DIRECCION.COLONIA, @item.DIRECCION.MUNICIPIO, @item.DIRECCION.CP </td>
+                <td>
+                    @using (Html.BeginForm("Add", "Embarque", FormMethod.Post))
+                    {
+                        <input type="hidden" name="IDE" value="@Model.ID" />
+                        <input type="hidden" name="IDV" value="@item.ID" />
+
+                        @Html.AntiForgeryToken()
+                        <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-plus"></i> Agregar</button>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<h4 class="header-title">Entregas</h4>
+
+<table class="table seleccionar">
+    <thead>
+        <tr>
+            <td>Títular</td>
+            <td>Dirección</td>
+            <td></td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in ViewBag.entregas)
+        {
+            <tr>
+                <td>@item.VENTA.ORDEN.CLIENTE.NOMBRE @item.VENTA.ORDEN.CLIENTE.APELLIDOS</td>
+                <td>@item.VENTA.DIRECCION.CALLE, @item.VENTA.DIRECCION.COLONIA, @item.VENTA.DIRECCION.MUNICIPIO, @item.VENTA.DIRECCION.CP </td>
+                <td>
+                    @using (Html.BeginForm("Remove", "Embarque", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@item.ID" />
+                        <input type="hidden" name="ide" value="@Model.ID" />
+                        <button class="btn btn-danger btn-sm" type="submit"><i class="fa fa-trash"></i> Borrar</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts{
+    <script type="text/javascript">
+        $('.seleccionar tbody').on('click', 'tr', function () {
+            if ($(this).hasClass('table-active')) {
+                $(this).removeClass('table-active');
+            } else {
+                $('tr.table-active').removeClass('table-active');
+                $(this).addClass('table-active');
+            }
+        });
+    </script>
+    }

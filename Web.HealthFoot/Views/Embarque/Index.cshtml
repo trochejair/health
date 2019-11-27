@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Web.HealthFoot.Models.EMBARQUE>
+
+@{
+    ViewBag.Title = "Embarques";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section botones{
+    <a class="btn btn-primary btn-sm" href="@Url.Action("Create")"><i class="fa fa-plus"> Agregar</i></a>
+}
+<table class="table datatable">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RUTAS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VEHICULOS)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FECHA)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RUTAS)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VEHICULOS)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FECHA)
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-primary" href="@Url.Action("Edit",new { id= item.ID})"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-sm btn-info" href="@Url.Action("Entrega",new { id=item.ID})"><i class="fa fa-plus"></i></a>
+                    <a class="btn btn-sm btn-danger" href=""><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

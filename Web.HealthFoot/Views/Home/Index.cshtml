@@ -91,7 +91,7 @@
                                                 </div>
                                             </div>
                                             <div class="productCaption clearfix">
-                                                <a href="single-product.html">
+                                                <a href="@Url.Action("ProductDetail","Home",new { id = item.ID })">
                                                     <h5>@Html.DisplayFor(m => item.NOMBRE)</h5>
                                                 </a>
                                                 <h3>$ @Html.DisplayFor(m => item.PRECIO)</h3>
@@ -138,7 +138,7 @@
                                                 </div>
                                             </div>
                                             <div class="productCaption clearfix">
-                                                <a href="single-product.html">
+                                                <a href="@Url.Action("ProductDetail","Home",new { id = item.ID })">
                                                     <h5>@Html.DisplayFor(m => item.NOMBRE)</h5>
                                                 </a>
                                                 <h3>$ @Html.DisplayFor(m => item.PRECIO)</h3>
@@ -185,7 +185,7 @@
                                                 </div>
                                             </div>
                                             <div class="productCaption clearfix">
-                                                <a href="single-product.html">
+                                                <a href="@Url.Action("ProductDetail","Home",new { id = item.ID })">
                                                     <h5>@Html.DisplayFor(m => item.NOMBRE)</h5>
                                                 </a>
                                                 <h3>$ @Html.DisplayFor(m => item.PRECIO)</h3>

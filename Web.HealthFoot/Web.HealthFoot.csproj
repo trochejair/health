@@ -313,6 +313,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Cart\AddCart.js" />
+    <Content Include="Content\Images\add_carro.png" />
     <Content Include="Content\Images\chocolatespicard.jpg" />
     <Content Include="Content\Images\diabettxcrema.jpg" />
     <Content Include="Content\Images\diabettxplus.png" />

@@ -16,7 +16,7 @@
                 confirmButtonText: 'OK'
             })
         </script>
-        }
+    }
 }
 <body class="body-wrapper version1">
     <div class="main-wrapper">
@@ -31,89 +31,105 @@
                 </div>
             </div>
         </section>
-
-
+        
         <section class="mainContent clearfix cartListWrapper">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="cartListInner">
-                            <form action="#">
+            @{
+                if (@Model.Sum(x => x.SUBTOTAL) > 0)
+                {
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="cartListInner">
+                                    <form action="#">
 
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center">Producto</th>
-                                                <th class="text-center">Nombre del Producto</th>
-                                                <th class="text-center">Precio</th>
-                                                <th class="text-center">Cantidad</th>
-                                                <th class="text-center">Subtotal</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <form>
-                                                @foreach (var item in Model)
-                                                {
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
                                                     <tr>
-                                                        <td>
-                                                            @foreach (var img in item.PRODUCTO.IMAGEN_PRODUCTO)
-                                                            {
-                                                                <img src="~/Content/ImagesProduct/@img.IMAGEN" width="60" />
-                                                                break;
-                                                            }
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.PRODUCTO.NOMBRE)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.PRODUCTO.PRECIO)
-                                                        </td>
-                                                        <td>
-                                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                                                <a href="@Url.Action("Quitar", "Cart", new { id = item.ID})" class="btn btn-primary">-</a>
-                                                                <div class="form-control">
-                                                                    @Html.DisplayFor(modelItem => item.CANTIDAD)
-                                                                </div>
-                                                                <a href="@Url.Action("Agregar", "Cart", new { id = item.ID})" class="btn btn-primary">+</a>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                             @Html.DisplayFor(modelItem => item.SUBTOTAL)</td>
-                                                        <td>
-                                                          <a href="@Url.Action("Eliminar", "Cart", new { id = item.ID})" style="color: rgb(71,186,193)"><i class=" fa-2x far fa-trash-alt"></i></a>
-                                                        </td>
+                                                        <th class="text-center">Producto</th>
+                                                        <th class="text-center">Nombre del Producto</th>
+                                                        <th class="text-center">Precio</th>
+                                                        <th class="text-center">Cantidad</th>
+                                                        <th class="text-center">Subtotal</th>
+                                                        <th></th>
                                                     </tr>
+                                                </thead>
+                                                <tbody>
 
-                                                }
-                                            </form>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                @{
-                                    <div class="row totalAmountArea">
-                                        <div class="col-sm-4 ml-sm-auto">
+                                                    <form>
+                                                        @foreach (var item in Model)
+                                                        {
+                                                            <tr>
+                                                                <td>
+                                                                    @foreach (var img in item.PRODUCTO.IMAGEN_PRODUCTO)
+                                                                    {
+                                                                        <img src="~/Content/ImagesProduct/@img.IMAGEN" width="60" />
+                                                                        break;
+                                                                    }
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.PRODUCTO.NOMBRE)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.PRODUCTO.PRECIO)
+                                                                </td>
+                                                                <td>
+                                                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                                                        <a href="@Url.Action("Quitar", "Cart", new { id = item.ID })" class="btn btn-primary">-</a>
+                                                                        <div class="form-control">
+                                                                            @Html.DisplayFor(modelItem => item.CANTIDAD)
+                                                                        </div>
+                                                                        <a href="@Url.Action("Agregar", "Cart", new { id = item.ID })" class="btn btn-primary">+</a>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.SUBTOTAL)
+                                                                </td>
+                                                                <td>
+                                                                    <a href="@Url.Action("Eliminar", "Cart", new { id = item.ID })" style="color: rgb(71,186,193)"><i class=" fa-2x far fa-trash-alt"></i></a>
+                                                                </td>
+                                                            </tr>
 
-                                            <ul class="list-unstyled">
-                                                <li>Subtotal <span>$ @((Model.Sum(x => x.SUBTOTAL)) - Model.Sum(x => x.SUBTOTAL) * 0.16) </span></li>
-                                                <li>IVA<span>$ @(Model.Sum(x => x.SUBTOTAL) * .16) </span></li>
-                                                <li>Total <span class="grandTotal">$ @Model.Sum(x => x.SUBTOTAL)</span></li>
-                                            </ul>
+                                                        }
+                                                    </form>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                    </div>
-                                }
-                                <div class="checkBtnArea">
-                                    <a href="@Url.Action("Entrega","Cart")" class="btn btn-primary">Comprar<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                        @{
+                                            <div class="row totalAmountArea">
+                                                <div class="col-sm-4 ml-sm-auto">
+
+                                                    <ul class="list-unstyled">
+                                                        <li>Subtotal <span>$ @((Model.Sum(x => x.SUBTOTAL)) - Model.Sum(x => x.SUBTOTAL) * 0.16) </span></li>
+                                                        <li>IVA<span>$ @(Model.Sum(x => x.SUBTOTAL) * .16) </span></li>
+                                                        <li>Total <span class="grandTotal">$ @Model.Sum(x => x.SUBTOTAL)</span></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        }
+                                        <div class="checkBtnArea">
+                                            <a href="@Url.Action("Entrega", "Cart")" class="btn btn-primary">Comprar<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                        </div>
+                                    </form>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
+                }
+                else
+                {
+                    <div class="text-center">
+                        <img src="/Content/Images/add_carro.png" />
+                        <br />
+                        <p>Al paracer no tienes productos en el carrito</p>
 
+                        <p>¡Empieza a comprar ahora!</p>
+                        <a type="button" href="@Url.Action("Product","Home")" class="btn btn btn-primary">¡Comprar!</a>
+                    </div>
+                }
+            }
+        </section>
+           
     </div>
 
 </body>

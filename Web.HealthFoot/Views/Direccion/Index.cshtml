@@ -11,8 +11,11 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
+<div class="col-12 text-center">
+    <a type="button" href="@Url.Action("Create","Direccion")" class="btn btn btn-primary">Agregar nueva dirección</a>
+</div>
 @foreach (var item in Model) {
-<div class="card m-5" style="border:solid 1px rgba(128, 128, 128, 0.5)!important; border-radius: 5px;">
+<div class="card m-4" style="border:solid 1px rgba(128, 128, 128, 0.5)!important; border-radius: 5px;">
     <div class="card-body">
         @Html.DisplayFor(modelItem => item.ESTADO)
 
@@ -27,10 +30,15 @@
         @Html.DisplayFor(modelItem => item.CP)
 
         @Html.DisplayFor(modelItem => item.NUMERO)
-
-
+        <div class="row">
+            <div class="col">
+                <a href="@Url.Action("Delete", "Direccion", new { id = item.ID })" class="float-right" style="color: cadetblue">Eliminar</a>
+            </div>
+            <div class="col">
+                <a href="@Url.Action("Edit", "Direccion", new { id = item.ID })" class="float-right" style="color: cadetblue">Editar</a>
+            </div>
+        </div>
     </div>
-    
 </div>
 
 }

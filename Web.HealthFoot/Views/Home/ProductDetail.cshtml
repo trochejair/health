@@ -27,8 +27,8 @@
                                 <div class="col-12">
                                     @foreach (var img in Model.IMAGEN_PRODUCTO)
                                     {
-                                      
-                                            <img src="/Content/ImagesProduct/@img.IMAGEN" class="w-100" alt="products-img">
+
+                                        <img src="/Content/ImagesProduct/@img.IMAGEN" class="w-100" alt="products-img">
                                         break;
                                     }
                                 </div>
@@ -55,27 +55,16 @@
                         <!--En este caso es individual, se accede directamente a la propiedad-->
                         <h2>@Html.DisplayFor(m => Model.NOMBRE)</h2>
                         <h3>$ @Html.DisplayFor(m => Model.PRECIO)</h3>
-                        <h4>@Html.DisplayFor(m => Model.DESCRIPCION)</h4>
+                        <p>@Html.DisplayFor(m => Model.DESCRIPCION)</p>
                         <p class="mb-1">Disponibles:</p>
-
                         <div class="row">
                             <div class="col-md-6">
                                 <input type="text" class="form-control mr-0" id="cantidadDisp" placeholder="@Model.CANTIDAD" readonly>
                             </div>
-                            <div class="col-md-6">
-                                <span class="quick-drop ">
-                                    <select name="guiest_id4" id="guiest_id4" class="select-drop form-control">
-                                        <option value="0">Cantidad</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                    </select>
-                                </span>
-                            </div>
                         </div>
 
                         <div class="btn-area">
-                            <a href="#" class="btn btn-primary btn-default">Agregar al carrito </a>
+                            <a href="@Url.Action("Agregar","Cart", new { id=Model.ID})" class="btn btn-primary btn-default">Agregar al carrito </a>
                         </div>
                     </div>
                 </div>
@@ -84,77 +73,46 @@
         <div class="page-header">
             <h4 class="text-center">Productos Relacionados</h4>
         </div>
-        <div class="row productsContent">
+        
+        <div class="container">
+            @if (ViewBag.Products != null)
+            {
+                <div class="row">
+                    @foreach (var item in ViewBag.Products)
+                    {
 
-            <div class="col-md-3 col-12 ">
-                <div class="productBox">
-                    <div class="productImage clearfix">
-                        <img src="~/Content/Images/p1.jpg" alt="products-img">
-                        <div class="productMasking">
-                            <ul class="list-inline btn-group" role="group">
-                                <li><a href="cart-page.html" class="btn btn-default"><i class="fa fa-shopping-cart"></i></a></li>
-                                <li><a class="btn btn-default" data-toggle="modal" href="-2.html"><i class="fa fa-eye"></i></a></li>
-                            </ul>
+                        <div class="col-lg-3 col-md-4 ">
+                            <div class="productBox">
+                                <div class="productImage clearfix">
+
+                                    @foreach (var img in item.IMAGEN_PRODUCTO)
+                                    {
+                                        <div class="d-flex justify-content-center">
+                                            <img src="~/Content/ImagesProduct/@img.IMAGEN" class="mx-auto" height="300" style="width:auto" alt="products-img">
+
+                                        </div>
+                                        break;
+                                    }
+
+                                    <div class="productMasking">
+                                        <ul class="list-inline btn-group" role="group">
+                                            <li><a class="btn btn-default btn-add-cart" data-product="@item.ID" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="¡Agregado con éxito al carrito!"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li><a class="btn btn-default" href="@Url.Action("ProductDetail","Home",new { id = item.ID })"><i class="fa fa-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="productCaption clearfix">
+                                    <a href="single-product.html">
+                                        <h5>@item.NOMBRE</h5>
+                                    </a>
+                                    <h3>$ @item.PRECIO</h3>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="productCaption clearfix">
-                        <h5>Nike Sportswear</h5>
-                        <h3>$199</h3>
-                    </div>
+                    }
                 </div>
-            </div>
-            <div class="col-md-3 col-12 ">
-                <div class="productBox">
-                    <div class="productImage clearfix">
-                        <img src="~/Content/Images/p2.jpg" alt="products-img">
-                        <div class="productMasking">
-                            <ul class="list-inline btn-group" role="group">
-                                <li><a href="cart-page.html" class="btn btn-default"><i class="fa fa-shopping-cart"></i></a></li>
-                                <li><a class="btn btn-default" data-toggle="modal" href="-2.html"><i class="fa fa-eye"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="productCaption clearfix">
-                        <h5>Dip Dyed Sweater</h5>
-                        <h3>$249</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-12 ">
-                <div class="productBox">
-                    <div class="productImage clearfix">
-                        <img src="~/Content/Images/p3.jpg" alt="products-img">
-                        <div class="productMasking">
-                            <ul class="list-inline btn-group" role="group">
-                                <li><a href="cart-page.html" class="btn btn-default"><i class="fa fa-shopping-cart"></i></a></li>
-                                <li><a class="btn btn-default" data-toggle="modal" href="-2.html"><i class="fa fa-eye"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="productCaption clearfix">
-                        <h5>Scarf Ring Corner</h5>
-                        <h3>$179</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-12 ">
-                <div class="productBox">
-                    <div class="productImage clearfix">
-                        <img src="~/Content/Images/p4.jpg" alt="products-img">
-                        <div class="productMasking">
-                            <ul class="list-inline btn-group" role="group">
-                                <li><a href="cart-page.html" class="btn btn-default"><i class="fa fa-shopping-cart"></i></a></li>
-                                <li><a class="btn btn-default" data-toggle="modal" href="-2.html"><i class="fa fa-eye"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="productCaption clearfix">
-                        <h5>Sun Buddies</h5>
-                        <h3>$149</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
+            }
+        </div>      
     </div>
 </section>
 

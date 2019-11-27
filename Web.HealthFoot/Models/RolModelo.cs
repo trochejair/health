@@ -26,6 +26,18 @@ namespace Web.HealthFoot.Models
 
         }
 
+        public List<EMPLEADO> findEmp(int id) {
+
+            using (var db = new HealthEntities())
+            {
+
+                List<EMPLEADO> emp = db.EMPLEADO.Where(e => e.ROL == id).ToList();
+                return emp;
+
+            }
+
+        }
+
         public AspNetRoles find(String Id)
         {
 
@@ -130,6 +142,13 @@ namespace Web.HealthFoot.Models
 
                     var rol = db.AspNetRoles.Find(id);
                     db.AspNetRoles.Remove(rol);
+
+                    foreach (var emp in findEmp(Convert.ToInt32(id))) {
+
+                        emp.ROL = null;
+
+                    }
+
                     db.SaveChanges();
 
                     return true;

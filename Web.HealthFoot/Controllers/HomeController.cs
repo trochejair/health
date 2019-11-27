@@ -45,6 +45,11 @@ namespace Web.HealthFoot.Controllers
         {
             var db = new HealthEntities();
             var Producto = db.PRODUCTO.Find(Id);
+
+
+            ViewBag.Products = db.PRODUCTO.Where(p => p.ACTIVO == 1)
+                .Where(p=>p.FK_CATEGORIA==Producto.FK_CATEGORIA).Take(4)
+                .ToArray();
             return View(Producto);
                           
         }

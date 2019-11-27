@@ -164,6 +164,8 @@
     <Compile Include="App_Start\RouteConfig2.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AspNetRolesController.cs" />
+    <Compile Include="Controllers\EmbarqueController.cs" />
     <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\DireccionController.cs" />
@@ -171,10 +173,12 @@
     <Compile Include="Controllers\InsumosController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\EmpleadoController.cs" />
+    <Compile Include="Controllers\RutaController.cs" />
     <Compile Include="Controllers\UserId.cs" />
     <Compile Include="Controllers\OrdenesInsumosController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
+    <Compile Include="Controllers\VehiculoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -724,6 +728,13 @@
     <Content Include="Views\Direccion\Edit.cshtml" />
     <Content Include="Views\Direccion\Index.cshtml" />
     <Content Include="Views\Cart\Entrega.cshtml" />
+    <Content Include="Views\Embarque\Create.cshtml" />
+    <Content Include="Views\Embarque\Entrega.cshtml" />
+    <Content Include="Views\Embarque\Index.cshtml" />
+    <Content Include="Views\Ruta\Create.cshtml" />
+    <Content Include="Views\Ruta\Index.cshtml" />
+    <Content Include="Views\Vehiculo\Create.cshtml" />
+    <Content Include="Views\Vehiculo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

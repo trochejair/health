@@ -227,7 +227,7 @@
 
                     <div class="col-sm-10">
 
-                        @Html.DropDownListFor(e => e.ROL, new SelectList(ViewBag.Roles, "Id", "Name"))
+                        @Html.DropDownListFor(e => e.ROL, new SelectList(ViewBag.Roles,"Id", "Name"))
                         @Html.ValidationMessageFor(e => e.ROL, "", new { @class = "text-danger" })
 
                         <!--

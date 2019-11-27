@@ -5,42 +5,60 @@
     Layout = "~/Views/Shared/_LayoutWeb.cshtml";
 }
 
-<h2>Tus direcciones</h2>
+<div class="row m-0" >
+    <div class="col-md-12 text-center mt-4">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+        <h2>Tus direcciones</h2>
 
-<div class="col-12 text-center">
-    <a type="button" href="@Url.Action("Create","Direccion")" class="btn btn btn-primary">Agregar nueva dirección</a>
-</div>
-@foreach (var item in Model) {
-<div class="card m-4" style="border:solid 1px rgba(128, 128, 128, 0.5)!important; border-radius: 5px;">
-    <div class="card-body">
-        @Html.DisplayFor(modelItem => item.ESTADO)
+        <a type="button" href="@Url.Action("Create","Direccion")" class="mt-2 btn btn-primary">Agregar nueva dirección</a>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 mx-auto mt-2">
+            <div class="card" style="border:solid 1px rgba(128, 128, 128, 0.5)!important; border-radius: 5px;">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.DisplayFor(modelItem => item.ESTADO)
 
-        @Html.DisplayFor(modelItem => item.CIUDAD)
+                            @Html.DisplayFor(modelItem => item.CIUDAD)
 
-        @Html.DisplayFor(modelItem => item.MUNICIPIO)
+                            @Html.DisplayFor(modelItem => item.MUNICIPIO)
 
-        @Html.DisplayFor(modelItem => item.COLONIA)
+                            @Html.DisplayFor(modelItem => item.COLONIA)
 
-        @Html.DisplayFor(modelItem => item.CALLE)
+                            @Html.DisplayFor(modelItem => item.CALLE)
 
-        @Html.DisplayFor(modelItem => item.CP)
+                            @Html.DisplayFor(modelItem => item.CP)
 
-        @Html.DisplayFor(modelItem => item.NUMERO)
-        <div class="row">
-            <div class="col">
-                <a href="@Url.Action("Delete", "Direccion", new { id = item.ID })" class="float-right" style="color: cadetblue">Eliminar</a>
-            </div>
-            <div class="col">
-                <a href="@Url.Action("Edit", "Direccion", new { id = item.ID })" class="float-right" style="color: cadetblue">Editar</a>
+                            @Html.DisplayFor(modelItem => item.NUMERO)
+                        </div>
+                        <div class="col-md-3">
+                            <a href="@Url.Action("Delete", "Direccion", new { id = item.ID })" class="float-right" style="color: cadetblue">Eliminar</a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="@Url.Action("Edit", "Direccion", new { id = item.ID })" class="float-right" style="color: cadetblue">Editar</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    }
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
 </div>
-
-}
 
 

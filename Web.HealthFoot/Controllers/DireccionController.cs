@@ -16,6 +16,7 @@ namespace Web.HealthFoot.Controllers
         private HealthEntities db = new HealthEntities();
 
         // GET: Direccion
+        [Authorize]
         public ActionResult Index()
         {
             string username = User.Identity.GetUserName();
@@ -26,6 +27,7 @@ namespace Web.HealthFoot.Controllers
         }
 
         // GET: Direccion/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -44,6 +46,7 @@ namespace Web.HealthFoot.Controllers
         }
 
         // GET: Direccion/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.FK_CLIENTE = new SelectList(db.CLIENTE, "ID", "NOMBRE");
@@ -76,6 +79,7 @@ namespace Web.HealthFoot.Controllers
         }
 
         // GET: Direccion/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -99,10 +103,17 @@ namespace Web.HealthFoot.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,ESTADO,CIUDAD,MUNICIPIO,COLONIA,CALLE,CP,NUMERO,ACTIVO,CREATED_AT,FK_CLIENTE")] DIRECCION dIRECCION)
+        public ActionResult Edit([Bind(Include = "ID,ESTADO,CIUDAD,MUNICIPIO,COLONIA,CALLE,CP,NUMERO")] DIRECCION dIRECCION)
         {
             if (ModelState.IsValid)
             {
+                var emailAuth = User.Identity.GetUserName();
+                dIRECCION.CREATED_AT = System.DateTime.Now;
+
+                var cliente = db.CLIENTE.Where(client => client.EMAIL == emailAuth).First();
+
+                dIRECCION.FK_CLIENTE = cliente.ID;
+                dIRECCION.ACTIVO = 1;
                 db.Entry(dIRECCION).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -127,9 +138,11 @@ namespace Web.HealthFoot.Controllers
 
                 return RedirectToAction("Index");
             }
-            return View(dIRECCION);
+            db.DIRECCION.Remove(dIRECCION);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
-
+/*
         // POST: Direccion/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -140,7 +153,7 @@ namespace Web.HealthFoot.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+*/
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -233,9 +233,14 @@ namespace Web.HealthFoot.Controllers
             });
         }
 
-        public ActionResult Details()
+        public ActionResult Details(int id)
         {
-            return View();
+            using (var db = new HealthEntities())
+            {
+                var producto = db.PRODUCTO.Find(id);
+
+                return View(producto);
+            }
         }
         [HttpPost]
         public ActionResult Images(int id)
@@ -243,7 +248,7 @@ namespace Web.HealthFoot.Controllers
             var success = false;
             var message = "";
 
-
+             
             bool isSavedSuccessfully = true;
             string fName = "";
             try
@@ -340,6 +345,32 @@ namespace Web.HealthFoot.Controllers
         {
             var success = false;
             var message = "";
+            var count = formCollection.Count;
+            var allKey = formCollection.AllKeys;
+            using (HealthEntities db =  new HealthEntities()) {
+                for (var x = 0; x < count; x++)
+                {
+                    string key = allKey[x];
+                    var name = formCollection[key];
+                    string Insumoid = key.Replace("arrayInsumos[", "")
+                                   .Replace("][name]", "");
+                    var quantity = formCollection["arrayInsumos[" + Insumoid + "]" + "[quantity]"];
+                    var unit = formCollection["arrayInsumos[" + Insumoid + "]" + "[unit]"];
+
+                    x = x + 2;
+
+                    FORMULA formula = new FORMULA
+                    {
+                        FK_PRODUCTO = id,
+                        FK_INSUMO = Int32.Parse(name),
+                        UNIDAD_MEDIDA= unit,
+                        CANTIDAD = Int32.Parse(quantity),
+                        CREATED_AT = DateTime.Now
+                    };
+                    db.FORMULA.Add(formula);
+                }
+
+            }
 
             return Json(new
             {

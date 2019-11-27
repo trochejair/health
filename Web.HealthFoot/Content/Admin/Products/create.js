@@ -20,6 +20,13 @@ $(document).ready(function () {
 
     $(document).on('submit', '#form-upsert', function (e) {
         e.preventDefault();
+        var inputsFormula = $('input[formula="true"]');
+        var dataFormula = {};
+        console.log(inputsFormula);
+        for (var i = 0; i < inputsFormula.length; i++) {
+            dataFormula[$(inputsFormula[i]).attr('name')] = $(inputsFormula[i]).val();
+        }
+        console.log(dataFormula);
         if (dropzoneImages.files.length > 0 ) {
             var data = $('#form-upsert').serialize();
             console.log(data);
@@ -31,8 +38,14 @@ $(document).ready(function () {
                 success: function (response) {
                     console.log(response)
                     if (response.success) {
-                      
-
+                       
+                        console.log(dataFormula);
+                        $.ajax({
+                            url: '/Productos/NewFormula/' + response.data,
+                            method: 'post',
+                            data: dataFormula,
+                            success: function (response) { }
+                        });
 
                         dropzoneImages.options.url = $("#inp-url-image").val() +"/"+ response.data; 
                         dropzoneImages.processQueue();
@@ -83,18 +96,21 @@ $(document).ready(function () {
             var selectSuppliesHidden = $('<input>', {
                 type: 'hidden',
                 name: "arrayInsumos[" + count + "][name]",
-                id: "arrayInsumos[" + count + "][]"
+                id: "arrayInsumos[" + count + "][]",
+                formula:"true"
             }).val(selectSupplies.val());
 
             var inpUnitHiden = $('<input>', {
                 type: 'hidden',
                 name: "arrayInsumos[" + count + "][unit]",
-                id: "arrayInsumos[" + count + "][]"
+                id: "arrayInsumos[" + count + "][]",
+                formula:"true"
             }).val(inpUnit.val());
             var inpQuantityHiden = $('<input>', {
                 type: 'hidden',
                 name: "arrayInsumos[" + count + "][quantity]",
-                id: "arrayInsumos[" + count + "][]"
+                id: "arrayInsumos[" + count + "][]",
+                formula:"true"
             }).val(inpQuantity.val());
 
 
@@ -106,8 +122,8 @@ $(document).ready(function () {
 
             var divParent = $('<div>', { class: 'row' })
                 .append(divNam)
-                .append(divUnit)
                 .append(divQuantity)
+                .append(divUnit)
                 .append(divDelete)
                 .append(selectSuppliesHidden)
                 .append(inpUnitHiden)

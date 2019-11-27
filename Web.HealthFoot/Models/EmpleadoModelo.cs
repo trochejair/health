@@ -27,7 +27,7 @@ namespace Web.HealthFoot.Models
             
                 datos = (from e in db.EMPLEADO
                          join u in db.AspNetUsers
-                         on e.EMAIL equals u.Email
+                         on e.EMAIL equals u.Email 
                          select new ViewModelEmpleadoEdit
                          {
 
@@ -121,7 +121,7 @@ namespace Web.HealthFoot.Models
                                 var us = new ApplicationUser();
                                 
                                 us.Email = user.Email;
-                                us.UserName = user.UserName;
+                                us.UserName = user.Email;
                                 us.PhoneNumber = user.PhoneNumber;
                                 string password = user.PasswordHash;
                                 
@@ -184,7 +184,7 @@ namespace Web.HealthFoot.Models
                             {
 
                                 var us = userManager.FindByEmail(Email);
-                                us.UserName = user.UserName;
+                                us.UserName = user.Email;
                                 us.Email = user.Email;
                                 us.PhoneNumber = user.PhoneNumber;
 

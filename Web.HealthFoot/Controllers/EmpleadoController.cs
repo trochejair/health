@@ -45,6 +45,7 @@ namespace Web.HealthFoot.Controllers
         public ActionResult Create(ViewModelEmpleado request)
         {
 
+            ViewBag.Roles = rol.findAll();
             if (ModelState.IsValid)
             {
 
@@ -113,6 +114,7 @@ namespace Web.HealthFoot.Controllers
         public ActionResult Edit(ViewModelEmpleadoEdit request)
         {
 
+            ViewBag.Roles = rol.findAll();
             if (ModelState.IsValid)
             {
 

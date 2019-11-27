@@ -11,7 +11,10 @@ namespace Web.HealthFoot.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
+
     public partial class EMBARQUE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,17 +22,66 @@ namespace Web.HealthFoot.Models
         {
             this.ENTREGA = new HashSet<ENTREGA>();
         }
-    
+
         public int ID { get; set; }
+        [Display(Name = "RUTA")]
         public int ID_RUTA { get; set; }
+        [Display(Name = "VEHÍCULO")]
         public int ID_VEHICULO { get; set; }
+        [Display(Name = "RUTA")]
+        public string VEHICULOS { get; set; }
+        [Display(Name = "RUTA")]
+        public string RUTAS { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public Nullable<System.DateTime> FECHA { get; set; }
         public Nullable<int> ACTIVO { get; set; }
         public System.DateTime CREATED_AT { get; set; }
-    
+
+
         public virtual RUTA RUTA { get; set; }
         public virtual VEHICULO VEHICULO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ENTREGA> ENTREGA { get; set; }
+
+        public EMBARQUE[] GetEmbarques()
+        {
+            using (var db = new HealthEntities())
+            {
+                return db.spEMBARQUECt().Select(e => new EMBARQUE
+                {
+                    ID = e.ID,
+                    VEHICULOS = e.VEHICULO,
+                    RUTAS = e.RUTA,
+                    FECHA = e.FECHA
+                }).ToArray();
+            }
+        }
+
+        public void InsertaEmbarque()
+        {
+            using (var db = new HealthEntities())
+            {
+                var id = new ObjectParameter("IDEM", typeof(int));
+                db.spEmbarqueIn(id, this.ID_RUTA, this.ID_VEHICULO, this.FECHA);
+            }
+        }
+
+        public void EditaEmbarque(int id)
+        {
+            using (var db = new HealthEntities())
+            {
+                db.spEmbarqueUp(id, this.ID_RUTA, this.ID_VEHICULO, this.FECHA);
+            }
+        }
+
+        public void EliminaEmbarque(int id)
+        {
+            using (var db = new HealthEntities())
+            {
+                db.spEmbarqueEl(id);
+            }
+        }
+
     }
 }

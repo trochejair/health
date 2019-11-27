@@ -11,7 +11,8 @@ namespace Web.HealthFoot.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Data.Entity.Core.Objects;
+
     public partial class RUTA
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -29,5 +30,30 @@ namespace Web.HealthFoot.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMBARQUE> EMBARQUE { get; set; }
+
+        public void InsertaRuta()
+        {
+            using (var db = new HealthEntities())
+            {
+                var id = new ObjectParameter("IDR", typeof(int));
+                db.spRUTAIn(id, this.INICIO, this.FIN, this.DISTANCIA);
+            }
+        }
+
+        public void EditaRuta(int id)
+        {
+            using (var db = new HealthEntities())
+            {
+                db.spRUTAEd(id, this.INICIO, this.FIN, this.DISTANCIA);
+            }
+        }
+
+        public void EliminaRuta(int id)
+        {
+            using (var db = new HealthEntities())
+            {
+                db.spRUTAEl(id);
+            }
+        }
     }
 }

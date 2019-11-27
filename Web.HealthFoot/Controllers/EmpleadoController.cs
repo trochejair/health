@@ -46,6 +46,7 @@ namespace Web.HealthFoot.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ViewModelEmpleado request)
         {
+            ViewBag.Roles = rol.findAll();
 
             if (ModelState.IsValid)
             {
@@ -64,7 +65,7 @@ namespace Web.HealthFoot.Controllers
                 emp.APELIDO_PATERNO = request.APELIDO_PATERNO;
                 emp.APELLIDO_MATERNO = request.APELLIDO_MATERNO;
                 emp.ACTIVO = request.ACTIVO;
-                //emp.ROL = request.ROL;
+                emp.ROL = request.ROL;
                 emp.CREATED_AT = fecha;
 
                 int resultado = modelo.insert(emp,users);
@@ -114,6 +115,8 @@ namespace Web.HealthFoot.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ViewModelEmpleadoEdit request)
         {
+
+            ViewBag.Roles = rol.findAll();
 
             if (ModelState.IsValid)
             {

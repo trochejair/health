@@ -11,7 +11,9 @@ namespace Web.HealthFoot.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
+
     public partial class VEHICULO
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -32,5 +34,48 @@ namespace Web.HealthFoot.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EMBARQUE> EMBARQUE { get; set; }
+
+        public void InsertaVehiculo()
+        {
+            using (var db = new HealthEntities())
+            {
+                var id = new ObjectParameter("IDV", typeof(int));
+                db.spVEHICULOIn(id, this.NOMBRE, this.MARCA, this.MODELO, this.CAPACIDAD, this.PESO, this.CILINDROS);
+            }
+        }
+
+        public void EditaVehiculo(int id)
+        {
+            using (var db = new HealthEntities())
+            {
+                db.spVEHICULOEd(id, this.NOMBRE, this.MARCA, this.MODELO, this.CAPACIDAD, this.PESO, this.CILINDROS);
+            }
+        }
+
+        public void EliminaVehiculo(int id)
+        {
+            using (var db = new HealthEntities())
+            {
+                db.spVEHICULOEl(id);
+            }
+        }
+
+        public VEHICULO getVehiculoById(int id)
+        {
+            using (var db = new HealthEntities())
+            {
+                return db.spVehiculoCt(id).Select(v => new VEHICULO
+                {
+                    ID = v.ID,
+                    NOMBRE = v.NOMBRE,
+                    MARCA = v.MARCA,
+                    MODELO = v.MODELO,
+                    PESO = v.PESO,
+                    CAPACIDAD = v.CAPACIDAD,
+                    CILINDROS = v.CILINDROS,
+                    ACTIVO = v.ACTIVO
+                }).First();
+            }
+        }
     }
 }

@@ -19,5 +19,6 @@ namespace Web.HealthFoot.Models
         public int ID_EMBARQUE { get; set; }
     
         public virtual EMBARQUE EMBARQUE { get; set; }
+        public virtual VENTA VENTA { get; set; }
     }
 }

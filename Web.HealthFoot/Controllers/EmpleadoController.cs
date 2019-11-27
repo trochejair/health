@@ -10,6 +10,8 @@ using Web.HealthFoot.Models.ViewModelsEmpRol;
 
 namespace Web.HealthFoot.Controllers
 {
+
+    [Authorize]
     public class EmpleadoController : Controller
     {
 

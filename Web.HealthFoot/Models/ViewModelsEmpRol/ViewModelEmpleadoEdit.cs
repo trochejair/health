@@ -30,6 +30,8 @@ namespace Web.HealthFoot.Models.ViewModelsEmpRol
         [Required(ErrorMessage = "Es necesario definir un rol al empleado")]
         public Nullable<int> ROL { get; set; }
 
+        public string NombreRol { get; set; }
+
         [Required(ErrorMessage = "Es necesario el estado del empleado")]
         public Nullable<int> ACTIVO { get; set; }
 

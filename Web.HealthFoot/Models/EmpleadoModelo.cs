@@ -8,6 +8,7 @@ using Web.HealthFoot.Models.ViewModelsEmpRol;
 
 namespace Web.HealthFoot.Models
 {
+
     public class EmpleadoModelo
     {
 
@@ -28,6 +29,8 @@ namespace Web.HealthFoot.Models
                 datos = (from e in db.EMPLEADO
                          join u in db.AspNetUsers
                          on e.EMAIL equals u.Email
+                         join r in db.AspNetRoles
+                         on e.ROL.ToString() equals r.Id
                          select new ViewModelEmpleadoEdit
                          {
 
@@ -38,6 +41,7 @@ namespace Web.HealthFoot.Models
                              APELIDO_PATERNO = e.APELIDO_PATERNO,
                              APELLIDO_MATERNO = e.APELLIDO_MATERNO,
                              ROL = e.ROL,
+                             NombreRol = r.Name,
                              ACTIVO = e.ACTIVO,
                              CREATED_AT = e.CREATED_AT
 
@@ -59,6 +63,8 @@ namespace Web.HealthFoot.Models
                 datos = (from e in db.EMPLEADO
                          join u in db.AspNetUsers
                          on e.EMAIL equals u.Email
+                         join r in db.AspNetRoles
+                         on e.ROL.ToString() equals r.Id
                          where e.ID == Id
                          select new ViewModelEmpleadoEdit
                          {
@@ -70,6 +76,7 @@ namespace Web.HealthFoot.Models
                              APELIDO_PATERNO = e.APELIDO_PATERNO,
                              APELLIDO_MATERNO = e.APELLIDO_MATERNO,
                              ROL = e.ROL,
+                             NombreRol = r.Name,
                              ACTIVO = e.ACTIVO,
                              CREATED_AT = e.CREATED_AT
 
@@ -118,15 +125,12 @@ namespace Web.HealthFoot.Models
                             try
                             {
                                 
-                                var us = new ApplicationUser();
+                                var us = new ApplicationUser { Email = user.Email, UserName = user.UserName, PhoneNumber = user.PhoneNumber } ;
                                 
-                                us.Email = user.Email;
-                                us.UserName = user.UserName;
-                                us.PhoneNumber = user.PhoneNumber;
                                 string password = user.PasswordHash;
-                                
+
                                 userManager.Create(us, password);
-                                
+
                                 db.EMPLEADO.Add(emp);
                                 db.SaveChanges();
 
@@ -184,7 +188,7 @@ namespace Web.HealthFoot.Models
                             {
 
                                 var us = userManager.FindByEmail(Email);
-                                us.UserName = user.UserName;
+                                us.UserName = user.Email;
                                 us.Email = user.Email;
                                 us.PhoneNumber = user.PhoneNumber;
 
@@ -244,7 +248,7 @@ namespace Web.HealthFoot.Models
                 {
 
                     var empleado = db.EMPLEADO.Find(id);
-                    db.EMPLEADO.Remove(empleado);
+                    empleado.ACTIVO = 0; 
                     db.SaveChanges();
 
                     return true;

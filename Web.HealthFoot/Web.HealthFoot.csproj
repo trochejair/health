@@ -35,16 +35,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -159,23 +153,44 @@
     <Reference Include="Microsoft.Owin.Security.OAuth">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.0\lib\net451\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\BundleConfig2.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\FilterConfig2.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\RouteConfig2.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\RolController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\DireccionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InsumosController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\EmpleadoController.cs" />
+    <Compile Include="Controllers\UserId.cs" />
+    <Compile Include="Controllers\OrdenesInsumosController.cs" />
+    <Compile Include="Controllers\ProductosController.cs" />
+    <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetRoles.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaims.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogins.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUsers.cs">
+      <DependentUpon>ModelHealth.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CATEGORIA.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
@@ -200,7 +215,6 @@
     <Compile Include="Models\FORMULA.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IMAGEN_PRODUCTO.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
@@ -210,7 +224,6 @@
     <Compile Include="Models\INSUMO_ORDEN.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ModelHealth.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -238,6 +251,10 @@
     <Compile Include="Models\PROVEEDOR.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RolModelo.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\EmpleadoModelo.cs" />
     <Compile Include="Models\RUTA.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
@@ -247,11 +264,21 @@
     <Compile Include="Models\VENTA.cs">
       <DependentUpon>ModelHealth.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModelsEmpRol\ViewModelEmpleadoEdit.cs" />
+    <Compile Include="Models\ViewModelsEmpRol\ViewModelEmpleado.cs" />
+    <Compile Include="Models\ViewModelsEmpRol\ViewModelRol.cs" />
+    <Compile Include="Models\ViewModels\InsumoViewModel.cs" />
+    <Compile Include="Models\ViewModels\ProductViewModel.cs" />
+    <Compile Include="Models\ViewModels\ProviderAddress.cs" />
+    <Compile Include="Models\ViewModels\SuppliesProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Admin\bootstrap.min.css" />
+    <Content Include="Content\Admin\commons\dropzone\dropzone.css" />
+    <Content Include="Content\Admin\commons\dropzone\dropzone.js" />
+    <Content Include="Content\Admin\commons\tooltip.js" />
     <Content Include="Content\Admin\datatables\autoFill.bootstrap4.css" />
     <Content Include="Content\Admin\datatables\autoFill.bootstrap4.min.js" />
     <Content Include="Content\Admin\datatables\dataTables.autoFill.min.js" />
@@ -274,12 +301,51 @@
     <Content Include="Content\Admin\fonts\typicons.svg" />
     <Content Include="Content\Admin\icons.css" />
     <Content Include="Content\Admin\metismenu.min.css" />
+    <Content Include="Content\Admin\OrdenInsumo\create.js" />
+    <Content Include="Content\Admin\Products\create.js" />
+    <Content Include="Content\Admin\Products\dropzone_init.js" />
+    <Content Include="Content\Admin\Products\edit.js" />
+    <Content Include="Content\Admin\Provider\index.js" />
     <Content Include="Content\Admin\style.css" />
+    <Content Include="Content\Admin\Supplied\index.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Cart\AddCart.js" />
+    <Content Include="Content\Images\chocolatespicard.jpg" />
+    <Content Include="Content\Images\diabettxcrema.jpg" />
+    <Content Include="Content\Images\diabettxplus.png" />
+    <Content Include="Content\Images\diabettxtalco.jpg" />
+    <Content Include="Content\Images\diebecon.jpg" />
+    <Content Include="Content\Images\endulzantestevia.jpg" />
+    <Content Include="Content\Images\endulzantesteviabake.jpg" />
+    <Content Include="Content\Images\endulzantesteviamaqui.jpg" />
+    <Content Include="Content\Images\endulzantestevianatural.jpg" />
+    <Content Include="Content\Images\endulzantesteviasinlactosa.jpg" />
+    <Content Include="Content\Images\galletastaifelds.jpg" />
+    <Content Include="Content\Images\galletasvoortman.jpg" />
+    <Content Include="Content\Images\im4.jpeg" />
+    <Content Include="Content\Images\job.jpg" />
     <Content Include="Content\Images\logo.jpg" />
+    <Content Include="Content\Images\product1.jpg" />
+    <Content Include="Content\Images\product2.jpg" />
+    <Content Include="Content\Images\product3.jpg" />
+    <Content Include="Content\Images\product4.jpg" />
+    <Content Include="Content\Images\team.jpg" />
+    <Content Include="Content\Images\woman.jpg" />
+    <Content Include="Content\productos\chocolatespicard.jpg" />
+    <Content Include="Content\productos\diabettxcrema.jpg" />
+    <Content Include="Content\productos\diabettxplus.png" />
+    <Content Include="Content\productos\diabettxtalco.jpg" />
+    <Content Include="Content\productos\diebecon.jpg" />
+    <Content Include="Content\productos\endulzantestevia.jpg" />
+    <Content Include="Content\productos\endulzantesteviabake.jpg" />
+    <Content Include="Content\productos\endulzantesteviamaqui.jpg" />
+    <Content Include="Content\productos\endulzantestevianatural.jpg" />
+    <Content Include="Content\productos\endulzantesteviasinlactosa.jpg" />
+    <Content Include="Content\productos\galletastaifelds.jpg" />
+    <Content Include="Content\productos\galletasvoortman.jpg" />
     <Content Include="Content\Web\css\colors\default.html" />
     <Content Include="Content\Web\css\default.css" />
     <Content Include="Content\Web\css\style.css" />
@@ -586,14 +652,18 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -622,6 +692,31 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Shared\_LayoutWeb.cshtml" />
+    <Content Include="Views\Insumos\Create.cshtml" />
+    <Content Include="Views\OrdenesInsumos\Create.cshtml" />
+    <Content Include="Views\Productos\Create.cshtml" />
+    <Content Include="Views\Productos\Details.cshtml" />
+    <Content Include="Views\Productos\Edit.cshtml" />
+    <Content Include="Views\Productos\Index.cshtml" />
+    <Content Include="Views\Proveedores\Create.cshtml" />
+    <Content Include="Views\Proveedores\Details.cshtml" />
+    <Content Include="Views\Proveedores\Ordenes.cshtml" />
+    <Content Include="Views\Proveedores\Index.cshtml" />
+    <Content Include="Views\Insumos\Index.cshtml" />
+    <Content Include="Views\OrdenesInsumos\Index.cshtml" />
+    <Content Include="Views\Proveedores\Edit.cshtml" />
+    <Content Include="Views\OrdenesInsumos\Details.cshtml" />
+    <Content Include="Views\Home\Product.cshtml" />
+    <Content Include="Views\Home\ProductDetail.cshtml" />
+    <Content Include="Views\Home\Profile.cshtml" />
+    <Content Include="Views\Home\TermsAndConditions.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Direccion\Create.cshtml" />
+    <Content Include="Views\Direccion\Delete.cshtml" />
+    <Content Include="Views\Direccion\Details.cshtml" />
+    <Content Include="Views\Direccion\Edit.cshtml" />
+    <Content Include="Views\Direccion\Index.cshtml" />
+    <Content Include="Views\Cart\Entrega.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

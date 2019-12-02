@@ -1,0 +1,118 @@
+﻿@model Web.HealthFoot.Models.PRODUCTO
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+
+<section class="lightSection clearfix pageHeader">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-title">
+                    <h2 class="text-center">Detalle del Producto</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mainContent clearfix">
+    <div class="container">
+        <div class="row singleProduct">
+            <div class="col-md-12">
+                <div class="media flex-wrap">
+                    <div class="media-left productSlider">
+                        <div id="carousel" class="carousel slide" data-ride="carousel">
+                            <div class="row">
+                                <div class="col-12">
+                                    @foreach (var img in Model.IMAGEN_PRODUCTO)
+                                    {
+
+                                        <img src="/Content/ImagesProduct/@img.IMAGEN" class="w-100" alt="products-img">
+                                        break;
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <div id="thumbcarousel" class="carousel slide" data-interval="false">
+                                <div class="carousel-inner">
+                                    @foreach (var img in Model.IMAGEN_PRODUCTO)
+                                    {
+                                        <div data-target="#carousel" data-slide-to="" class="thumb"><img src="/Content/ImagesProduct/@img.IMAGEN"></div>
+                                    }
+                                </div>
+                                <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev">
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                </a>
+                                <a class="right carousel-control" href="#thumbcarousel" role="button" data-slide="next">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="media-body">
+                        <!--En este caso es individual, se accede directamente a la propiedad-->
+                        <h2>@Html.DisplayFor(m => Model.NOMBRE)</h2>
+                        <h3>$ @Html.DisplayFor(m => Model.PRECIO)</h3>
+                        <p>@Html.DisplayFor(m => Model.DESCRIPCION)</p>
+                        <p class="mb-1">Disponibles:</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control mr-0" id="cantidadDisp" placeholder="@Model.CANTIDAD" readonly>
+                            </div>
+                        </div>
+
+                        <div class="btn-area">
+                            <a href="@Url.Action("agregarProd","Cart", new { id=Model.ID})" class="btn btn-primary btn-default">Agregar al carrito </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-header">
+            <h4 class="text-center">Productos Relacionados</h4>
+        </div>
+        
+        <div class="container">
+            @if (ViewBag.Products != null)
+            {
+                <div class="row">
+                    @foreach (var item in ViewBag.Products)
+                    {
+
+                        <div class="col-lg-3 col-md-4 ">
+                            <div class="productBox">
+                                <div class="productImage clearfix">
+
+                                    @foreach (var img in item.IMAGEN_PRODUCTO)
+                                    {
+                                        <div class="d-flex justify-content-center">
+                                            <img src="~/Content/ImagesProduct/@img.IMAGEN" class="mx-auto" height="300" style="width:auto" alt="products-img">
+
+                                        </div>
+                                        break;
+                                    }
+
+                                    <div class="productMasking">
+                                        <ul class="list-inline btn-group" role="group">
+                                            <li><a class="btn btn-default btn-add-cart" data-product="@item.ID" data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="¡Agregado con éxito al carrito!"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li><a class="btn btn-default" href="@Url.Action("ProductDetail","Home",new { id = item.ID })"><i class="fa fa-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="productCaption clearfix">
+                                    <a href="single-product.html">
+                                        <h5>@item.NOMBRE</h5>
+                                    </a>
+                                    <h3>$ @item.PRECIO</h3>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>      
+    </div>
+</section>
+

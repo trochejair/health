@@ -1,0 +1,77 @@
+﻿@model Web.HealthFoot.Models.ProviderAddress
+
+@{
+    ViewBag.Title = "Detalles";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="row">
+
+            <div class="col-md-12">
+                <h2>Detalles de Proveedor</h2>
+            </div>
+            <div class="col-md-6">
+                <b>Nombre: </b>
+                @Html.DisplayFor(model => model.NOMBRE)
+            </div>
+
+            <div class="col-md-6">
+                <b>Teléfono</b>
+                @Html.DisplayFor(model => model.TELEFONO)
+
+            </div>
+
+            <div class="col-md-6">
+                <b>Correo: </b>
+                @Html.DisplayFor(model => model.CORREO)
+
+            </div>
+            <div class="col-md-6">
+                <b>RFC: </b>
+                @Html.DisplayFor(model => model.RFC)
+            </div>
+
+            <div class="col-md-12">
+                <h5>Dirección</h5>
+
+            </div>
+            <div class="col-md-6">
+                <b>Estado:  </b>@Html.DisplayFor(model => model.ESTADO)
+            </div>
+            <div class="col-md-6">
+                <b>Ciudad: </b>
+                @Html.DisplayFor(model => model.CIUDAD)
+            </div>
+            <div class="col-md-6">
+                <b>Municipio: </b>
+                @Html.DisplayFor(model => model.MUNICIPIO)
+            </div>
+            <div class="col-md-6">
+                <b>Colonia: </b>
+                @Html.DisplayFor(model => model.COLONIA)
+            </div>
+
+            <div class="col-md-6">
+                <b>Calle: </b>
+                @Html.DisplayFor(model => model.CALLE)
+            </div>
+
+            <div class="col-md-6">
+                <b>CP: </b>
+                @Html.DisplayFor(model => model.CP)
+
+            </div>
+
+            <div class="col-md-6">
+                <b>Numero: </b>
+                @Html.DisplayFor(model => model.NUMERO)
+            </div>
+
+        </div>
+
+    </div>
+</div>

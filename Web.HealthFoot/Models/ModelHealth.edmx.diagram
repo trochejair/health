@@ -4,42 +4,49 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="abc5d4259f284db9b7e47c9115c207a2" Name="Diagram1">
-        <EntityTypeShape EntityType="HealthModel.CATEGORIA" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthModel.CLIENTE" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthModel.DETALLE_ORDEN" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthModel.DIRECCION" Width="1.5" PointX="1.5" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthModel.EMBARQUE" Width="1.5" PointX="10" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthModel.EMPLEADO" Width="1.5" PointX="9.75" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthModel.ENTREGA" Width="1.5" PointX="12.25" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthModel.FORMULA" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthModel.IMAGEN_PRODUCTO" Width="1.5" PointX="5.25" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthModel.INSUMO" Width="1.5" PointX="3.75" PointY="15.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthModel.INSUMO_ORDEN" Width="1.5" PointX="6" PointY="16.5" IsExpanded="true" />
+      <Diagram DiagramId="0bde7a5efa0b426e9e61f96c49c296c7" Name="Diagram1">
+        <EntityTypeShape EntityType="HealthModel.AspNetRoles" Width="1.5" PointX="10.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthModel.AspNetUserClaims" Width="1.5" PointX="15.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthModel.AspNetUserLogins" Width="1.5" PointX="15.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthModel.AspNetUsers" Width="1.5" PointX="13" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthModel.CATEGORIA" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthModel.CLIENTE" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthModel.DETALLE_ORDEN" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthModel.DIRECCION" Width="1.5" PointX="3" PointY="17.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthModel.EMBARQUE" Width="1.5" PointX="10" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthModel.EMPLEADO" Width="1.5" PointX="0.75" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthModel.ENTREGA" Width="1.5" PointX="12.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthModel.FORMULA" Width="1.5" PointX="8.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthModel.IMAGEN_PRODUCTO" Width="1.5" PointX="5.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthModel.INSUMO" Width="1.5" PointX="6" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthModel.INSUMO_ORDEN" Width="1.5" PointX="12.75" PointY="12" IsExpanded="true" />
         <EntityTypeShape EntityType="HealthModel.ORDEN" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthModel.ORDEN_PROVEEDOR" Width="1.5" PointX="3.75" PointY="18.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthModel.PRODUCTO" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthModel.PROVEEDOR" Width="1.5" PointX="1.5" PointY="18.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthModel.RUTA" Width="1.5" PointX="7.75" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthModel.VEHICULO" Width="1.5" PointX="7.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="HealthModel.VENTA" Width="1.5" PointX="5.25" PointY="1.875" IsExpanded="true" />
-        <AssociationConnector Association="HealthModel.FK__PRODUCTO__FK_CAT__276EDEB3" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthModel.FK__CLIENTE__FK_DIRE__44FF419A" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthModel.FK__ORDEN__FK_CLIENT__48CFD27E" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthModel.FK__DETALLE_O__FK_OR__4CA06362" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthModel.FK__DETALLE_O__FK_PR__4BAC3F29" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthModel.FK__PROVEEDOR__FK_DI__30F848ED" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthModel.FK__VENTA__FK_DIRECC__5165187F" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthModel.FK__EMBARQUE__ID_RUT__5AEE82B9" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthModel.FK__EMBARQUE__ID_VEH__5BE2A6F2" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthModel.FK__ENTREGA__ID_EMBA__5EBF139D" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthModel.FK__FORMULA__FK_INSU__412EB0B6" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthModel.FK__FORMULA__FK_PROD__403A8C7D" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthModel.FK__IMAGEN_PR__FK_PR__2A4B4B5E" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthModel.FK__INSUMO_OR__FK_IN__3C69FB99" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthModel.FK__INSUMO_OR__FK_OR__3B75D760" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthModel.FK__VENTA__FK_ORDEN__5070F446" ManuallyRouted="false" />
-        <AssociationConnector Association="HealthModel.FK__ORDEN_PRO__FK_PR__34C8D9D1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HealthModel.ORDEN_PROVEEDOR" Width="1.5" PointX="7.5" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthModel.PRODUCTO" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthModel.PROVEEDOR" Width="1.5" PointX="5.25" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthModel.RUTA" Width="1.5" PointX="7.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthModel.VEHICULO" Width="1.5" PointX="7.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HealthModel.VENTA" Width="1.5" PointX="10.25" PointY="12.625" IsExpanded="true" />
+        <AssociationConnector Association="HealthModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthModel.FK__PRODUCTO__FK_CAT__0BE6BFCF" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthModel.FK__DIRECCION__FK_CL__15702A09" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthModel.FK__ORDEN__FK_CLIENT__2D47B39A" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthModel.FK__DETALLE_O__FK_OR__3118447E" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthModel.FK__DETALLE_O__FK_PR__30242045" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthModel.FK__PROVEEDOR__FK_DI__1940BAED" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthModel.FK__VENTA__FK_DIRECC__35DCF99B" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthModel.FK__EMBARQUE__ID_RUT__3F6663D5" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthModel.FK__EMBARQUE__ID_VEH__405A880E" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthModel.FK__ENTREGA__ID_EMBA__4336F4B9" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthModel.FK__FORMULA__FK_INSU__297722B6" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthModel.FK__FORMULA__FK_PROD__2882FE7D" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthModel.FK__IMAGEN_PR__FK_PR__0EC32C7A" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthModel.FK__INSUMO_OR__FK_IN__24B26D99" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthModel.FK__INSUMO_OR__FK_OR__23BE4960" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthModel.FK__VENTA__FK_ORDEN__34E8D562" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthModel.FK__ORDEN_PRO__FK_PR__1D114BD1" ManuallyRouted="false" />
+        <AssociationConnector Association="HealthModel.AspNetUserRoles" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

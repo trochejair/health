@@ -1,0 +1,163 @@
+﻿@model List<Web.HealthFoot.Models.ViewModelsEmpRol.ViewModelEmpleadoEdit>
+
+@{
+    ViewBag.Title = "Empleados";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section botones{
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            @Html.ActionLink("Agregar", "Create", "Empleado", new { @class = "btn btn-primary" })
+
+        </div>
+
+    </div>
+}
+
+<div class="col-12">
+
+    <h2>Empleados</h2>
+
+</div>
+
+<div class="col-12">
+
+    @if (Model != null && Model.Count() > 0)
+    {
+
+        <table class="table datatable">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+
+                        Id
+
+                    </th>
+
+                    <th>
+
+                        Email
+
+                    </th>
+
+                    <th>
+
+                        Nombre
+
+                    </th>
+
+                    <th>
+
+                        Rol
+
+                    </th>
+
+                    <th>
+
+                        Status
+
+                    </th>
+
+                    <th>
+
+                        Registro
+
+                    </th>
+
+                    <th>
+
+
+
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @foreach (var emp in Model)
+                {
+
+                    <tr>
+
+                        <td>
+
+                            @emp.ID
+
+                        </td>
+
+                        <td>
+
+                            @emp.EMAIL
+
+                        </td>
+
+                        <td>
+
+                            @emp.APELIDO_PATERNO
+
+                        </td>
+
+                        <td>
+
+                            @emp.NombreRol
+
+                        </td>
+
+                        <td>
+
+                            @emp.ACTIVO
+
+                        </td>
+
+                        <td>
+
+                            @emp.CREATED_AT
+
+                        </td>
+
+                        <td>
+
+                            @using (Html.BeginForm("Delete", "Empleado", FormMethod.Post))
+                            {
+
+                                <input name="id" type="hidden" value="@emp.ID"/>
+
+                                @Html.AntiForgeryToken()
+
+                                <a class="btn btn-link" href="@Url.Action("Show", "Empleado", new { id = emp.ID })"><i class="fas fa-eye"></i></a>
+
+                                <a class="btn btn-link" href="@Url.Action("Edit", "Empleado", new { id = emp.ID })"><i class="fas fa-edit"></i></a>
+
+                                <button type="submit" class="btn btn-link"><i class="fas fa-trash"></i></button>
+
+                            }
+
+                        </td>
+
+                    </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+    }
+    else
+    {
+
+        <h4>No hay ningun empleado registrado</h4>
+
+    }
+
+</div>
+

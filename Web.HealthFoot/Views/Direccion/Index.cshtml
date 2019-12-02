@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Web.HealthFoot.Models.DIRECCION>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutWeb.cshtml";
+}
+
+<h2>Tus direcciones</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@foreach (var item in Model) {
+<div class="card m-5" style="border:solid 1px rgba(128, 128, 128, 0.5)!important; border-radius: 5px;">
+    <div class="card-body">
+        @Html.DisplayFor(modelItem => item.ESTADO)
+
+        @Html.DisplayFor(modelItem => item.CIUDAD)
+
+        @Html.DisplayFor(modelItem => item.MUNICIPIO)
+
+        @Html.DisplayFor(modelItem => item.COLONIA)
+
+        @Html.DisplayFor(modelItem => item.CALLE)
+
+        @Html.DisplayFor(modelItem => item.CP)
+
+        @Html.DisplayFor(modelItem => item.NUMERO)
+
+
+    </div>
+    
+</div>
+
+}
+
+

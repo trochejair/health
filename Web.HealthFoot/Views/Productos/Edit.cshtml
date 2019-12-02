@@ -1,0 +1,163 @@
+﻿@model Web.HealthFoot.Models.PRODUCTO
+@{
+    ViewBag.Title = "Proveedores";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section css{
+    @Styles.Render("~/Content/Admin/commons/dropzone/dropzone.css")
+}
+
+@section scripts{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    @Scripts.Render("~/Content/Admin/commons/dropzone/dropzone.js")
+    @Scripts.Render("~/Content/Admin/Products/edit.js")
+}
+<div class="row">
+    <input id="inp-url-image" type="hidden" value="@Url.Action("Images","Productos", new { id = Model.ID })" />
+    <input id="inp-url-delete-img" type="hidden" value="@Url.Action("DeleteImages","Productos")"/>
+
+    <div class="col-md-12 text-center my-3">
+        <h2>Editar producto</h2>
+    </div>
+    <div class="col-md-8 mx-auto">
+        <form id="form-upsert"
+              class="form-row"
+              method="POST"
+              action="@Url.Action("Edit","Productos", new {id = Model.ID })">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text"
+                           class="form-control"
+                           id="nombre"
+                           name="nombre"
+                           value="@Model.NOMBRE">
+                    <span class="field-validation-valid text-danger"
+                          data-valmsg-for="nombre"
+                          data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea type="text"
+                              class="form-control"
+                              id="descripcion"
+                              name="descripcion">@Model.DESCRIPCION</textarea>
+                    <span class="field-validation-valid text-danger"
+                          data-valmsg-for="descripcion"
+                          data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number"
+                           class="form-control"
+                           id="cantidad"
+                           name="cantidad"
+                           value="@Model.CANTIDAD">
+                    <span class="field-validation-valid text-danger"
+                          data-valmsg-for="cantidad"
+                          data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="precio">Precio</label>
+                    <input type="number"
+                           class="form-control"
+                           id="precio"
+                           name="precio"
+                           value="@Model.PRECIO">
+                    <span class="field-validation-valid text-danger"
+                          data-valmsg-for="precio"
+                          data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="Supplies">Categoría</label>
+                    <select id="Category" class="form-control" name="Category">
+                        @foreach (var category in ViewBag.Category)
+                        {
+                            <option value="@category.ID"
+                                    @(category.ID == Model.FK_CATEGORIA ? "SELECTED" : "")>
+                                @category.NOMBRE
+                            </option>
+
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-12 mt-3">
+                <input type="hidden" id="image-count" value="@Model.IMAGEN_PRODUCTO.Count"/>
+                <div class="row">
+                    @foreach (var image in Model.IMAGEN_PRODUCTO)
+                    {
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <img src="~/Content/ImagesProduct/@image.IMAGEN" class="w-100" />
+                                </div>
+                                <div class="col-md-12 text-center mt-1" 
+                                     style="color:red; 
+                                            font-size: 18px">
+                                    <i data-delete-image="@image.ID"
+                                       style="cursor:pointer;"
+                                       class="fas fa-trash"></i>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="col-md-12 mt-3">
+                <div id="zdrop" class="dropzone ">
+                    <div class="dz-default dz-message">
+                        <span>Subir imagen</span>
+                        <h1><i class="fas fa-upload  fa-7x" style="font-size:40px"></i></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 text-center my-3">
+                <h4>Agregar fórmula</h4>
+            </div>
+            <div class="col-md-12">
+                <div class="form-row shadow p-3 mb-5 bg-white rounded">
+                    <div class="form-group col-md-6">
+                        <label for="insumo">Insumo</label>
+                        @Html.DropDownList("Supplies", null, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="cantidad">Cantidad</label>
+                        <input type="text" class="form-control" id="cantidad" placeholder="Cantidad">
+                    </div>
+                    <div class="col-md-2">
+                        <div>
+                            <i class="fas fa-plus-circle fa-3x"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-12 text-center">
+                <button for="control"
+                        type="submit"
+                        class="btn btn-primary">
+                    Guardar
+                </button>
+            </div>
+
+        </form>
+
+    </div>
+</div>

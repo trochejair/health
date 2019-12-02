@@ -1,0 +1,65 @@
+﻿@model Web.HealthFoot.Models.AspNetRoles
+
+@{
+    ViewBag.Title = "Ver Rol";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section botones{
+
+    <div class="row">
+        <div class="col-md-6">
+
+            @Html.ActionLink("Modificar", "Edit", "Rol", new { id = Model.Id }, new { @class = "btn btn-primary" })
+
+        </div>
+
+        <div class="col-md-6">
+
+            @Html.ActionLink("Regresar", "List", "Rol", new { @class = "btn btn-danger" })
+
+        </div>
+
+    </div>
+
+}
+
+<div class="col-12 container">
+
+    <h2>Ver Rol</h2>
+
+</div>
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+
+        <div class="col-12">
+
+            <div class="form-group row">
+                <label for="nombre" class="col-sm-2 col-form-label">
+                    Nombre
+                </label>
+
+                <div class="col-sm-10">
+
+                    <Label>
+                        
+                        @Model.Name
+
+                    </Label>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <input type="submit" value="Guardar" id="submit-form" style="visibility:hidden" />
+
+}

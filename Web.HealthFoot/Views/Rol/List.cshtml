@@ -1,0 +1,113 @@
+﻿@model List<Web.HealthFoot.Models.AspNetRoles>
+
+@{
+    ViewBag.Title = "Roles";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@section botones{
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            @Html.ActionLink("Agregar", "Create", "Rol", new { @class = "btn btn-primary" })
+
+        </div>
+
+    </div>
+}
+
+<div class="col-12">
+
+    <h2>Roles</h2>
+
+</div>
+
+<div class="col-12">
+
+    @if (Model != null && Model.Count() > 0)
+    {
+
+        <table class="table datatable">
+
+            <thead>
+
+                <tr>
+
+                    <th>
+
+                        Id
+
+                    </th>
+
+                    <th>
+
+                        Nombre
+
+                    </th>
+
+                    <th>
+
+
+
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                @foreach (var rol in Model)
+                {
+                    <tr>
+
+                        <td>
+
+                            @rol.Id
+
+                        </td>
+
+                        <td>
+
+                            @rol.Name
+
+                        </td>
+
+                        <td>
+
+                            @using (Html.BeginForm("Delete", "Rol", FormMethod.Post))
+                            {
+
+                                <input name="id" type="hidden" value="@rol.Id" />
+
+                                @Html.AntiForgeryToken()
+
+                                <a class="btn btn-link" href="@Url.Action("Show", "Rol", new { id = rol.Id })"><i class="fas fa-eye"></i></a>
+
+                                <a class="btn btn-link" href="@Url.Action("Edit", "Rol", new { id = rol.Id })"><i class="fas fa-edit"></i></a>
+
+                                <button type="submit" class="btn btn-link"><i class="fas fa-trash"></i></button>
+
+                            }
+
+                        </td>
+
+                    </tr>
+
+                }
+
+            </tbody>
+
+        </table>
+
+    }
+    else
+    {
+
+        <h4>No hay ningun rol registrado</h4>
+
+    }
+
+</div>

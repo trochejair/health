@@ -5,6 +5,57 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="HealthModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <EntityType Name="CATEGORIA">
           <Key>
             <PropertyRef Name="ID" />
@@ -22,7 +73,6 @@
           <Property Name="NOMBRE" Type="nvarchar" MaxLength="50" />
           <Property Name="APELLIDOS" Type="nvarchar" MaxLength="50" />
           <Property Name="EMAIL" Type="nvarchar" MaxLength="255" />
-          <Property Name="FK_DIRECCION" Type="int" Nullable="false" />
           <Property Name="ACTIVO" Type="int" />
           <Property Name="ROL" Type="int" />
           <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
@@ -51,6 +101,7 @@
           <Property Name="NUMERO" Type="nvarchar" MaxLength="10" />
           <Property Name="ACTIVO" Type="int" />
           <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
+          <Property Name="FK_CLIENTE" Type="int" />
         </EntityType>
         <EntityType Name="EMBARQUE">
           <Key>
@@ -89,7 +140,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FK_PRODUCTO" Type="int" Nullable="false" />
-          <Property Name="FK_INSUMO_ORDEN" Type="int" Nullable="false" />
+          <Property Name="FK_INSUMO" Type="int" Nullable="false" />
           <Property Name="UNIDAD_MEDIDA" Type="nvarchar" MaxLength="50" />
           <Property Name="CANTIDAD" Type="int" />
           <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
@@ -206,19 +257,7 @@
           <Property Name="FK_DIRECCION" Type="int" Nullable="false" />
           <Property Name="CREATED_AT" Type="datetime" Nullable="false" />
         </EntityType>
-        <Association Name="FK__CLIENTE__FK_DIRE__44FF419A">
-          <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="1" />
-          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DIRECCION">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="CLIENTE">
-              <PropertyRef Name="FK_DIRECCION" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__DETALLE_O__FK_OR__4CA06362">
+        <Association Name="FK__DETALLE_O__FK_OR__3118447E">
           <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="1" />
           <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -230,7 +269,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DETALLE_O__FK_PR__4BAC3F29">
+        <Association Name="FK__DETALLE_O__FK_PR__30242045">
           <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
           <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -242,7 +281,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EMBARQUE__ID_RUT__5AEE82B9">
+        <Association Name="FK__DIRECCION__FK_CL__15702A09">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DIRECCION">
+              <PropertyRef Name="FK_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMBARQUE__ID_RUT__3F6663D5">
           <End Role="RUTA" Type="Self.RUTA" Multiplicity="1" />
           <End Role="EMBARQUE" Type="Self.EMBARQUE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -254,7 +305,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EMBARQUE__ID_VEH__5BE2A6F2">
+        <Association Name="FK__EMBARQUE__ID_VEH__405A880E">
           <End Role="VEHICULO" Type="Self.VEHICULO" Multiplicity="1" />
           <End Role="EMBARQUE" Type="Self.EMBARQUE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -266,7 +317,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ENTREGA__ID_EMBA__5EBF139D">
+        <Association Name="FK__ENTREGA__ID_EMBA__4336F4B9">
           <End Role="EMBARQUE" Type="Self.EMBARQUE" Multiplicity="1" />
           <End Role="ENTREGA" Type="Self.ENTREGA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -278,19 +329,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FORMULA__FK_INSU__412EB0B6">
-          <End Role="INSUMO_ORDEN" Type="Self.INSUMO_ORDEN" Multiplicity="1" />
+        <Association Name="FK__FORMULA__FK_INSU__297722B6">
+          <End Role="INSUMO" Type="Self.INSUMO" Multiplicity="1" />
           <End Role="FORMULA" Type="Self.FORMULA" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="INSUMO_ORDEN">
+            <Principal Role="INSUMO">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="FORMULA">
-              <PropertyRef Name="FK_INSUMO_ORDEN" />
+              <PropertyRef Name="FK_INSUMO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FORMULA__FK_PROD__403A8C7D">
+        <Association Name="FK__FORMULA__FK_PROD__2882FE7D">
           <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
           <End Role="FORMULA" Type="Self.FORMULA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -302,7 +353,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__IMAGEN_PR__FK_PR__2A4B4B5E">
+        <Association Name="FK__IMAGEN_PR__FK_PR__0EC32C7A">
           <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
           <End Role="IMAGEN_PRODUCTO" Type="Self.IMAGEN_PRODUCTO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -314,7 +365,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__INSUMO_OR__FK_IN__3C69FB99">
+        <Association Name="FK__INSUMO_OR__FK_IN__24B26D99">
           <End Role="INSUMO" Type="Self.INSUMO" Multiplicity="1" />
           <End Role="INSUMO_ORDEN" Type="Self.INSUMO_ORDEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -326,7 +377,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__INSUMO_OR__FK_OR__3B75D760">
+        <Association Name="FK__INSUMO_OR__FK_OR__23BE4960">
           <End Role="ORDEN_PROVEEDOR" Type="Self.ORDEN_PROVEEDOR" Multiplicity="1" />
           <End Role="INSUMO_ORDEN" Type="Self.INSUMO_ORDEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -338,7 +389,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ORDEN__FK_CLIENT__48CFD27E">
+        <Association Name="FK__ORDEN__FK_CLIENT__2D47B39A">
           <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
           <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -350,7 +401,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ORDEN_PRO__FK_PR__34C8D9D1">
+        <Association Name="FK__ORDEN_PRO__FK_PR__1D114BD1">
           <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
           <End Role="ORDEN_PROVEEDOR" Type="Self.ORDEN_PROVEEDOR" Multiplicity="*" />
           <ReferentialConstraint>
@@ -362,7 +413,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PRODUCTO__FK_CAT__276EDEB3">
+        <Association Name="FK__PRODUCTO__FK_CAT__0BE6BFCF">
           <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="1" />
           <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -374,7 +425,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PROVEEDOR__FK_DI__30F848ED">
+        <Association Name="FK__PROVEEDOR__FK_DI__1940BAED">
           <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="1" />
           <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
           <ReferentialConstraint>
@@ -386,7 +437,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VENTA__FK_DIRECC__5165187F">
+        <Association Name="FK__VENTA__FK_DIRECC__35DCF99B">
           <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="1" />
           <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -398,7 +449,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VENTA__FK_ORDEN__5070F446">
+        <Association Name="FK__VENTA__FK_ORDEN__34E8D562">
           <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="1" />
           <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -410,7 +461,68 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="HealthModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DETALLE_ORDEN" EntityType="Self.DETALLE_ORDEN" Schema="dbo" store:Type="Tables" />
@@ -429,73 +541,89 @@
           <EntitySet Name="RUTA" EntityType="Self.RUTA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VEHICULO" EntityType="Self.VEHICULO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VENTA" EntityType="Self.VENTA" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__CLIENTE__FK_DIRE__44FF419A" Association="Self.FK__CLIENTE__FK_DIRE__44FF419A">
-            <End Role="DIRECCION" EntitySet="DIRECCION" />
-            <End Role="CLIENTE" EntitySet="CLIENTE" />
-          </AssociationSet>
-          <AssociationSet Name="FK__DETALLE_O__FK_OR__4CA06362" Association="Self.FK__DETALLE_O__FK_OR__4CA06362">
+          <AssociationSet Name="FK__DETALLE_O__FK_OR__3118447E" Association="Self.FK__DETALLE_O__FK_OR__3118447E">
             <End Role="ORDEN" EntitySet="ORDEN" />
             <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__DETALLE_O__FK_PR__4BAC3F29" Association="Self.FK__DETALLE_O__FK_PR__4BAC3F29">
+          <AssociationSet Name="FK__DETALLE_O__FK_PR__30242045" Association="Self.FK__DETALLE_O__FK_PR__30242045">
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__EMBARQUE__ID_RUT__5AEE82B9" Association="Self.FK__EMBARQUE__ID_RUT__5AEE82B9">
+          <AssociationSet Name="FK__DIRECCION__FK_CL__15702A09" Association="Self.FK__DIRECCION__FK_CL__15702A09">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="DIRECCION" EntitySet="DIRECCION" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMBARQUE__ID_RUT__3F6663D5" Association="Self.FK__EMBARQUE__ID_RUT__3F6663D5">
             <End Role="RUTA" EntitySet="RUTA" />
             <End Role="EMBARQUE" EntitySet="EMBARQUE" />
           </AssociationSet>
-          <AssociationSet Name="FK__EMBARQUE__ID_VEH__5BE2A6F2" Association="Self.FK__EMBARQUE__ID_VEH__5BE2A6F2">
+          <AssociationSet Name="FK__EMBARQUE__ID_VEH__405A880E" Association="Self.FK__EMBARQUE__ID_VEH__405A880E">
             <End Role="VEHICULO" EntitySet="VEHICULO" />
             <End Role="EMBARQUE" EntitySet="EMBARQUE" />
           </AssociationSet>
-          <AssociationSet Name="FK__ENTREGA__ID_EMBA__5EBF139D" Association="Self.FK__ENTREGA__ID_EMBA__5EBF139D">
+          <AssociationSet Name="FK__ENTREGA__ID_EMBA__4336F4B9" Association="Self.FK__ENTREGA__ID_EMBA__4336F4B9">
             <End Role="EMBARQUE" EntitySet="EMBARQUE" />
             <End Role="ENTREGA" EntitySet="ENTREGA" />
           </AssociationSet>
-          <AssociationSet Name="FK__FORMULA__FK_INSU__412EB0B6" Association="Self.FK__FORMULA__FK_INSU__412EB0B6">
-            <End Role="INSUMO_ORDEN" EntitySet="INSUMO_ORDEN" />
+          <AssociationSet Name="FK__FORMULA__FK_INSU__297722B6" Association="Self.FK__FORMULA__FK_INSU__297722B6">
+            <End Role="INSUMO" EntitySet="INSUMO" />
             <End Role="FORMULA" EntitySet="FORMULA" />
           </AssociationSet>
-          <AssociationSet Name="FK__FORMULA__FK_PROD__403A8C7D" Association="Self.FK__FORMULA__FK_PROD__403A8C7D">
+          <AssociationSet Name="FK__FORMULA__FK_PROD__2882FE7D" Association="Self.FK__FORMULA__FK_PROD__2882FE7D">
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="FORMULA" EntitySet="FORMULA" />
           </AssociationSet>
-          <AssociationSet Name="FK__IMAGEN_PR__FK_PR__2A4B4B5E" Association="Self.FK__IMAGEN_PR__FK_PR__2A4B4B5E">
+          <AssociationSet Name="FK__IMAGEN_PR__FK_PR__0EC32C7A" Association="Self.FK__IMAGEN_PR__FK_PR__0EC32C7A">
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="IMAGEN_PRODUCTO" EntitySet="IMAGEN_PRODUCTO" />
           </AssociationSet>
-          <AssociationSet Name="FK__INSUMO_OR__FK_IN__3C69FB99" Association="Self.FK__INSUMO_OR__FK_IN__3C69FB99">
+          <AssociationSet Name="FK__INSUMO_OR__FK_IN__24B26D99" Association="Self.FK__INSUMO_OR__FK_IN__24B26D99">
             <End Role="INSUMO" EntitySet="INSUMO" />
             <End Role="INSUMO_ORDEN" EntitySet="INSUMO_ORDEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__INSUMO_OR__FK_OR__3B75D760" Association="Self.FK__INSUMO_OR__FK_OR__3B75D760">
+          <AssociationSet Name="FK__INSUMO_OR__FK_OR__23BE4960" Association="Self.FK__INSUMO_OR__FK_OR__23BE4960">
             <End Role="ORDEN_PROVEEDOR" EntitySet="ORDEN_PROVEEDOR" />
             <End Role="INSUMO_ORDEN" EntitySet="INSUMO_ORDEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__ORDEN__FK_CLIENT__48CFD27E" Association="Self.FK__ORDEN__FK_CLIENT__48CFD27E">
+          <AssociationSet Name="FK__ORDEN__FK_CLIENT__2D47B39A" Association="Self.FK__ORDEN__FK_CLIENT__2D47B39A">
             <End Role="CLIENTE" EntitySet="CLIENTE" />
             <End Role="ORDEN" EntitySet="ORDEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__ORDEN_PRO__FK_PR__34C8D9D1" Association="Self.FK__ORDEN_PRO__FK_PR__34C8D9D1">
+          <AssociationSet Name="FK__ORDEN_PRO__FK_PR__1D114BD1" Association="Self.FK__ORDEN_PRO__FK_PR__1D114BD1">
             <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
             <End Role="ORDEN_PROVEEDOR" EntitySet="ORDEN_PROVEEDOR" />
           </AssociationSet>
-          <AssociationSet Name="FK__PRODUCTO__FK_CAT__276EDEB3" Association="Self.FK__PRODUCTO__FK_CAT__276EDEB3">
+          <AssociationSet Name="FK__PRODUCTO__FK_CAT__0BE6BFCF" Association="Self.FK__PRODUCTO__FK_CAT__0BE6BFCF">
             <End Role="CATEGORIA" EntitySet="CATEGORIA" />
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
           </AssociationSet>
-          <AssociationSet Name="FK__PROVEEDOR__FK_DI__30F848ED" Association="Self.FK__PROVEEDOR__FK_DI__30F848ED">
+          <AssociationSet Name="FK__PROVEEDOR__FK_DI__1940BAED" Association="Self.FK__PROVEEDOR__FK_DI__1940BAED">
             <End Role="DIRECCION" EntitySet="DIRECCION" />
             <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
           </AssociationSet>
-          <AssociationSet Name="FK__VENTA__FK_DIRECC__5165187F" Association="Self.FK__VENTA__FK_DIRECC__5165187F">
+          <AssociationSet Name="FK__VENTA__FK_DIRECC__35DCF99B" Association="Self.FK__VENTA__FK_DIRECC__35DCF99B">
             <End Role="DIRECCION" EntitySet="DIRECCION" />
             <End Role="VENTA" EntitySet="VENTA" />
           </AssociationSet>
-          <AssociationSet Name="FK__VENTA__FK_ORDEN__5070F446" Association="Self.FK__VENTA__FK_ORDEN__5070F446">
+          <AssociationSet Name="FK__VENTA__FK_ORDEN__34E8D562" Association="Self.FK__VENTA__FK_ORDEN__34E8D562">
             <End Role="ORDEN" EntitySet="ORDEN" />
             <End Role="VENTA" EntitySet="VENTA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -503,6 +631,55 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HealthModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+        </EntityType>
         <EntityType Name="CATEGORIA">
           <Key>
             <PropertyRef Name="ID" />
@@ -511,7 +688,7 @@
           <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__PRODUCTO__FK_CAT__276EDEB3" FromRole="CATEGORIA" ToRole="PRODUCTO" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__PRODUCTO__FK_CAT__0BE6BFCF" FromRole="CATEGORIA" ToRole="PRODUCTO" />
         </EntityType>
         <EntityType Name="CLIENTE">
           <Key>
@@ -521,12 +698,11 @@
           <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="APELLIDOS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EMAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="FK_DIRECCION" Type="Int32" Nullable="false" />
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="ROL" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="DIRECCION" Relationship="Self.FK__CLIENTE__FK_DIRE__44FF419A" FromRole="CLIENTE" ToRole="DIRECCION" />
-          <NavigationProperty Name="ORDEN" Relationship="Self.FK__ORDEN__FK_CLIENT__48CFD27E" FromRole="CLIENTE" ToRole="ORDEN" />
+          <NavigationProperty Name="DIRECCION" Relationship="Self.FK__DIRECCION__FK_CL__15702A09" FromRole="CLIENTE" ToRole="DIRECCION" />
+          <NavigationProperty Name="ORDEN" Relationship="Self.FK__ORDEN__FK_CLIENT__2D47B39A" FromRole="CLIENTE" ToRole="ORDEN" />
         </EntityType>
         <EntityType Name="DETALLE_ORDEN">
           <Key>
@@ -537,8 +713,8 @@
           <Property Name="FK_PRODUCTO" Type="Int32" Nullable="false" />
           <Property Name="CANTIDAD" Type="Int32" />
           <Property Name="SUBTOTAL" Type="Double" />
-          <NavigationProperty Name="ORDEN" Relationship="Self.FK__DETALLE_O__FK_OR__4CA06362" FromRole="DETALLE_ORDEN" ToRole="ORDEN" />
-          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__DETALLE_O__FK_PR__4BAC3F29" FromRole="DETALLE_ORDEN" ToRole="PRODUCTO" />
+          <NavigationProperty Name="ORDEN" Relationship="Self.FK__DETALLE_O__FK_OR__3118447E" FromRole="DETALLE_ORDEN" ToRole="ORDEN" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__DETALLE_O__FK_PR__30242045" FromRole="DETALLE_ORDEN" ToRole="PRODUCTO" />
         </EntityType>
         <EntityType Name="DIRECCION">
           <Key>
@@ -554,9 +730,10 @@
           <Property Name="NUMERO" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__CLIENTE__FK_DIRE__44FF419A" FromRole="DIRECCION" ToRole="CLIENTE" />
-          <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK__PROVEEDOR__FK_DI__30F848ED" FromRole="DIRECCION" ToRole="PROVEEDOR" />
-          <NavigationProperty Name="VENTA" Relationship="Self.FK__VENTA__FK_DIRECC__5165187F" FromRole="DIRECCION" ToRole="VENTA" />
+          <Property Name="FK_CLIENTE" Type="Int32" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__DIRECCION__FK_CL__15702A09" FromRole="DIRECCION" ToRole="CLIENTE" />
+          <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK__PROVEEDOR__FK_DI__1940BAED" FromRole="DIRECCION" ToRole="PROVEEDOR" />
+          <NavigationProperty Name="VENTA" Relationship="Self.FK__VENTA__FK_DIRECC__35DCF99B" FromRole="DIRECCION" ToRole="VENTA" />
         </EntityType>
         <EntityType Name="EMBARQUE">
           <Key>
@@ -568,9 +745,9 @@
           <Property Name="FECHA" Type="DateTime" Precision="0" />
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="RUTA" Relationship="Self.FK__EMBARQUE__ID_RUT__5AEE82B9" FromRole="EMBARQUE" ToRole="RUTA" />
-          <NavigationProperty Name="VEHICULO" Relationship="Self.FK__EMBARQUE__ID_VEH__5BE2A6F2" FromRole="EMBARQUE" ToRole="VEHICULO" />
-          <NavigationProperty Name="ENTREGA" Relationship="Self.FK__ENTREGA__ID_EMBA__5EBF139D" FromRole="EMBARQUE" ToRole="ENTREGA" />
+          <NavigationProperty Name="RUTA" Relationship="Self.FK__EMBARQUE__ID_RUT__3F6663D5" FromRole="EMBARQUE" ToRole="RUTA" />
+          <NavigationProperty Name="VEHICULO" Relationship="Self.FK__EMBARQUE__ID_VEH__405A880E" FromRole="EMBARQUE" ToRole="VEHICULO" />
+          <NavigationProperty Name="ENTREGA" Relationship="Self.FK__ENTREGA__ID_EMBA__4336F4B9" FromRole="EMBARQUE" ToRole="ENTREGA" />
         </EntityType>
         <EntityType Name="EMPLEADO">
           <Key>
@@ -591,7 +768,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ID_VENTA" Type="Int32" Nullable="false" />
           <Property Name="ID_EMBARQUE" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="EMBARQUE" Relationship="Self.FK__ENTREGA__ID_EMBA__5EBF139D" FromRole="ENTREGA" ToRole="EMBARQUE" />
+          <NavigationProperty Name="EMBARQUE" Relationship="Self.FK__ENTREGA__ID_EMBA__4336F4B9" FromRole="ENTREGA" ToRole="EMBARQUE" />
         </EntityType>
         <EntityType Name="FORMULA">
           <Key>
@@ -599,12 +776,12 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FK_PRODUCTO" Type="Int32" Nullable="false" />
-          <Property Name="FK_INSUMO_ORDEN" Type="Int32" Nullable="false" />
+          <Property Name="FK_INSUMO" Type="Int32" Nullable="false" />
           <Property Name="UNIDAD_MEDIDA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CANTIDAD" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="INSUMO_ORDEN" Relationship="Self.FK__FORMULA__FK_INSU__412EB0B6" FromRole="FORMULA" ToRole="INSUMO_ORDEN" />
-          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__FORMULA__FK_PROD__403A8C7D" FromRole="FORMULA" ToRole="PRODUCTO" />
+          <NavigationProperty Name="INSUMO" Relationship="Self.FK__FORMULA__FK_INSU__297722B6" FromRole="FORMULA" ToRole="INSUMO" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__FORMULA__FK_PROD__2882FE7D" FromRole="FORMULA" ToRole="PRODUCTO" />
         </EntityType>
         <EntityType Name="IMAGEN_PRODUCTO">
           <Key>
@@ -613,7 +790,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IMAGEN" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="FK_PRODUCTO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__IMAGEN_PR__FK_PR__2A4B4B5E" FromRole="IMAGEN_PRODUCTO" ToRole="PRODUCTO" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__IMAGEN_PR__FK_PR__0EC32C7A" FromRole="IMAGEN_PRODUCTO" ToRole="PRODUCTO" />
         </EntityType>
         <EntityType Name="INSUMO">
           <Key>
@@ -624,7 +801,8 @@
           <Property Name="CANTIDAD" Type="Int32" />
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="INSUMO_ORDEN" Relationship="Self.FK__INSUMO_OR__FK_IN__3C69FB99" FromRole="INSUMO" ToRole="INSUMO_ORDEN" />
+          <NavigationProperty Name="FORMULA" Relationship="Self.FK__FORMULA__FK_INSU__297722B6" FromRole="INSUMO" ToRole="FORMULA" />
+          <NavigationProperty Name="INSUMO_ORDEN" Relationship="Self.FK__INSUMO_OR__FK_IN__24B26D99" FromRole="INSUMO" ToRole="INSUMO_ORDEN" />
         </EntityType>
         <EntityType Name="INSUMO_ORDEN">
           <Key>
@@ -638,9 +816,8 @@
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="FK_ORDEN_PROVEEDOR" Type="Int32" Nullable="false" />
           <Property Name="FK_INSUMO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="FORMULA" Relationship="Self.FK__FORMULA__FK_INSU__412EB0B6" FromRole="INSUMO_ORDEN" ToRole="FORMULA" />
-          <NavigationProperty Name="INSUMO" Relationship="Self.FK__INSUMO_OR__FK_IN__3C69FB99" FromRole="INSUMO_ORDEN" ToRole="INSUMO" />
-          <NavigationProperty Name="ORDEN_PROVEEDOR" Relationship="Self.FK__INSUMO_OR__FK_OR__3B75D760" FromRole="INSUMO_ORDEN" ToRole="ORDEN_PROVEEDOR" />
+          <NavigationProperty Name="INSUMO" Relationship="Self.FK__INSUMO_OR__FK_IN__24B26D99" FromRole="INSUMO_ORDEN" ToRole="INSUMO" />
+          <NavigationProperty Name="ORDEN_PROVEEDOR" Relationship="Self.FK__INSUMO_OR__FK_OR__23BE4960" FromRole="INSUMO_ORDEN" ToRole="ORDEN_PROVEEDOR" />
         </EntityType>
         <EntityType Name="ORDEN">
           <Key>
@@ -652,9 +829,9 @@
           <Property Name="ESTATUS" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__ORDEN__FK_CLIENT__48CFD27E" FromRole="ORDEN" ToRole="CLIENTE" />
-          <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK__DETALLE_O__FK_OR__4CA06362" FromRole="ORDEN" ToRole="DETALLE_ORDEN" />
-          <NavigationProperty Name="VENTA" Relationship="Self.FK__VENTA__FK_ORDEN__5070F446" FromRole="ORDEN" ToRole="VENTA" />
+          <NavigationProperty Name="CLIENTE" Relationship="Self.FK__ORDEN__FK_CLIENT__2D47B39A" FromRole="ORDEN" ToRole="CLIENTE" />
+          <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK__DETALLE_O__FK_OR__3118447E" FromRole="ORDEN" ToRole="DETALLE_ORDEN" />
+          <NavigationProperty Name="VENTA" Relationship="Self.FK__VENTA__FK_ORDEN__34E8D562" FromRole="ORDEN" ToRole="VENTA" />
         </EntityType>
         <EntityType Name="ORDEN_PROVEEDOR">
           <Key>
@@ -664,8 +841,8 @@
           <Property Name="FK_PROVEEDOR" Type="Int32" Nullable="false" />
           <Property Name="FECHA" Type="DateTime" Precision="0" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="INSUMO_ORDEN" Relationship="Self.FK__INSUMO_OR__FK_OR__3B75D760" FromRole="ORDEN_PROVEEDOR" ToRole="INSUMO_ORDEN" />
-          <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK__ORDEN_PRO__FK_PR__34C8D9D1" FromRole="ORDEN_PROVEEDOR" ToRole="PROVEEDOR" />
+          <NavigationProperty Name="INSUMO_ORDEN" Relationship="Self.FK__INSUMO_OR__FK_OR__23BE4960" FromRole="ORDEN_PROVEEDOR" ToRole="INSUMO_ORDEN" />
+          <NavigationProperty Name="PROVEEDOR" Relationship="Self.FK__ORDEN_PRO__FK_PR__1D114BD1" FromRole="ORDEN_PROVEEDOR" ToRole="PROVEEDOR" />
         </EntityType>
         <EntityType Name="PRODUCTO">
           <Key>
@@ -679,10 +856,10 @@
           <Property Name="FK_CATEGORIA" Type="Int32" Nullable="false" />
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="CATEGORIA" Relationship="Self.FK__PRODUCTO__FK_CAT__276EDEB3" FromRole="PRODUCTO" ToRole="CATEGORIA" />
-          <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK__DETALLE_O__FK_PR__4BAC3F29" FromRole="PRODUCTO" ToRole="DETALLE_ORDEN" />
-          <NavigationProperty Name="FORMULA" Relationship="Self.FK__FORMULA__FK_PROD__403A8C7D" FromRole="PRODUCTO" ToRole="FORMULA" />
-          <NavigationProperty Name="IMAGEN_PRODUCTO" Relationship="Self.FK__IMAGEN_PR__FK_PR__2A4B4B5E" FromRole="PRODUCTO" ToRole="IMAGEN_PRODUCTO" />
+          <NavigationProperty Name="CATEGORIA" Relationship="Self.FK__PRODUCTO__FK_CAT__0BE6BFCF" FromRole="PRODUCTO" ToRole="CATEGORIA" />
+          <NavigationProperty Name="DETALLE_ORDEN" Relationship="Self.FK__DETALLE_O__FK_PR__30242045" FromRole="PRODUCTO" ToRole="DETALLE_ORDEN" />
+          <NavigationProperty Name="FORMULA" Relationship="Self.FK__FORMULA__FK_PROD__2882FE7D" FromRole="PRODUCTO" ToRole="FORMULA" />
+          <NavigationProperty Name="IMAGEN_PRODUCTO" Relationship="Self.FK__IMAGEN_PR__FK_PR__0EC32C7A" FromRole="PRODUCTO" ToRole="IMAGEN_PRODUCTO" />
         </EntityType>
         <EntityType Name="PROVEEDOR">
           <Key>
@@ -696,8 +873,8 @@
           <Property Name="FK_DIRECCION" Type="Int32" Nullable="false" />
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="DIRECCION" Relationship="Self.FK__PROVEEDOR__FK_DI__30F848ED" FromRole="PROVEEDOR" ToRole="DIRECCION" />
-          <NavigationProperty Name="ORDEN_PROVEEDOR" Relationship="Self.FK__ORDEN_PRO__FK_PR__34C8D9D1" FromRole="PROVEEDOR" ToRole="ORDEN_PROVEEDOR" />
+          <NavigationProperty Name="DIRECCION" Relationship="Self.FK__PROVEEDOR__FK_DI__1940BAED" FromRole="PROVEEDOR" ToRole="DIRECCION" />
+          <NavigationProperty Name="ORDEN_PROVEEDOR" Relationship="Self.FK__ORDEN_PRO__FK_PR__1D114BD1" FromRole="PROVEEDOR" ToRole="ORDEN_PROVEEDOR" />
         </EntityType>
         <EntityType Name="RUTA">
           <Key>
@@ -709,7 +886,7 @@
           <Property Name="DISTANCIA" Type="Int32" />
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="EMBARQUE" Relationship="Self.FK__EMBARQUE__ID_RUT__5AEE82B9" FromRole="RUTA" ToRole="EMBARQUE" />
+          <NavigationProperty Name="EMBARQUE" Relationship="Self.FK__EMBARQUE__ID_RUT__3F6663D5" FromRole="RUTA" ToRole="EMBARQUE" />
         </EntityType>
         <EntityType Name="VEHICULO">
           <Key>
@@ -724,7 +901,7 @@
           <Property Name="CILINDROS" Type="Int32" />
           <Property Name="ACTIVO" Type="Int32" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="EMBARQUE" Relationship="Self.FK__EMBARQUE__ID_VEH__5BE2A6F2" FromRole="VEHICULO" ToRole="EMBARQUE" />
+          <NavigationProperty Name="EMBARQUE" Relationship="Self.FK__EMBARQUE__ID_VEH__405A880E" FromRole="VEHICULO" ToRole="EMBARQUE" />
         </EntityType>
         <EntityType Name="VENTA">
           <Key>
@@ -735,10 +912,38 @@
           <Property Name="FECHA" Type="DateTime" Precision="0" />
           <Property Name="FK_DIRECCION" Type="Int32" Nullable="false" />
           <Property Name="CREATED_AT" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="DIRECCION" Relationship="Self.FK__VENTA__FK_DIRECC__5165187F" FromRole="VENTA" ToRole="DIRECCION" />
-          <NavigationProperty Name="ORDEN" Relationship="Self.FK__VENTA__FK_ORDEN__5070F446" FromRole="VENTA" ToRole="ORDEN" />
+          <NavigationProperty Name="DIRECCION" Relationship="Self.FK__VENTA__FK_DIRECC__35DCF99B" FromRole="VENTA" ToRole="DIRECCION" />
+          <NavigationProperty Name="ORDEN" Relationship="Self.FK__VENTA__FK_ORDEN__34E8D562" FromRole="VENTA" ToRole="ORDEN" />
         </EntityType>
-        <Association Name="FK__PRODUCTO__FK_CAT__276EDEB3">
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO__FK_CAT__0BE6BFCF">
           <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="1" />
           <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -750,19 +955,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CLIENTE__FK_DIRE__44FF419A">
-          <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="1" />
-          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
+        <Association Name="FK__DIRECCION__FK_CL__15702A09">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="0..1" />
+          <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="DIRECCION">
+            <Principal Role="CLIENTE">
               <PropertyRef Name="ID" />
             </Principal>
-            <Dependent Role="CLIENTE">
-              <PropertyRef Name="FK_DIRECCION" />
+            <Dependent Role="DIRECCION">
+              <PropertyRef Name="FK_CLIENTE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ORDEN__FK_CLIENT__48CFD27E">
+        <Association Name="FK__ORDEN__FK_CLIENT__2D47B39A">
           <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
           <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -774,7 +979,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DETALLE_O__FK_OR__4CA06362">
+        <Association Name="FK__DETALLE_O__FK_OR__3118447E">
           <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="1" />
           <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -786,7 +991,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DETALLE_O__FK_PR__4BAC3F29">
+        <Association Name="FK__DETALLE_O__FK_PR__30242045">
           <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
           <End Role="DETALLE_ORDEN" Type="Self.DETALLE_ORDEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -798,7 +1003,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PROVEEDOR__FK_DI__30F848ED">
+        <Association Name="FK__PROVEEDOR__FK_DI__1940BAED">
           <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="1" />
           <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="*" />
           <ReferentialConstraint>
@@ -810,7 +1015,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VENTA__FK_DIRECC__5165187F">
+        <Association Name="FK__VENTA__FK_DIRECC__35DCF99B">
           <End Role="DIRECCION" Type="Self.DIRECCION" Multiplicity="1" />
           <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -822,7 +1027,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EMBARQUE__ID_RUT__5AEE82B9">
+        <Association Name="FK__EMBARQUE__ID_RUT__3F6663D5">
           <End Role="RUTA" Type="Self.RUTA" Multiplicity="1" />
           <End Role="EMBARQUE" Type="Self.EMBARQUE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -834,7 +1039,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__EMBARQUE__ID_VEH__5BE2A6F2">
+        <Association Name="FK__EMBARQUE__ID_VEH__405A880E">
           <End Role="VEHICULO" Type="Self.VEHICULO" Multiplicity="1" />
           <End Role="EMBARQUE" Type="Self.EMBARQUE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -846,7 +1051,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ENTREGA__ID_EMBA__5EBF139D">
+        <Association Name="FK__ENTREGA__ID_EMBA__4336F4B9">
           <End Role="EMBARQUE" Type="Self.EMBARQUE" Multiplicity="1" />
           <End Role="ENTREGA" Type="Self.ENTREGA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -858,19 +1063,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FORMULA__FK_INSU__412EB0B6">
-          <End Role="INSUMO_ORDEN" Type="Self.INSUMO_ORDEN" Multiplicity="1" />
+        <Association Name="FK__FORMULA__FK_INSU__297722B6">
+          <End Role="INSUMO" Type="Self.INSUMO" Multiplicity="1" />
           <End Role="FORMULA" Type="Self.FORMULA" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="INSUMO_ORDEN">
+            <Principal Role="INSUMO">
               <PropertyRef Name="ID" />
             </Principal>
             <Dependent Role="FORMULA">
-              <PropertyRef Name="FK_INSUMO_ORDEN" />
+              <PropertyRef Name="FK_INSUMO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FORMULA__FK_PROD__403A8C7D">
+        <Association Name="FK__FORMULA__FK_PROD__2882FE7D">
           <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
           <End Role="FORMULA" Type="Self.FORMULA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -882,7 +1087,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__IMAGEN_PR__FK_PR__2A4B4B5E">
+        <Association Name="FK__IMAGEN_PR__FK_PR__0EC32C7A">
           <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
           <End Role="IMAGEN_PRODUCTO" Type="Self.IMAGEN_PRODUCTO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -894,7 +1099,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__INSUMO_OR__FK_IN__3C69FB99">
+        <Association Name="FK__INSUMO_OR__FK_IN__24B26D99">
           <End Role="INSUMO" Type="Self.INSUMO" Multiplicity="1" />
           <End Role="INSUMO_ORDEN" Type="Self.INSUMO_ORDEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -906,7 +1111,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__INSUMO_OR__FK_OR__3B75D760">
+        <Association Name="FK__INSUMO_OR__FK_OR__23BE4960">
           <End Role="ORDEN_PROVEEDOR" Type="Self.ORDEN_PROVEEDOR" Multiplicity="1" />
           <End Role="INSUMO_ORDEN" Type="Self.INSUMO_ORDEN" Multiplicity="*" />
           <ReferentialConstraint>
@@ -918,7 +1123,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VENTA__FK_ORDEN__5070F446">
+        <Association Name="FK__VENTA__FK_ORDEN__34E8D562">
           <End Role="ORDEN" Type="Self.ORDEN" Multiplicity="1" />
           <End Role="VENTA" Type="Self.VENTA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -930,7 +1135,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ORDEN_PRO__FK_PR__34C8D9D1">
+        <Association Name="FK__ORDEN_PRO__FK_PR__1D114BD1">
           <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
           <End Role="ORDEN_PROVEEDOR" Type="Self.ORDEN_PROVEEDOR" Multiplicity="*" />
           <ReferentialConstraint>
@@ -942,7 +1147,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+        </Association>
         <EntityContainer Name="HealthEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
           <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" />
           <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" />
           <EntitySet Name="DETALLE_ORDEN" EntityType="Self.DETALLE_ORDEN" />
@@ -961,73 +1174,85 @@
           <EntitySet Name="RUTA" EntityType="Self.RUTA" />
           <EntitySet Name="VEHICULO" EntityType="Self.VEHICULO" />
           <EntitySet Name="VENTA" EntityType="Self.VENTA" />
-          <AssociationSet Name="FK__PRODUCTO__FK_CAT__276EDEB3" Association="Self.FK__PRODUCTO__FK_CAT__276EDEB3">
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO__FK_CAT__0BE6BFCF" Association="Self.FK__PRODUCTO__FK_CAT__0BE6BFCF">
             <End Role="CATEGORIA" EntitySet="CATEGORIA" />
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
           </AssociationSet>
-          <AssociationSet Name="FK__CLIENTE__FK_DIRE__44FF419A" Association="Self.FK__CLIENTE__FK_DIRE__44FF419A">
-            <End Role="DIRECCION" EntitySet="DIRECCION" />
+          <AssociationSet Name="FK__DIRECCION__FK_CL__15702A09" Association="Self.FK__DIRECCION__FK_CL__15702A09">
             <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="DIRECCION" EntitySet="DIRECCION" />
           </AssociationSet>
-          <AssociationSet Name="FK__ORDEN__FK_CLIENT__48CFD27E" Association="Self.FK__ORDEN__FK_CLIENT__48CFD27E">
+          <AssociationSet Name="FK__ORDEN__FK_CLIENT__2D47B39A" Association="Self.FK__ORDEN__FK_CLIENT__2D47B39A">
             <End Role="CLIENTE" EntitySet="CLIENTE" />
             <End Role="ORDEN" EntitySet="ORDEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__DETALLE_O__FK_OR__4CA06362" Association="Self.FK__DETALLE_O__FK_OR__4CA06362">
+          <AssociationSet Name="FK__DETALLE_O__FK_OR__3118447E" Association="Self.FK__DETALLE_O__FK_OR__3118447E">
             <End Role="ORDEN" EntitySet="ORDEN" />
             <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__DETALLE_O__FK_PR__4BAC3F29" Association="Self.FK__DETALLE_O__FK_PR__4BAC3F29">
+          <AssociationSet Name="FK__DETALLE_O__FK_PR__30242045" Association="Self.FK__DETALLE_O__FK_PR__30242045">
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="DETALLE_ORDEN" EntitySet="DETALLE_ORDEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__PROVEEDOR__FK_DI__30F848ED" Association="Self.FK__PROVEEDOR__FK_DI__30F848ED">
+          <AssociationSet Name="FK__PROVEEDOR__FK_DI__1940BAED" Association="Self.FK__PROVEEDOR__FK_DI__1940BAED">
             <End Role="DIRECCION" EntitySet="DIRECCION" />
             <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
           </AssociationSet>
-          <AssociationSet Name="FK__VENTA__FK_DIRECC__5165187F" Association="Self.FK__VENTA__FK_DIRECC__5165187F">
+          <AssociationSet Name="FK__VENTA__FK_DIRECC__35DCF99B" Association="Self.FK__VENTA__FK_DIRECC__35DCF99B">
             <End Role="DIRECCION" EntitySet="DIRECCION" />
             <End Role="VENTA" EntitySet="VENTA" />
           </AssociationSet>
-          <AssociationSet Name="FK__EMBARQUE__ID_RUT__5AEE82B9" Association="Self.FK__EMBARQUE__ID_RUT__5AEE82B9">
+          <AssociationSet Name="FK__EMBARQUE__ID_RUT__3F6663D5" Association="Self.FK__EMBARQUE__ID_RUT__3F6663D5">
             <End Role="RUTA" EntitySet="RUTA" />
             <End Role="EMBARQUE" EntitySet="EMBARQUE" />
           </AssociationSet>
-          <AssociationSet Name="FK__EMBARQUE__ID_VEH__5BE2A6F2" Association="Self.FK__EMBARQUE__ID_VEH__5BE2A6F2">
+          <AssociationSet Name="FK__EMBARQUE__ID_VEH__405A880E" Association="Self.FK__EMBARQUE__ID_VEH__405A880E">
             <End Role="VEHICULO" EntitySet="VEHICULO" />
             <End Role="EMBARQUE" EntitySet="EMBARQUE" />
           </AssociationSet>
-          <AssociationSet Name="FK__ENTREGA__ID_EMBA__5EBF139D" Association="Self.FK__ENTREGA__ID_EMBA__5EBF139D">
+          <AssociationSet Name="FK__ENTREGA__ID_EMBA__4336F4B9" Association="Self.FK__ENTREGA__ID_EMBA__4336F4B9">
             <End Role="EMBARQUE" EntitySet="EMBARQUE" />
             <End Role="ENTREGA" EntitySet="ENTREGA" />
           </AssociationSet>
-          <AssociationSet Name="FK__FORMULA__FK_INSU__412EB0B6" Association="Self.FK__FORMULA__FK_INSU__412EB0B6">
-            <End Role="INSUMO_ORDEN" EntitySet="INSUMO_ORDEN" />
+          <AssociationSet Name="FK__FORMULA__FK_INSU__297722B6" Association="Self.FK__FORMULA__FK_INSU__297722B6">
+            <End Role="INSUMO" EntitySet="INSUMO" />
             <End Role="FORMULA" EntitySet="FORMULA" />
           </AssociationSet>
-          <AssociationSet Name="FK__FORMULA__FK_PROD__403A8C7D" Association="Self.FK__FORMULA__FK_PROD__403A8C7D">
+          <AssociationSet Name="FK__FORMULA__FK_PROD__2882FE7D" Association="Self.FK__FORMULA__FK_PROD__2882FE7D">
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="FORMULA" EntitySet="FORMULA" />
           </AssociationSet>
-          <AssociationSet Name="FK__IMAGEN_PR__FK_PR__2A4B4B5E" Association="Self.FK__IMAGEN_PR__FK_PR__2A4B4B5E">
+          <AssociationSet Name="FK__IMAGEN_PR__FK_PR__0EC32C7A" Association="Self.FK__IMAGEN_PR__FK_PR__0EC32C7A">
             <End Role="PRODUCTO" EntitySet="PRODUCTO" />
             <End Role="IMAGEN_PRODUCTO" EntitySet="IMAGEN_PRODUCTO" />
           </AssociationSet>
-          <AssociationSet Name="FK__INSUMO_OR__FK_IN__3C69FB99" Association="Self.FK__INSUMO_OR__FK_IN__3C69FB99">
+          <AssociationSet Name="FK__INSUMO_OR__FK_IN__24B26D99" Association="Self.FK__INSUMO_OR__FK_IN__24B26D99">
             <End Role="INSUMO" EntitySet="INSUMO" />
             <End Role="INSUMO_ORDEN" EntitySet="INSUMO_ORDEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__INSUMO_OR__FK_OR__3B75D760" Association="Self.FK__INSUMO_OR__FK_OR__3B75D760">
+          <AssociationSet Name="FK__INSUMO_OR__FK_OR__23BE4960" Association="Self.FK__INSUMO_OR__FK_OR__23BE4960">
             <End Role="ORDEN_PROVEEDOR" EntitySet="ORDEN_PROVEEDOR" />
             <End Role="INSUMO_ORDEN" EntitySet="INSUMO_ORDEN" />
           </AssociationSet>
-          <AssociationSet Name="FK__VENTA__FK_ORDEN__5070F446" Association="Self.FK__VENTA__FK_ORDEN__5070F446">
+          <AssociationSet Name="FK__VENTA__FK_ORDEN__34E8D562" Association="Self.FK__VENTA__FK_ORDEN__34E8D562">
             <End Role="ORDEN" EntitySet="ORDEN" />
             <End Role="VENTA" EntitySet="VENTA" />
           </AssociationSet>
-          <AssociationSet Name="FK__ORDEN_PRO__FK_PR__34C8D9D1" Association="Self.FK__ORDEN_PRO__FK_PR__34C8D9D1">
+          <AssociationSet Name="FK__ORDEN_PRO__FK_PR__1D114BD1" Association="Self.FK__ORDEN_PRO__FK_PR__1D114BD1">
             <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
             <End Role="ORDEN_PROVEEDOR" EntitySet="ORDEN_PROVEEDOR" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -1036,6 +1261,51 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="HealthModelStoreContainer" CdmEntityContainer="HealthEntities">
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="HealthModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="HealthModel.AspNetUserClaims">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="HealthModel.AspNetUserLogins">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="HealthModel.AspNetUsers">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CATEGORIA">
             <EntityTypeMapping TypeName="HealthModel.CATEGORIA">
               <MappingFragment StoreEntitySet="CATEGORIA">
@@ -1053,7 +1323,6 @@
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="APELLIDOS" ColumnName="APELLIDOS" />
                 <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
-                <ScalarProperty Name="FK_DIRECCION" ColumnName="FK_DIRECCION" />
                 <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
                 <ScalarProperty Name="ROL" ColumnName="ROL" />
                 <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
@@ -1084,6 +1353,7 @@
                 <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
                 <ScalarProperty Name="ACTIVO" ColumnName="ACTIVO" />
                 <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
+                <ScalarProperty Name="FK_CLIENTE" ColumnName="FK_CLIENTE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1126,7 +1396,7 @@
               <MappingFragment StoreEntitySet="FORMULA">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FK_PRODUCTO" ColumnName="FK_PRODUCTO" />
-                <ScalarProperty Name="FK_INSUMO_ORDEN" ColumnName="FK_INSUMO_ORDEN" />
+                <ScalarProperty Name="FK_INSUMO" ColumnName="FK_INSUMO" />
                 <ScalarProperty Name="UNIDAD_MEDIDA" ColumnName="UNIDAD_MEDIDA" />
                 <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
                 <ScalarProperty Name="CREATED_AT" ColumnName="CREATED_AT" />
@@ -1255,6 +1525,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="HealthModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

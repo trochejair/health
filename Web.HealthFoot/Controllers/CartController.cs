@@ -280,10 +280,8 @@ namespace Web.HealthFoot.Controllers
                 }
 
                 }
-                
-            }
-
+            return RedirectToAction("Product", "Home");
+        }  
             
-        }
     }
-}
+ }
